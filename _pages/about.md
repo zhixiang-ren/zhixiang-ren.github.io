@@ -14,40 +14,41 @@ Zhixiang Ren is currently an Associate Research Scientist and PhD Supervisor at 
 
 <div style="float: left;">
 
-  <div style="width: 30%;padding: 1%;background-color: rgb(241, 241, 241);">
+  <div style="width: 30%;padding: 3%;background-color: rgb(241, 241, 241);float: left;">
     <img style="width: 100%;padding: 3%;" src="/images/profile.png">
     <p style="width: 100%;padding: 3%;">Yiming Ren</p>
     <p style="width: 100%;padding: 3%;">Software Engineer</p>
   </div>
 
-  <div style="width: 30%;padding: 1%;background-color: rgb(241, 241, 241);">
-    <img style="width: 30%;padding-left: 3%;padding-right: 3%;" src="/images/profile.png">
-    <p style="width: 30%;padding-left: 3%;padding-right: 3%;">Zeting Li</p>
-    <p style="width: 30%;padding-left: 3%;padding-right: 3%;">Software Engineer</p>
+  <div style="width: 30%;padding: 3%;background-color: rgb(241, 241, 241);float: left;">
+    <img style="width: 100%;padding-left: 3%;padding-right: 3%;" src="/images/profile.png">
+    <p style="width: 100%;padding-left: 3%;padding-right: 3%;">Zeting Li</p>
+    <p style="width: 100%;padding-left: 3%;padding-right: 3%;">Software Engineer</p>
   </div>
 
-  <div style="width: 30%;padding: 1%;background-color: rgb(241, 241, 241);">
-    <img style="width: 30%;padding-left: 3%;padding-right: 3%;" src="/images/profile.png">
-    <p style="width: 30%;padding-left: 3%;padding-right: 3%;">Yue Zhou</p>
-    <p style="width: 30%;padding-left: 3%;padding-right: 3%;">Software Engineer</p>
+  <div style="width: 30%;padding: 3%;background-color: rgb(241, 241, 241);float: left;">
+    <img style="width: 100%;padding-left: 3%;padding-right: 3%;" src="/images/profile.png">
+    <p style="width: 100%;padding-left: 3%;padding-right: 3%;">Yue Zhou</p>
+    <p style="width: 100%;padding-left: 3%;padding-right: 3%;">Software Engineer</p>
   </div>
 
-  <div style="width: 30%;padding: 1%;background-color: rgb(241, 241, 241);">
-    <img style="width: 30%;padding-left: 3%;padding-right: 3%;" src="/images/profile.png">
-    <p style="width: 30%;padding-left: 3%;padding-right: 3%;">Tianyu Zhao</p>
-    <p style="width: 30%;padding-left: 3%;padding-right: 3%;">Ph.D student</p>
+  <div style="width: 30%;padding: 3%;background-color: rgb(241, 241, 241);float: left;">
+    <img style="width: 100%;padding-left: 3%;padding-right: 3%;" src="/images/profile.png">
+    <p style="width: 100%;padding-left: 3%;padding-right: 3%;">Tianyu Zhao</p>
+    <p style="width: 100%;padding-left: 3%;padding-right: 3%;">Ph.D student</p>
   </div>
 
-  <div style="width: 30%;padding: 1%;background-color: rgb(241, 241, 241);">
-    <img style="width: 30%;padding-left: 3%;padding-right: 3%;" src="/images/profile.png">
-    <p style="width: 30%;padding-left: 3%;padding-right: 3%;">Taojie Kuang</p>
-    <p style="width: 30%;padding-left: 3%;padding-right: 3%;">Ph.D student</p>
+  <div style="width: 30%;padding: 3%;background-color: rgb(241, 241, 241);float: left;">
+    <img style="width: 100%;padding-left: 3%;padding-right: 3%;" src="/images/profile.png">
+    <p style="width: 100%;padding-left: 3%;padding-right: 3%;">Taojie Kuang</p>
+    <p style="width: 100%;padding-left: 3%;padding-right: 3%;">Ph.D student</p>
   </div>
 
-  <div style="width: 30%;padding: 1%;background-color: rgb(241, 241, 241);">
-    <img style="width: 30%;padding-left: 3%;padding-right: 3%;" src="/images/profile.png">
-    <p style="width: 30%;padding-left: 3%;padding-right: 3%;">Pengfei Liu</p>
-    <p style="width: 30%;padding-left: 3%;padding-right: 3%;">Ph.D student</p>
+  <div style="width: 30%;padding: 3%;background-color: rgb(241, 241, 241);float: left;">
+    <img style="width: 100%;padding-left: 3%;padding-right: 3%;" src="/images/profile.png">
+    <p style="width: 100%;padding-left: 3%;padding-right: 3%;">Pengfei Liu</p>
+    <p style="width: 100%;padding-left: 3%;padding-right: 3%;">Ph.D student</p>
   </div>
+
 </div>
 
