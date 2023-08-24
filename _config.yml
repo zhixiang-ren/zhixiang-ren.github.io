@@ -8,7 +8,7 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "ZhiXiang Ren"
+title                    : "Zhixiang Ren"
 title_separator          : "-"
 name                     : &name "RZX"
 description              : &description "personal description"
