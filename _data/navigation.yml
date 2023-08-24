@@ -1,10 +1,8 @@
 # main links links
 main:
-  - title: "Publications"
-    url: /publications/  
-    
+
   - title: "AIDD"
-    url: /AIDD/
+    url: /AIDD/s
 
   - title: "Bioinformation"
     url: /Bioinformation/
@@ -14,3 +12,6 @@ main:
   
   - title: "Intelligent Computing Publication"
     url: /Intelligent_Computing_Publication/
+
+  - title: "Publications"
+    url: /publications/  
