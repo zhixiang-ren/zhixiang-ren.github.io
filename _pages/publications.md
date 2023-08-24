@@ -33,7 +33,7 @@ author_profile: true
 <div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
 </br>
 <h3>Attention-Based Deep Learning Model for Image Desaturation of SDO/AIA</h3>
-<p style="text-align:justify">Published in 5 July 2023</p>
+<p style="text-align:justify">Published in 5 Jul 2023</p>
 <a href="https://iopscience.iop.org/article/10.1088/1674-4527/acd595/meta">Paper Link</a>
 </br>
 </div>
@@ -41,7 +41,7 @@ author_profile: true
 <div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
 </br>
 <h3>A Large-Scale Dataset of Three-Dimensional Solar Magnetic Fields Extrapolated by Nonlinear Force-Free Method</h3>
-<p style="text-align:justify">Published in 30 March 2023</p>
+<p style="text-align:justify">Published in 30 Mar 2023</p>
 <a href="https://www.nature.com/articles/s41597-023-02091-5">Paper Link</a>
 </br>
 </div>
@@ -81,7 +81,7 @@ author_profile: true
 <div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
 </br>
 <h3>Identification of bioactive constituents for colitis from traditional Chinese medicine prescription via deep neural network</h3>
-<p style="text-align:justify">Published in 1 June 2023</p>
+<p style="text-align:justify">Published in 1 Jun 2023</p>
 <a href="https://www.biorxiv.org/content/10.1101/2023.06.01.542694v2.abstract">Paper Link</a>
 </br>
 </div>
@@ -113,7 +113,7 @@ author_profile: true
 <div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
 </br>
 <h3>Super-resolution of Solar Magnetograms Using Deep Learning</h3>
-<p style="text-align:justify">Published in 22 July 2022</p>
+<p style="text-align:justify">Published in 22 Jul 2022</p>
 <a href="https://iopscience.iop.org/article/10.1088/1674-4527/ac78ce/meta">Paper Link</a>
 </br>
 </div>
@@ -184,63 +184,219 @@ author_profile: true
 
 <div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
 </br>
-<h3>Measurement of the Crab Nebula Spectrum Past 100 TeV with HAWC</h3>
-<p style="text-align:justify">Published in 21 Aug 2019</p>
-<a href="https://iopscience.iop.org/article/10.3847/1538-4357/ab2f7d/meta">Paper Link</a>
+<h3>Searching for dark matter sub-structure with HAWC</h3>
+<p style="text-align:justify">Published in 15 Jul 2019</p>
+<a href="https://iopscience.iop.org/article/10.1088/1475-7516/2019/07/022/meta">Paper Link</a>
 </br>
 </div>
 
+<div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
+</br>
+<h3>MAGIC and Fermi-LAT gamma-ray results on unassociated HAWC sources</h3>
+<p style="text-align:justify">Published in 16 Jan 2019</p>
+<a href="https://academic.oup.com/mnras/article/485/1/356/5289894">Paper Link</a>
+</br>
+</div>
 
+<div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
+</br>
+<h3>All-sky Measurement of the Anisotropy of Cosmic Rays at 10 TeV and Mapping of the Local Interstellar Magnetic Field</h3>
+<p style="text-align:justify">Published in 24 Jan 2019</p>
+<a href="https://iopscience.iop.org/article/10.3847/1538-4357/aaf5cc/meta">Paper Link</a>
+</br>
+</div>
 
+<div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
+</br>
+<h3>First HAWC observations of the Sun constrain steady TeV gamma-ray emission</h3>
+<p style="text-align:justify">Published in 17 Dec 2018</p>
+<a href="https://journals.aps.org/prd/abstract/10.1103/PhysRevD.98.123011">Paper Link</a>
+</br>
+</div>
 
+<div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
+</br>
+<h3>Constraints on spin-dependent dark matter scattering with long-lived mediators from TeV observations of the Sun with HAWC</h3>
+<p style="text-align:justify">Published in 17 Dec 2018</p>
+<a href="https://journals.aps.org/prd/abstract/10.1103/PhysRevD.98.123012">Paper Link</a>
+</br>
+</div>
 
+<div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
+</br>
+<h3>VERITAS and Fermi-LAT Observations of TeV Gamma-Ray Sources Discovered by HAWC in the 2HWC Catalog</h3>
+<p style="text-align:justify">Published in 5 Oct 2018</p>
+<a href="https://iopscience.iop.org/article/10.3847/1538-4357/aade4e/meta">Paper Link</a>
+</br>
+</div>
 
+<div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
+</br>
+<h3>Very-high-energy particle acceleration powered by the jets of the microquasar SS 433</h3>
+<p style="text-align:justify">Published in 3 Oct 2018</p>
+<a href="https://www.nature.com/articles/s41586-018-0565-5">Paper Link</a>
+</br>
+</div>
 
+<div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
+</br>
+<h3>Observation of Anisotropy of TeV Cosmic Rays with Two Years of HAWC</h3>
+<p style="text-align:justify">Published in 20 Sep 2018</p>
+<a href="https://iopscience.iop.org/article/10.3847/1538-4357/aad90c/meta">Paper Link</a>
+</br>
+</div>
 
+<div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
+</br>
+<h3>Multimessenger observations of a flaring blazar coincident with high-energy neutrino IceCube-170922A</h3>
+<p style="text-align:justify">Published in 13 Jul 2018</p>
+<a href="https://www.science.org/doi/abs/10.1126/science.aat1378">Paper Link</a>
+</br>
+</div>
 
+<div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
+</br>
+<h3>Search for dark matter gamma-ray emission from the Andromeda Galaxy with the High-Altitude Water Cherenkov Observatory</h3>
+<p style="text-align:justify">Published in 29 Jun 2018</p>
+<a href="https://iopscience.iop.org/article/10.1088/1475-7516/2018/06/043/meta">Paper Link</a>
+</br>
+</div>
 
+<div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
+</br>
+<h3>Constraining the ¯p/p ratio in TeV cosmic rays with observations of the Moon shadow by HAWC</h3>
+<p style="text-align:justify">Published in 16 May 2018</p>
+<a href="https://journals.aps.org/prd/abstract/10.1103/PhysRevD.97.102005">Paper Link</a>
+</br>
+</div>
 
+<div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
+</br>
+<h3>A search for dark matter in the Galactic halo with HAWC</h3>
+<p style="text-align:justify">Published in 23 Feb 2018</p>
+<a href="https://iopscience.iop.org/article/10.1088/1475-7516/2018/02/049/meta">Paper Link</a>
+</br>
+</div>
 
+<div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
+</br>
+<h3>Dark Matter Limits from Dwarf Spheroidal Galaxies with the HAWC Gamma-Ray Observatory</h3>
+<p style="text-align:justify">Published in 1 Feb 2018</p>
+<a href="https://iopscience.iop.org/article/10.3847/1538-4357/aaa6d8/meta">Paper Link</a>
+</br>
+</div>
 
+<div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
+</br>
+<h3>Improve the Low Energy Sensitivity of the HAWC Observatory</h3>
+<p style="text-align:justify">Published in Dec 2018</p>
+<a href="https://www.proquest.com/openview/302c659daa85a7e95d8c3e33e3060d0b/1?pq-origsite=gscholar&cbl=18750&diss=y">Paper Link</a>
+</br>
+</div>
 
+<div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
+</br>
+<h3>All-particle cosmic ray energy spectrum measured by the HAWC experiment from 10 to 500 TeV</h3>
+<p style="text-align:justify">Published in 5 Dec 2017</p>
+<a href="https://journals.aps.org/prd/abstract/10.1103/PhysRevD.96.122001">Paper Link</a>
+</br>
+</div>
 
+<div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
+</br>
+<h3>Extended gamma-ray sources around pulsars constrain the origin of the positron flux at Earth</h3>
+<p style="text-align:justify">Published in 17 Nov 2017</p>
+<a href="https://www.science.org/doi/abs/10.1126/science.aan4880">Paper Link</a>
+</br>
+</div>
 
+<div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
+</br>
+<h3>Multiwavelength follow-up of a rare IceCube neutrino multiplet</h3>
+<p style="text-align:justify">Published in 24 Nov 2017</p>
+<a href="https://www.aanda.org/articles/aa/abs/2017/11/aa30620-17/aa30620-17.html">Paper Link</a>
+</br>
+</div>
 
+<div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
+</br>
+<h3>Survey of nearby active galactic nuclei with the HAWC Observatory</h3>
+<p style="text-align:justify">Published in 18 Aug 2017</p>
+<a href="https://arxiv.org/abs/1708.05698">Paper Link</a>
+</br>
+</div>
 
+<div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
+</br>
+<h3>The HAWC Real-time Flare Monitor for Rapid Detection of Transient Events</h3>
+<p style="text-align:justify">Published in 12 Jul 2017</p>
+<a href="https://iopscience.iop.org/article/10.3847/1538-4357/aa789f/meta">Paper Link</a>
+</br>
+</div>
 
+<div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
+</br>
+<h3>Search for Very-high-energy Emission from Gamma-Ray Bursts Using the First 18 Months of Data from the HAWC Gamma-Ray Observatory</h3>
+<p style="text-align:justify">Published in 6 Jul 2017</p>
+<a href="https://iopscience.iop.org/article/10.3847/1538-4357/aa756f/meta">Paper Link</a>
+</br>
+</div>
 
+<div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
+</br>
+<h3>The 2HWC HAWC Observatory Gamma-Ray Catalog</h3>
+<p style="text-align:justify">Published in 29 Jun 2017</p>
+<a href="https://iopscience.iop.org/article/10.3847/1538-4357/aa7556/meta">Paper Link</a>
+</br>
+</div>
 
+<div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
+</br>
+<h3>Observation of the Crab Nebula with the HAWC Gamma-Ray Observatory</h3>
+<p style="text-align:justify">Published in 29 Jun 2017</p>
+<a href="https://iopscience.iop.org/article/10.3847/1538-4357/aa7555/meta">Paper Link</a>
+</br>
+</div>
 
+<div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
+</br>
+<h3>Search for Very High-energy Gamma Rays from the Northern Fermi Bubble Region with HAWC</h3>
+<p style="text-align:justify">Published in 16 Jun 2017</p>
+<a href="https://iopscience.iop.org/article/10.3847/1538-4357/aa751a/meta">Paper Link</a>
+</br>
+</div>
 
+<div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
+</br>
+<h3>Daily Monitoring of TeV Gamma-Ray Emission from Mrk 421, Mrk 501, and the Crab Nebula with HAWC</h3>
+<p style="text-align:justify">Published in 31 May 2017</p>
+<a href="https://iopscience.iop.org/article/10.3847/1538-4357/aa729e/meta">Paper Link</a>
+</br>
+</div>
 
+<div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
+</br>
+<h3>Multi-messenger Observations of a Binary Neutron Star Merger</h3>
+<p style="text-align:justify">Published in 16 Oct 2017</p>
+<a href="https://iopscience.iop.org/article/10.3847/2041-8213/aa91c9/meta">Paper Link</a>
+</br>
+</div>
 
+<div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
+</br>
+<h3>SEARCH FOR TeV GAMMA-RAY EMISSION FROM POINT-LIKE SOURCES IN THE INNER GALACTIC PLANE WITH A PARTIAL CONFIGURATION OF THE HAWC OBSERVATORY</h3>
+<p style="text-align:justify">Published in 18 Jan 2016</p>
+<a href="https://iopscience.iop.org/article/10.3847/0004-637X/817/1/3/meta">Paper Link</a>
+</br>
+</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
+</br>
+<h3>The Calibration System of the HAWC Gamma-Ray Observatory</h3>
+<p style="text-align:justify">Published in Jul 2015</p>
+<a href="https://ui.adsabs.harvard.edu/abs/2015ICRC...34..997A/abstract">Paper Link</a>
+</br>
+</div>
 
 
 
