@@ -8,46 +8,46 @@ redirect_from:
   - /about.html
 ---
 
-11111
+111111
 
-Zhixiang Ren is currently an Associate Research Scientist and PhD Supervisor at the PengCheng Laboratory in Shenzhen, China. He received his PhD from the University of New Mexico in 2018. His research interests include deep learning, intelligent scientific computing, multi-modal large AI models, AI for science, especially “AI+bioinformatics” and AI-aided drug design. He has published over 40 papers in top academic journals, including Nature and Science, with over 6,000 citations. He has been granted several national patents and has led the development of one international standard and two industry standards in the field of intelligent computing. He is also an associated editor of Frontiers in Big Data and a reviewer for journals such as Neural Networks, Pattern Recognition, and Applied Sciences.
+<p style="text-align:justify">Zhixiang Ren is currently an Associate Research Scientist and PhD Supervisor at the PengCheng Laboratory in Shenzhen, China. He received his PhD from the University of New Mexico in 2018. His research interests include deep learning, intelligent scientific computing, multi-modal large AI models, AI for science, especially “AI+bioinformatics” and AI-aided drug design. He has published over 40 papers in top academic journals, including Nature and Science, with over 6,000 citations. He has been granted several national patents and has led the development of one international standard and two industry standards in the field of intelligent computing. He is also an associated editor of Frontiers in Big Data and a reviewer for journals such as Neural Networks, Pattern Recognition, and Applied Sciences.</p>
 
-<div style="float: left;">
+<div style="float: left;background-color: rgb(248, 248, 248);">
 
-  <div style="width: 30%;padding: 3%;background-color: rgb(241, 241, 241);float: left;">
+  <div style="width: 33%;padding: 3%;background-color: rgb(241, 241, 241);float: left;">
     <img style="width: 100%;padding: 3%;" src="/images/profile.png">
     <p style="width: 100%;padding: 3%;">Yiming Ren</p>
     <p style="width: 100%;padding: 3%;">Software Engineer</p>
   </div>
 
-  <div style="width: 30%;padding: 3%;background-color: rgb(241, 241, 241);float: left;">
-    <img style="width: 100%;padding-left: 3%;padding-right: 3%;" src="/images/profile.png">
-    <p style="width: 100%;padding-left: 3%;padding-right: 3%;">Zeting Li</p>
-    <p style="width: 100%;padding-left: 3%;padding-right: 3%;">Software Engineer</p>
+  <div style="width: 33%;padding: 3%;background-color: rgb(241, 241, 241);float: left;">
+    <img style="width: 100%;padding: 3%;" src="/images/profile.png">
+    <p style="width: 100%;padding: 3%;">Zeting Li</p>
+    <p style="width: 100%;padding: 3%;">Software Engineer</p>
   </div>
 
-  <div style="width: 30%;padding: 3%;background-color: rgb(241, 241, 241);float: left;">
-    <img style="width: 100%;padding-left: 3%;padding-right: 3%;" src="/images/profile.png">
-    <p style="width: 100%;padding-left: 3%;padding-right: 3%;">Yue Zhou</p>
-    <p style="width: 100%;padding-left: 3%;padding-right: 3%;">Software Engineer</p>
+  <div style="width: 33%;padding: 3%;background-color: rgb(241, 241, 241);float: left;">
+    <img style="width: 100%;padding: 3%;" src="/images/profile.png">
+    <p style="width: 100%;padding: 3%;">Yue Zhou</p>
+    <p style="width: 100%;padding: 3%;">Software Engineer</p>
   </div>
 
-  <div style="width: 30%;padding: 3%;background-color: rgb(241, 241, 241);float: left;">
-    <img style="width: 100%;padding-left: 3%;padding-right: 3%;" src="/images/profile.png">
-    <p style="width: 100%;padding-left: 3%;padding-right: 3%;">Tianyu Zhao</p>
-    <p style="width: 100%;padding-left: 3%;padding-right: 3%;">Ph.D student</p>
+  <div style="width: 33%;padding: 3%;background-color: rgb(241, 241, 241);float: left;">
+    <img style="width: 100%;padding: 3%;" src="/images/profile.png">
+    <p style="width: 100%;padding: 3%;">Tianyu Zhao</p>
+    <p style="width: 100%;padding: 3%;">Ph.D student</p>
   </div>
 
-  <div style="width: 30%;padding: 3%;background-color: rgb(241, 241, 241);float: left;">
-    <img style="width: 100%;padding-left: 3%;padding-right: 3%;" src="/images/profile.png">
-    <p style="width: 100%;padding-left: 3%;padding-right: 3%;">Taojie Kuang</p>
-    <p style="width: 100%;padding-left: 3%;padding-right: 3%;">Ph.D student</p>
+  <div style="width: 33%;padding: 3%;background-color: rgb(241, 241, 241);float: left;">
+    <img style="width: 100%;padding: 3%;" src="/images/profile.png">
+    <p style="width: 100%;padding: 3%;">Taojie Kuang</p>
+    <p style="width: 100%;padding: 3%;">Ph.D student</p>
   </div>
 
-  <div style="width: 30%;padding: 3%;background-color: rgb(241, 241, 241);float: left;">
-    <img style="width: 100%;padding-left: 3%;padding-right: 3%;" src="/images/profile.png">
-    <p style="width: 100%;padding-left: 3%;padding-right: 3%;">Pengfei Liu</p>
-    <p style="width: 100%;padding-left: 3%;padding-right: 3%;">Ph.D student</p>
+  <div style="width: 33%;padding: 3%;background-color: rgb(241, 241, 241);float: left;">
+    <img style="width: 100%;padding: 3%;" src="/images/profile.png">
+    <p style="width: 100%;padding: 3%;">Pengfei Liu</p>
+    <p style="width: 100%;padding: 3%;">Ph.D student</p>
   </div>
 
 </div>
