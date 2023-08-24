@@ -22,32 +22,32 @@ Zhixiang Ren is currently an Associate Research Scientist and PhD Supervisor at 
 
   <div style="background-color: rgb(241, 241, 241);">
     <img style="width: 30%;padding-left: 3%;padding-right: 3%;" src="/images/profile.png">
-    <h style="width: 30%;padding-left: 3%;padding-right: 3%;">Zeting Li</h>
-    <h style="width: 30%;padding-left: 3%;padding-right: 3%;">Software Engineer</h>
+    <p style="width: 30%;padding-left: 3%;padding-right: 3%;">Zeting Li</p>
+    <p style="width: 30%;padding-left: 3%;padding-right: 3%;">Software Engineer</p>
   </div>
 
   <div style="background-color: rgb(241, 241, 241);">
     <img style="width: 30%;padding-left: 3%;padding-right: 3%;" src="/images/profile.png">
-    <h style="width: 30%;padding-left: 3%;padding-right: 3%;">Yue Zhou</h>
-    <h style="width: 30%;padding-left: 3%;padding-right: 3%;">Software Engineer</h>
+    <p style="width: 30%;padding-left: 3%;padding-right: 3%;">Yue Zhou</p>
+    <p style="width: 30%;padding-left: 3%;padding-right: 3%;">Software Engineer</p>
   </div>
 
   <div style="background-color: rgb(241, 241, 241);">
     <img style="width: 30%;padding-left: 3%;padding-right: 3%;" src="/images/profile.png">
-    <h style="width: 30%;padding-left: 3%;padding-right: 3%;">Tianyu Zhao</h>
-    <h style="width: 30%;padding-left: 3%;padding-right: 3%;">Ph.D student</h>
+    <p style="width: 30%;padding-left: 3%;padding-right: 3%;">Tianyu Zhao</p>
+    <p style="width: 30%;padding-left: 3%;padding-right: 3%;">Ph.D student</p>
   </div>
 
   <div style="background-color: rgb(241, 241, 241);">
     <img style="width: 30%;padding-left: 3%;padding-right: 3%;" src="/images/profile.png">
-    <h style="width: 30%;padding-left: 3%;padding-right: 3%;">Taojie Kuang</h>
-    <h style="width: 30%;padding-left: 3%;padding-right: 3%;">Ph.D student</h>
+    <p style="width: 30%;padding-left: 3%;padding-right: 3%;">Taojie Kuang</p>
+    <p style="width: 30%;padding-left: 3%;padding-right: 3%;">Ph.D student</p>
   </div>
 
   <div style="background-color: rgb(241, 241, 241);">
     <img style="width: 30%;padding-left: 3%;padding-right: 3%;" src="/images/profile.png">
-    <h style="width: 30%;padding-left: 3%;padding-right: 3%;">Pengfei Liu</h>
-    <h style="width: 30%;padding-left: 3%;padding-right: 3%;">Ph.D student</h>
+    <p style="width: 30%;padding-left: 3%;padding-right: 3%;">Pengfei Liu</p>
+    <p style="width: 30%;padding-left: 3%;padding-right: 3%;">Ph.D student</p>
   </div>
 </div>
 
