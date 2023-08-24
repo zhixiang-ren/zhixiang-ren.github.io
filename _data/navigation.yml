@@ -3,6 +3,14 @@ main:
   - title: "Publications"
     url: /publications/  
     
-  - title: "Portfolio"
-    url: /portfolio/
+  - title: "AIDD"
+    url: /AIDD/
 
+  - title: "Bioinformation"
+    url: /Bioinformation/
+
+  - title: "Gravitational Wave Science"
+    url: /Gravitational_Wave_Science/
+  
+  - title: "Intelligent Computing Publication"
+    url: /Intelligent_Computing_Publication/
