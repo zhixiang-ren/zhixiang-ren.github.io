@@ -14,37 +14,37 @@ redirect_from:
 
 <div style="float: left;background-color: rgb(248, 248, 248);">
 
-  <div style="width: 33%;padding: 3%;background-color: rgb(241, 241, 241);float: left;">
+  <div style="width: 33%;padding: 5px;background-color: rgb(241, 241, 241);float: left;">
     <img style="width: 100%;padding: 3%;" src="/images/profile.png">
     <p style="width: 100%;padding: 3%;">Yiming Ren</p>
     <p style="width: 100%;padding: 3%;">Software Engineer</p>
   </div>
 
-  <div style="width: 33%;padding: 3%;background-color: rgb(241, 241, 241);float: left;">
+  <div style="width: 33%;padding: 5px;background-color: rgb(241, 241, 241);float: left;">
     <img style="width: 100%;padding: 3%;" src="/images/profile.png">
     <p style="width: 100%;padding: 3%;">Zeting Li</p>
     <p style="width: 100%;padding: 3%;">Software Engineer</p>
   </div>
 
-  <div style="width: 33%;padding: 3%;background-color: rgb(241, 241, 241);float: left;">
+  <div style="width: 33%;padding: 5px;background-color: rgb(241, 241, 241);float: left;">
     <img style="width: 100%;padding: 3%;" src="/images/profile.png">
     <p style="width: 100%;padding: 3%;">Yue Zhou</p>
     <p style="width: 100%;padding: 3%;">Software Engineer</p>
   </div>
 
-  <div style="width: 33%;padding: 3%;background-color: rgb(241, 241, 241);float: left;">
+  <div style="width: 33%;padding: 5px;background-color: rgb(241, 241, 241);float: left;">
     <img style="width: 100%;padding: 3%;" src="/images/profile.png">
     <p style="width: 100%;padding: 3%;">Tianyu Zhao</p>
     <p style="width: 100%;padding: 3%;">Ph.D student</p>
   </div>
 
-  <div style="width: 33%;padding: 3%;background-color: rgb(241, 241, 241);float: left;">
+  <div style="width: 33%;padding: 5px;background-color: rgb(241, 241, 241);float: left;">
     <img style="width: 100%;padding: 3%;" src="/images/profile.png">
     <p style="width: 100%;padding: 3%;">Taojie Kuang</p>
     <p style="width: 100%;padding: 3%;">Ph.D student</p>
   </div>
 
-  <div style="width: 33%;padding: 3%;background-color: rgb(241, 241, 241);float: left;">
+  <div style="width: 33%;padding: 5px;background-color: rgb(241, 241, 241);float: left;">
     <img style="width: 100%;padding: 3%;" src="/images/profile.png">
     <p style="width: 100%;padding: 3%;">Pengfei Liu</p>
     <p style="width: 100%;padding: 3%;">Ph.D student</p>
