@@ -15,39 +15,39 @@ Zhixiang Ren is currently an Associate Research Scientist and PhD Supervisor at 
 <div style="float: left;">
 
   <div>
-    <img style="width: 30%;padding: 3%;" src="/images/profile.png"></img>
-    <p>Yiming Ren</p>
-    <p>Software Engineer</p>
+    <img style="width: 30%;padding: 3%;" src="/images/profile.png">
+    <p style="width: 30%;padding: 3%;">Yiming Ren</p>
+    <p style="width: 30%;padding: 3%;">Software Engineer</p>
   </div>
 
   <div>
-    <img style="width: 30%;padding: 3%;" src="/images/profile.png" />
-    <h>Zeting Li</h>
-    <h>Software Engineer</h>
+    <img style="width: 30%;padding: 3%;" src="/images/profile.png">
+    <h style="width: 30%;padding: 3%;">Zeting Li</h>
+    <h style="width: 30%;padding: 3%;">Software Engineer</h>
   </div>
 
   <div>
-    <img style="width: 30%;padding: 3%;" src="/images/profile.png" />
-    <h>Yue Zhou</h>
-    <h>Software Engineer</h>
+    <img style="width: 30%;padding: 3%;" src="/images/profile.png">
+    <h style="width: 30%;padding: 3%;">Yue Zhou</h>
+    <h style="width: 30%;padding: 3%;">Software Engineer</h>
   </div>
 
   <div>
-    <img style="width: 30%;padding: 3%;" src="/images/profile.png" />
-    <h>Tianyu Zhao</h>
-    <h>Ph.D student</h>
+    <img style="width: 30%;padding: 3%;" src="/images/profile.png">
+    <h style="width: 30%;padding: 3%;">Tianyu Zhao</h>
+    <h style="width: 30%;padding: 3%;">Ph.D student</h>
   </div>
 
   <div>
-    <img style="width: 30%;padding: 3%;" src="/images/profile.png" />
-    <h>Taojie Kuang</h>
-    <h>Ph.D student</h>
+    <img style="width: 30%;padding: 3%;" src="/images/profile.png">
+    <h style="width: 30%;padding: 3%;">Taojie Kuang</h>
+    <h style="width: 30%;padding: 3%;">Ph.D student</h>
   </div>
 
   <div>
-    <img style="width: 30%;padding: 3%;" src="/images/profile.png" />
-    <h>Pengfei Liu</h>
-    <h>Ph.D student</h>
+    <img style="width: 30%;padding: 3%;" src="/images/profile.png">
+    <h style="width: 30%;padding: 3%;">Pengfei Liu</h>
+    <h style="width: 30%;padding: 3%;">Ph.D student</h>
   </div>
 </div>
 
