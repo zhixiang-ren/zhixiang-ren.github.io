@@ -1,17 +1,17 @@
 # main links links
 main:
 
-  - title: "AIDD"
-    url: /AIDD/
+  - title: "AI Aided Drug Discovery"
+    url: /AI_Aided_Drug_Discovery/
 
   - title: "Bioinformation"
     url: /Bioinformation/
 
-  - title: "Gravitational Wave Science"
-    url: /Gravitational_Wave_Science/
+  - title: "Astrophysics"
+    url: /Astrophysics/
   
-  - title: "Intelligent Computing Publication"
-    url: /Intelligent_Computing_Publication/
+  - title: "Intelligent Computing"
+    url: /Intelligent_Computing/
 
   - title: "Publications"
     url: /publications/  
