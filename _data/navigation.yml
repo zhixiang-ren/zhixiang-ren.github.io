@@ -1,10 +1,10 @@
 # main links links
 main:
 
-  - title: "AI Aided Drug Discovery"
+  - title: "AI for Drug Discovery"
     url: /AI_Aided_Drug_Discovery/
 
-  - title: "Bioinformation"
+  - title: "AI for Medicine"
     url: /Bioinformation/
   
   - title: "Intelligent Computing"
