@@ -2,10 +2,10 @@
 main:
 
   - title: "AI for Drug Discovery"
-    url: /AI_Aided_Drug_Discovery/
+    url: /AI_for_Drug_Discovery/
 
   - title: "AI for Medicine"
-    url: /AI_Medicine/
+    url: /AI_for_Medicine/
   
   - title: "Intelligent Computing"
     url: /Intelligent_Computing/
