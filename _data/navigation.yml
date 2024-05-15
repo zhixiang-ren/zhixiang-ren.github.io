@@ -1,14 +1,17 @@
 # main links links
 main:
 
-  - title: "AI for Drug Discovery"
-    url: /AI_for_Drug_Discovery/
+  - title: "AI for Biochemistry"
+    url: /AI_for_Biochemistry/
 
-  - title: "AI for Medicine"
-    url: /AI_for_Medicine/
+  - title: "AI for Transcriptomics"
+    url: /AI_for_Transcriptomics/
   
-  - title: "Intelligent Computing"
-    url: /Intelligent_Computing/
-
-  - title: "Publications"
-    url: /publications/  
+  - title: "AI for Protein"
+    url: /AI_for_Protein/
+  
+  - title: "AI for Traditional Chinese Medicine"
+    url: /AI_for_Traditional_Chinese_Medicine/
+  
+  - title: "AI for Temporal Scientific Data"
+    url: /AI_for_Temporal_Scientific_Data/
