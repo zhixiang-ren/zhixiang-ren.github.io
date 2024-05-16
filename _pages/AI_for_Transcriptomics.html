@@ -31,9 +31,17 @@ author_profile: true
 <div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
 </br>
 <h3>Multimodal Artificial Intelligence Large Models for Small-Molecule Drug Generation and Description</h3>
-<p>Paper Link: <a href="https://arxiv.org/abs/2308.06911">https://arxiv.org/abs/2308.06911</a></p>
-<img style="width: 100%;padding: 3%;" src="/images/GIT-Mol.png" />
-<p style="text-align:justify">We are dedicated to the development of an innovative multimodal large model in the fields of drug discovery and molecular biology, aiming to provide new perspectives and solutions for understanding and utilizing multimodal molecular data. To this end, we have designed and implemented a multimodal AI large model capable of simultaneously processing images, graphs, and text. Through a novel cross-modal fusion approach (identifying and extracting correlations between different modalities and implementing cross-fusion of information, thereby generating a unified embedding that integrates multimodal information), our model achieves an organic interaction and efficient fusion among these three modalities. Our model has demonstrated outstanding performance across various small-molecule drug tasks, with the ability to understand and handle multimodal molecular data. It has accomplished accurate prediction of molecular properties, as well as the generation and description of molecules in response to textual prompts, showing superior performance in comparison with models of similar levels.
+<p>Paper Link: <a href="https://www.biorxiv.org/content/10.1101/2024.04.25.591050.abstract">https://www.biorxiv.org/content/10.1101/2024.04.25.591050.abstract</a></p>
+<img style="width: 100%;padding: 3%;" src="/images/MetaSCDrug.png" />
+<p style="text-align:justify">
+  Analyzing the drug response at the cellular level is crucial for identifying biomarkers and understanding the mechanisms of resistance. 
+  Although studies on the drug response of individual cells can provide novel insights into tumor heterogeneity, pharmacogenomic data related to single-cell (SC) RNA sequencing is often limited. 
+  Transfer learning provides a promising approach to translate the knowledge of drug response from bulk cell lines to SC analysis, potentially providing an effective solution to this challenge. 
+  Previous studies often use data from single drug-cell lines to pre-train specific models and adapt the models on SC datasets, which lack pharmacogenomic information from other drugs and hinder model generalization. 
+  In this work, we introduce MetaSCDrug as a unified meta pre-training framework that integrates molecular information with transcriptomic data to simultaneously modeling cellular heterogeneity in response to multiple pre-trained drugs and generalize to unseen drugs. 
+  Our model requires only one pre-training session, followed by fine-tuning on multiple single-cell datasets by few-shot learning, achieving an average of 4.58% accuracy increase in drug response prediction compared to the baselines. 
+  Furthermore, our meta pre-training strategy effectively captures transcriptome heterogeneity in the generalization of unseen drugs, achieving a 20% improvement over the model without meta pre-training. 
+  Case studies of our framework highlight its capability to identify critical genes for resistance, providing a method for exploring drug action pathways and understanding resistance mechanisms.
 </p>
 </br>
 </div>
@@ -42,10 +50,17 @@ author_profile: true
 
 <div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
 </br>
-<h3>Deep Neural Network-Based Research on Small-Molecule Drugs</h3>
-<p>Paper Link: <a href="https://www.biorxiv.org/content/10.1101/2023.08.15.553467v1.abstract">https://www.biorxiv.org/content/10.1101/2023.08.15.553467v1.abstract</a></p>
-<img style="width: 100%;padding: 3%;" src="/images/3D-Mol.png" />
-<p style="text-align:justify">By designing novel molecular representation methods and utilizing the force field computations and knowledge-base optimization features of RDKit, we generate 3D conformations of molecules from molecular topological graphs. Subsequently, we decompose the molecular conformations into point-edge graphs, bond-angle graphs, and dihedral-angle graphs to comprehensively characterize the spatial information of molecules and extract the 3D structure of small-molecule drugs. We have designed a molecular encoder based on a message-passing model and pre-trained their model using extensive unlabeled small-molecule data through a self-supervised contrastive learning approach (using molecular topological graphs). Our AI model has achieved state-of-the-art (SOTA) performance in several aspects of small-molecule drug property prediction.
+<h3>Cytokine expression patterns: A single-cell RNA sequencing and machine learning based roadmap for cancer classification</h3>
+<p>Paper Link: <a href="https://www.sciencedirect.com/science/article/pii/S1476927124000136">https://www.sciencedirect.com/science/article/pii/S1476927124000136</a></p>
+<img style="width: 100%;padding: 3%;" src="/images/TIME.png" />
+<p style="text-align:justify">
+  Cytokines are small protein molecules that exhibit potent immunoregulatory properties, which are known as the essential components of the tumor immune microenvironment (TIME). 
+  While some cytokines are known to be universally upregulated in TIME, the unique cytokine expression patterns have not been fully resolved in specific types of cancers. 
+  To address this challenge, we develop a TIME single-cell RNA sequencing (scRNA-seq) dataset, which is designed to study cytokine expression patterns for precise cancer classification. 
+  The dataset, including 39 cancers, is constructed by integrating 684 tumor scRNA-seq samples from multiple public repositories. 
+  After screening and processing, the dataset retains only the expression data of immune cells. 
+  With a machine learning classification model, unique cytokine expression patterns are identified for various cancer categories and pioneering applied to cancer classification with an accuracy rate of 78.01%. 
+  Our method will not only boost the understanding of cancer-type-specific immune modulations in TIME but also serve as a crucial reference for future diagnostic and therapeutic research in cancer immunity.
 </p>
 <a></a>
 </br>
@@ -58,7 +73,12 @@ author_profile: true
 <h3>RNA Splicing Prediction with Large Language model</h3>
 <p>Paper Link: <a href="https://www.biorxiv.org/content/10.1101/2023.01.31.526427v2.abstract">https://www.biorxiv.org/content/10.1101/2023.01.31.526427v2.abstract</a></p>
 <img style="width: 100%;padding: 3%;" src="/images/SpliceBERT.png" />
-<p style="text-align:justify">RNA splicing is an important post-transcriptional process of gene expression in eukaryotic cells. Predicting RNA splicing from primary sequences can facilitate the interpretation of genomic variants. We developed a novel self-supervised pre-trained language model, SpliceBERT, to improve sequence-based RNA splicing prediction. Pre-training on pre-mRNA sequences from vertebrates enables SpliceBERT to capture evolutionary conservation information and characterize the unique property of splice sites. SpliceBERT also improves zero-shot prediction of variant effects on splicing by considering sequence context information, and achieves superior performance for predicting branchpoint in the human genome and splice sites across species. Our study highlighted the importance of pre-training genomic language models on a diverse range of species and suggested that pre-trained language models were promising for deciphering the sequence logic of RNA splicing.
+<p style="text-align:justify">RNA splicing is an important post-transcriptional process of gene expression in eukaryotic cells. 
+  Predicting RNA splicing from primary sequences can facilitate the interpretation of genomic variants. 
+  We developed a novel self-supervised pre-trained language model, SpliceBERT, to improve sequence-based RNA splicing prediction. 
+  Pre-training on pre-mRNA sequences from vertebrates enables SpliceBERT to capture evolutionary conservation information and characterize the unique property of splice sites. 
+  SpliceBERT also improves zero-shot prediction of variant effects on splicing by considering sequence context information, and achieves superior performance for predicting branchpoint in the human genome and splice sites across species. 
+  Our study highlighted the importance of pre-training genomic language models on a diverse range of species and suggested that pre-trained language models were promising for deciphering the sequence logic of RNA splicing.
 </p>
 </br>
 </div>
