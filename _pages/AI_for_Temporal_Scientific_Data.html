@@ -61,7 +61,17 @@ author_profile: true
 <p>Paper Link: <a href="https://link.springer.com/article/10.1007/s11467-023-1318-y">https://link.springer.com/article/10.1007/s11467-023-1318-y</a></p>
 <img style="width: 100%;padding: 3%;" src="/images/Taiji.png" />
 <p style="text-align:justify">
-  
+  The direct observation of gravitational waves (GWs) opens a new window for exploring new physics from quanta to cosmos and provides a new tool for probing the evolution of universe. 
+  GWs detection in space covers a broad spectrum ranging over more than four orders of magnitude and enables us to study rich physical and astronomical phenomena. 
+  Taiji is a proposed space-based gravitational wave (GW) detection mission that will be launched in the 2030s. 
+  Taiji will be exposed to numerous overlapping and persistent GW signals buried in the foreground and background, posing various data analysis challenges. 
+  In order to empower potential scientific discoveries, the Mock Laser Interferometer Space Antenna (LISA) data challenge and the LISA data challenge (LDC) were developed. 
+  While LDC provides a baseline framework, the first LDC needs to be updated with more realistic simulations and adjusted detector responses for Taiji’s constellation. 
+  In this paper, we review the scientific objectives and the roadmap for Taiji, as well as the technical difficulties in data analysis and the data generation strategy, and present the associated data challenges. 
+  In contrast to LDC, we utilize second-order Keplerian orbit and second-generation time delay interferometry techniques. 
+  Additionally, we employ a new model for the extreme-mass-ratio inspiral waveform and stochastic GW background spectrum, which enables us to test general relativity and measure the non-Gaussianity of curvature perturbations. 
+  Furthermore, we present a comprehensive showcase of parameter estimation using a toy dataset. This showcase not only demonstrates the scientific potential of the Taiji data challenge (TDC) but also serves to validate the effectiveness of the pipeline. 
+  As the first data challenge for Taiji, we aim to build an open ground for data analysis related to Taiji sources and sciences. More details can be found on the official website (taiji-tdc.ictp-ap.org).
 </p>
 </br>
 </div>
@@ -70,11 +80,17 @@ author_profile: true
 
 <div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
 </br>
-<h3>WaveFormer: transformer-based denoising method for gravitational-wave data</h3>
-<p>Paper Link: <a href="https://iopscience.iop.org/article/10.1088/2632-2153/ad2f54">https://iopscience.iop.org/article/10.1088/2632-2153/ad2f54</a></p>
-<img style="width: 100%;padding: 3%;" src="/images/GIT-Mol.png" />
+<h3>Dilated convolutional neural network for detecting extreme-mass-ratio inspirals</h3>
+<p>Paper Link: <a href="https://journals.aps.org/prd/abstract/10.1103/PhysRevD.109.084054">https://journals.aps.org/prd/abstract/10.1103/PhysRevD.109.084054</a></p>
+<img style="width: 100%;padding: 3%;" src="/images/DECODE.png" />
 <p style="text-align:justify">
-  
+  The detection of extreme-mass-ratio inspirals (EMRIs) is intricate due to their complex waveforms, extended duration, and low signal-to-noise ratio (SNR), making them more challenging to be identified compared to compact binary coalescences. 
+  While matched filtering-based techniques are known for their computational demands, existing deep learning-based methods primarily handle time-domain data and are often constrained by data duration and SNR. 
+  In addition, most existing work ignores time delay interferometry (TDI) and applies the long-wavelength approximation in detector response calculations, thus limiting their ability to handle laser frequency noise. 
+  In this study, we introduce dilated convolutional neural network for detecting extreme-mass-ratio inspirals (DECODE), an end-to-end model focusing on EMRI signal detection by sequence modeling in the frequency domain. 
+  Centered around a dilated causal convolutional neural network, trained on synthetic data considering TDI-1.5 detector response, DECODE can efficiently process a year’s worth of multichannel TDI data with an SNR of around 50. 
+  We evaluate our model on one-year data with accumulated SNR ranging from 50 to 120 and achieve a true positive rate of 96.3% at a false positive rate of 1%, keeping an inference time of less than 0.01 seconds. 
+  With the visualization of three showcased EMRI signals for interpretability and generalization, DECODE exhibits strong potential for future space-based gravitational wave data analyses.
 </p>
 </br>
 </div>
