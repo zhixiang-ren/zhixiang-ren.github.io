@@ -29,15 +29,16 @@ author_profile: true
   
 <div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
 </br>
-<h3>Multimodal Artificial Intelligence Large Models for Small-Molecule Drug Generation and Description</h3>
+<h3>GIT-Mol: A Multi-modal Large Language Model for Molecular Science with Graph, Image, and Text</h3>
 <p>Paper Link: <a href="https://arxiv.org/abs/2308.06911">https://arxiv.org/abs/2308.06911</a></p>
 <img style="width: 100%;padding: 3%;" src="/images/GIT-Mol.png" />
 <p style="text-align:justify">
-  We are dedicated to the development of an innovative multimodal large model in the fields of drug discovery and molecular biology, aiming to provide new perspectives and solutions for understanding and utilizing multimodal molecular data. 
-  To this end, we have designed and implemented a multimodal AI large model capable of simultaneously processing images, graphs, and text. 
-  Through a novel cross-modal fusion approach (identifying and extracting correlations between different modalities and implementing cross-fusion of information, thereby generating a unified embedding that integrates multimodal information), our model achieves an organic interaction and efficient fusion among these three modalities. 
-  Our model has demonstrated outstanding performance across various small-molecule drug tasks, with the ability to understand and handle multimodal molecular data. 
-  It has accomplished accurate prediction of molecular properties, as well as the generation and description of molecules in response to textual prompts, showing superior performance in comparison with models of similar levels.
+  Large language models have made significant strides in natural language processing, enabling innovative applications in molecular science by processing textual representations of molecules. 
+  However, most existing language models cannot capture the rich information with complex molecular structures or images. 
+  In this paper, we introduce GIT-Mol, a multi-modal large language model that integrates the Graph, Image, and Text information. 
+  To facilitate the integration of multi-modal molecular data, we propose GIT-Former, a novel architecture that is capable of aligning all modalities into a unified latent space. 
+  We achieve a 5%-10% accuracy increase in properties prediction and a 20.2% boost in molecule generation validity compared to the baselines. 
+  With the any-to-language molecular translation strategy, our model has the potential to perform more downstream tasks, such as compound name recognition and chemical reaction prediction.
 </p>
 </br>
 </div>
@@ -46,14 +47,18 @@ author_profile: true
 
 <div style="width: 100%;padding-left: 3%;padding-right: 3%;background-color: rgb(226, 226, 226);">
 </br>
-<h3>Deep Neural Network-Based Research on Small-Molecule Drugs</h3>
+<h3>3D-Mol: A Novel Contrastive Learning Framework for Molecular Property Prediction with 3D Information</h3>
 <p>Paper Link: <a href="https://www.biorxiv.org/content/10.1101/2023.08.15.553467v1.abstract">https://www.biorxiv.org/content/10.1101/2023.08.15.553467v1.abstract</a></p>
 <img style="width: 100%;padding: 3%;" src="/images/3D-Mol.png" />
 <p style="text-align:justify">
-  By designing novel molecular representation methods and utilizing the force field computations and knowledge-base optimization features of RDKit, we generate 3D conformations of molecules from molecular topological graphs. 
-  Subsequently, we decompose the molecular conformations into point-edge graphs, bond-angle graphs, and dihedral-angle graphs to comprehensively characterize the spatial information of molecules and extract the 3D structure of small-molecule drugs. 
-  We have designed a molecular encoder based on a message-passing model and pre-trained their model using extensive unlabeled small-molecule data through a self-supervised contrastive learning approach (using molecular topological graphs). 
-  Our AI model has achieved state-of-the-art (SOTA) performance in several aspects of small-molecule drug property prediction.
+  Molecular property prediction offers an effective and efficient approach for early screening and optimization of drug candidates. 
+  Although deep learning based methods have made notable progress, most existing works still do not fully utilize 3D spatial information. 
+  This can lead to a single molecular representation representing multiple actual molecules. 
+  To address these issues, we propose a novel 3D structure-based molecular modeling method named 3D-Mol. 
+  In order to accurately represent complete spatial structure, we design a novel encoder to extract 3D features by deconstructing the molecules into three geometric graphs. 
+  In addition, we use 20M unlabeled data to pretrain our model by contrastive learning. 
+  We consider conformations with the same topological structure as positive pairs and the opposites as negative pairs, while the weight is determined by the dissimilarity between the conformations. 
+  We compare 3D-Mol with various state-of-the-art(SOTA) baselines on 7 benchmarks and demonstrate our outstanding performance in 5 benchmarks.
 </p>
 <a></a>
 </br>
