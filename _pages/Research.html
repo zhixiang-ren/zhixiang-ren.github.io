@@ -212,85 +212,145 @@ author_profile: true
 </p>
 
 <div style="border: 1px solid #ccc; padding: 20px; margin-bottom: 20px;">
-    <h3></h3>
+    <h3>Dilated convolutional neural network for detecting extreme-mass-ratio inspirals</h3>
     <div style="display: flex;">
         <div style="width: 30%;">
-            <img src="" alt="Paper 3 Image" style="width: 100%; height: auto;">
+            <img src="" style="width: 100%; height: auto;">
         </div>
         <div style="width: 70%; padding-left: 20px;">
-            <p></p>
+            <p>
+              The detection of Extreme Mass Ratio Inspirals (EMRIs) is intricate due to their complex waveforms, extended duration, and low signal-to-noise ratio (SNR), making them more challenging to be identified compared to compact binary coalescences.
+              While matched filtering-based techniques are known for their computational demands, existing deep learning-based methods primarily handle time-domain data and are often constrained by data duration and SNR. 
+              In addition, most existing work ignores time-delay interferometry (TDI) and applies the long-wavelength approximation in detector response calculations, thus limiting their ability to handle laser frequency noise. 
+              In this study, we introduce DECODE (DilatEd COnvolutional neural network for Detecting Extrememass-ratio inspirals), an end-to-end model focusing on EMRI signal detection by sequence modeling in the frequency domain. 
+              Centered around a dilated causal convolutional neural network, trained on synthetic data considering TDI-1.5 detector response, DECODE can efficiently process a year’s worth of multichannel TDI data with an SNR of around 50. 
+              We evaluate our model on 1-year data with accumulated SNR ranging from 50 to 120 and achieve a true positive rate of 96.3% at a false positive rate of 1%, keeping an inference time of less than 0.01 seconds. 
+              With the visualization of three showcased EMRI signals for interpretability and generalization, DECODE exhibits strong potential for future space-based gravitational wave data analyses.
+            </p>
         </div>
     </div>
 </div>
 
 <div style="border: 1px solid #ccc; padding: 20px; margin-bottom: 20px;">
-    <h3></h3>
+    <h3>Compact Binary Systems Waveform Generation with Generative Pre-trained Transformer</h3>
     <div style="display: flex;">
         <div style="width: 30%;">
-            <img src="" alt="Paper 3 Image" style="width: 100%; height: auto;">
+            <img src="" style="width: 100%; height: auto;">
         </div>
         <div style="width: 70%; padding-left: 20px;">
-            <p></p>
+            <p>
+              Space-based gravitational wave (GW) detection is one of the most anticipated GW detection projects in the next decade, which promises to detect abundant compact binary systems. 
+              At present, deep learning methods have not been widely explored for GW waveform generation and extrapolation. 
+              To solve the data processing difficulty and the increasing waveform complexity caused by the detector’s response and second-generation time-delay interferometry (TDI 2.0), an interpretable pre-trained large model named CBS-GPT (Compact Binary Systems Waveform Generation with Generative Pre-trained Transformer) is proposed. 
+              For compact binary system waveforms, three models were trained to predict the waveforms of massive black hole binaries (MBHB), extreme mass-ratio inspirals (EMRIs), and galactic binaries (GB), achieving prediction accuracies of at most 99%, 91%, and 99%, respectively. 
+              The CBS-GPT model exhibits notable generalization and interpretability, with its hidden parameters effectively capturing the intricate information of waveforms, even with the complex instrument response and a wide parameter range. 
+              Our research demonstrates the potential of large models in the GW realm, opening up new opportunities and guidance for future researches such as complex waveforms generation, gap completion, and deep learning model design for GW science.
+            </p>
         </div>
     </div>
 </div>
 
 <div style="border: 1px solid #ccc; padding: 20px; margin-bottom: 20px;">
-    <h3></h3>
+    <h3>WaveFormer: transformer-based denoising method for gravitational-wave data</h3>
     <div style="display: flex;">
         <div style="width: 30%;">
-            <img src="" alt="Paper 3 Image" style="width: 100%; height: auto;">
+            <img src="" style="width: 100%; height: auto;">
         </div>
         <div style="width: 70%; padding-left: 20px;">
-            <p></p>
+            <p>
+              With the advent of gravitational-wave astronomy and the discovery of more compact binary coalescences, data quality improvement techniques are desired to handle the complex and overwhelming noise in gravitational wave (GW) observational data. 
+              Though recent machine learning-based studies have shown promising results for data denoising, they are unable to precisely recover both the GW signal amplitude and phase. 
+              To address such an issue, we develop a deep neural network centered workflow, WaveFormer, for significant noise suppression and signal recovery on observational data from the Laser Interferometer Gravitational-Wave Observatory (LIGO). 
+              The WaveFormer has a science-driven architecture design with hierarchical feature extraction across a broad frequency spectrum. 
+              As a result, the overall noise and glitch are decreased by more than one order of magnitude and the signal recovery error is roughly 1% and 7% for the phase and amplitude, respectively. 
+              Moreover, on 75 reported binary black hole events of LIGO we obtain a significant improvement of inverse false alarm rate. 
+              Our work highlights the potential of large neural networks in GW data analysis and, while primarily demonstrated on LIGO data, its adaptable design indicates promise for broader application within the International Gravitational-Wave Observatories Network in future observational runs.
+            </p>
         </div>
     </div>
 </div>
 
 <div style="border: 1px solid #ccc; padding: 20px; margin-bottom: 20px;">
-    <h3></h3>
+    <h3>GWAI: Harnessing Artificial Intelligence for Enhancing Gravitational Wave Data Analysis</h3>
     <div style="display: flex;">
         <div style="width: 30%;">
-            <img src="" alt="Paper 3 Image" style="width: 100%; height: auto;">
+            <img src="" style="width: 100%; height: auto;">
         </div>
         <div style="width: 70%; padding-left: 20px;">
-            <p></p>
+            <p>
+              Gravitational wave (GW) astronomy has opened new frontiers in understanding the cosmos, while the integration of artificial intelligence (AI) in science promises to revolutionize data analysis methodologies. 
+              However, a significant gap exists, as there is currently no dedicated platform that enables scientists to develop, test, and evaluate AI algorithms efficiently. 
+              To address this gap, we introduce GWAI, a pioneering AI-centered software platform designed for gravitational wave data analysis. 
+              GWAI contains a three-layered architecture that emphasizes simplicity, modularity, and flexibility, covering the entire analysis pipeline. 
+              GWAI aims to accelerate scientific discoveries, bridging the gap between advanced AI techniques and astrophysical research.
+            </p>
         </div>
     </div>
 </div>
 
 <div style="border: 1px solid #ccc; padding: 20px; margin-bottom: 20px;">
-    <h3></h3>
+    <h3>Taiji Data Challenge for Exploring Gravitational Wave Universe</h3>
     <div style="display: flex;">
         <div style="width: 30%;">
-            <img src="" alt="Paper 3 Image" style="width: 100%; height: auto;">
+            <img src="" style="width: 100%; height: auto;">
         </div>
         <div style="width: 70%; padding-left: 20px;">
-            <p></p>
+            <p>
+              The direct observation of gravitational waves (GWs) opens a new window for exploring new physics from quanta to cosmos and provides a new tool for probing the evolution of universe. 
+              GWs detection in space covers a broad spectrum ranging over more than four orders of magnitude and enables us to study rich physical and astronomical phenomena. 
+              Taiji is a proposed space-based GW detection mission that will be launched in the 2030s. 
+              Taiji will be exposed to numerous overlapping and persistent GW signals buried in the foreground and background, posing various data analysis challenges. 
+              In order to empower potential scientific discoveries, the Mock Laser Interferometer Space Antenna (LISA) Data Challenge and the LISA Data Challenge (LDC) were developed. 
+              While LDC provides a baseline framework, the first LDC needs to be updated with more realistic simulations and adjusted detector responses for Taiji’s constellation. 
+              In this paper, we review the scientific objectives and the roadmap for Taiji, as well as the technical difficulties in data analysis and the data generation strategy, and present the associated data challenges. 
+              In contrast to LDC, we utilize second-order Keplerian orbit and second-generation time delay interferometry techniques. 
+              Additionally, we employ a new model for the extreme-mass-ratio inspiral waveform and stochastic GW background spectrum, which enables us to test general relativity and measure the non-Gaussianity of curvature perturbations. 
+              Furthermore, we present a comprehensive showcase of parameter estimation using a toy dataset. 
+              This showcase not only demonstrates the scientific potential of the Taiji Data Challenge but also serves to validate the effectiveness of the pipeline. 
+              As the first data challenge for Taiji, we aim to build an open ground for data analysis related to Taiji sources and sciences. 
+              More details can be found on the official website http://taiji-tdc.ictp-ap.org.
+            </p>
         </div>
     </div>
 </div>
 
 <div style="border: 1px solid #ccc; padding: 20px; margin-bottom: 20px;">
-    <h3></h3>
+    <h3>Space-based gravitational wave signal detection and extraction with deep neural network</h3>
     <div style="display: flex;">
         <div style="width: 30%;">
-            <img src="" alt="Paper 3 Image" style="width: 100%; height: auto;">
+            <img src="" style="width: 100%; height: auto;">
         </div>
         <div style="width: 70%; padding-left: 20px;">
-            <p></p>
+            <p>
+              Space-based gravitational wave (GW) detectors will be able to observe signals from sources that are otherwise nearly impossible from current ground-based detection. 
+              Consequently, the well established signal detection method, matched filtering, will require a complex template bank, leading to a computational cost that is too expensive in practice. 
+              Here, we develop a high-accuracy GW signal detection and extraction method for all space-based GW sources. 
+              As a proof of concept, we show that a science-driven and uniform multi-stage self-attentionbased deep neural network can identify synthetic signals that are submerged in Gaussian noise. 
+              Our method exhibits a detection rate exceeding 99% in identifying signals from various sources, with the signal-to-noise ratio at 50, at a false alarm rate of 1%. 
+              while obtaining at least 95% similarity compared with target signals. 
+              We further demonstrate the interpretability and strong generalization behavior for several extended scenarios.
+            </p>
         </div>
     </div>
 </div>
 
 <div style="border: 1px solid #ccc; padding: 20px; margin-bottom: 20px;">
-    <h3></h3>
+    <h3>Sampling with Prior Knowledge for High-dimensional Gravitational Wave Data Analysis</h3>
     <div style="display: flex;">
         <div style="width: 30%;">
-            <img src="" alt="Paper 3 Image" style="width: 100%; height: auto;">
+            <img src="" style="width: 100%; height: auto;">
         </div>
         <div style="width: 70%; padding-left: 20px;">
-            <p></p>
+            <p>
+              Extracting knowledge from high-dimensional data has been notoriously difficult, primarily due to the so-called “curse of dimensionality” and the complex joint distributions of these dimensions. 
+              This is a particularly profound issue for high-dimensional gravitational wave data analysis where one requires to conduct Bayesian inference and estimate joint posterior distributions. 
+              In this study, we incorporate prior physical knowledge by sampling from desired interim distributions to develop the training dataset. 
+              Accordingly, the more relevant regions of the high-dimensional feature space are covered by additional data points, such that the model can learn the subtle but important details. 
+              We adapt the normalizing flow method to be more expressive and trainable, such that the information can be effectively extracted and represented by the transformation between the prior and target distributions. 
+              Once trained, our model only takes approximately 1 s on one V100 GPU to generate thousands of samples for probabilistic inference purposes. 
+              The evaluation of our approach confirms the efficacy and efficiency of gravitational wave data inferences and points to a promising direction for similar research. 
+              The source code, specifications, and detailed procedures are publicly accessible on GitHub.
+            </p>
         </div>
     </div>
 </div>
