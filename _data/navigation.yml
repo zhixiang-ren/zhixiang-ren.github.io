@@ -16,7 +16,11 @@ main:
   - title: "AI for Temporal Data"
     url: /AI_for_Temporal_Scientific_Data/
 
-  - title: "Research"
-    url: /Research/
+  - title: "People"
+    url: /People/
 
-  
+  - title: "Software"
+    url: /Software/
+
+  - title: "Publication"
+    url: /Publication/
