@@ -1,17 +1,14 @@
 # main links links
 main:
 
-  - title: "AI for Biochemistry"
-    url: /AI_for_Biochemistry/
+  - title: "Research"
+    url: /Research/
 
-  - title: "AI for Transcriptomics"
-    url: /AI_for_Transcriptomics/
+  - title: "Publication"
+    url: /Publication/
   
-  - title: "AI for Protein"
-    url: /AI_for_Protein/
+  - title: "Software"
+    url: /Software/
   
-  - title: "AI for Medicine"
-    url: /AI_for_Traditional_Chinese_Medicine/
-  
-  - title: "AI for Temporal Data"
-    url: /AI_for_Temporal_Scientific_Data/
+  - title: "People"
+    url: /People/
