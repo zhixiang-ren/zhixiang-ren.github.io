@@ -16,6 +16,9 @@ main:
   - title: "AI for Temporal Data"
     url: /AI_for_Temporal_Scientific_Data/
 
+  - title: "Home"
+    url: /about/
+
   - title: "People"
     url: /People/
 
