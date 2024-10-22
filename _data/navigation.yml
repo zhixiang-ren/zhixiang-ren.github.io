@@ -4,14 +4,20 @@ main:
   - title: "Home"
     url: /about/
 
-  - title: "People"
-    url: /People/
-
-  - title: "Software"
-    url: /Software/
+  - title: "Research"
+    url: /Research/
 
   - title: "Publication"
     url: /Publication/
 
-  - title: "Research"
-    url: /Research/
+  - title: "Software"
+    url: /Software/
+
+  - title: "People"
+    url: /People/
+
+  
+
+  
+
+  
