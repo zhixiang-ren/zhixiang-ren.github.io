@@ -140,19 +140,20 @@ author_profile: true
 <!-- 每个论文的div -->
 <div style="border: 1px solid #ccc; padding: 20px; margin-bottom: 20px;">
     <!-- 论文标题 -->
-    <h3><a href="https://www.sciencedirect.com/science/article/pii/S2001037024001053" target="_blank">TCMM: A unified database for traditional Chinese medicine modernization and therapeutic innovations</a></h3>
+    <h3><a href="https://academic.oup.com/bib/article/25/3/bbae163/7644137" target="_blank">Self-supervised learning on millions of primary RNA sequences from 72 vertebrates improves sequence-based RNA splicing prediction</a></h3>
     <div style="display: flex;">
       <div>
         <!-- 图片部分，使用 float 来让图片浮动在文字左边 -->  
-        <img src="/images/paper1.png" alt="Paper 1 Image" style="float: left; width: 60%; height: auto; margin-right: 20px; margin-bottom: 0px; margin-top: 5px;">
+        <img src="/images/DeepProSite.png" alt="Paper 1 Image" style="float: left; width: 60%; height: auto; margin-right: 20px; margin-bottom: 0px; margin-top: 5px;">
         <!-- 论文描述，文字会自然环绕图片 -->
         <p>
-          Mining the potential of traditional Chinese medicine (TCM) in treating modern diseases requires a profound understanding of its action mechanism and a comprehensive knowledge system that seamlessly bridges modern medical insights with traditional theories. 
-          However, existing databases for modernizing TCM are plagued by varying degrees of information loss, which impede the multidimensional dissection of pharmacological effects. 
-          To address this challenge, we introduce traditional Chinese medicine modernization (TCMM), the currently largest modernized TCM database that integrates pioneering intelligent pipelines. 
-          By aligning high-quality TCM and modern medicine data, TCMM boasts the most extensive TCM modernization knowledge, including 20 types of modernized TCM concepts such as prescription, ingredient, target and 46 biological relations among them, totaling 3,447,023 records. 
-          We demonstrate the efficacy and reliability of TCMM with two features, prescription generation and knowledge discovery, the outcomes show consistency with biological experimental results. 
-          A publicly available web interface is at https://www.tcmm.net.cn/.
+          Language models pretrained by self-supervised learning (SSL) have been widely utilized to study protein sequences, while few models were developed for genomic sequences and were limited to single species. 
+          Due to the lack of genomes from different species, these models cannot effectively leverage evolutionary information. 
+          In this study, we have developed SpliceBERT, a language model pretrained on primary ribonucleic acids (RNA) sequences from 72 vertebrates by masked language modeling, and applied it to sequence-based modeling of RNA splicing. 
+          Pretraining SpliceBERT on diverse species enables effective identification of evolutionarily conserved elements. 
+          Meanwhile, the learned hidden states and attention weights can characterize the biological properties of splice sites. 
+          As a result, SpliceBERT was shown effective on several downstream tasks: zero-shot prediction of variant effects on splicing, prediction of branchpoints in humans, and cross-species prediction of splice sites. 
+          Our study highlighted the importance of pretraining genomic language models on a diverse range of species and suggested that SSL is a promising approach to enhance our understanding of the regulatory logic underlying genomic sequences.
         </p>
       </div>
     </div>
