@@ -88,19 +88,14 @@ author_profile: true
 <!-- 每个论文的div -->
 <div style="border: 1px solid #ccc; padding: 20px; margin-bottom: 20px;">
     <!-- 论文标题 -->
-    <h3><a href="https://www.sciencedirect.com/science/article/pii/S2001037024001053" target="_blank">TCMM: A unified database for traditional Chinese medicine modernization and therapeutic innovations</a></h3>
+    <h3><a href="https://www.sciencedirect.com/science/article/pii/S0957417425008681" target="_blank">Aligning sequence and structure representations leveraging protein domains for function prediction</a></h3>
     <div style="display: flex;">
       <div>
         <!-- 图片部分，使用 float 来让图片浮动在文字左边 -->  
-        <img src="/images/paper1.png" alt="Paper 1 Image" style="float: left; width: 60%; height: auto; margin-right: 20px; margin-bottom: 0px; margin-top: 5px;">
+        <img src="/images/ProtFAD.png" alt="Paper 1 Image" style="float: left; width: 60%; height: auto; margin-right: 20px; margin-bottom: 0px; margin-top: 5px;">
         <!-- 论文描述，文字会自然环绕图片 -->
         <p>
-          Mining the potential of traditional Chinese medicine (TCM) in treating modern diseases requires a profound understanding of its action mechanism and a comprehensive knowledge system that seamlessly bridges modern medical insights with traditional theories. 
-          However, existing databases for modernizing TCM are plagued by varying degrees of information loss, which impede the multidimensional dissection of pharmacological effects. 
-          To address this challenge, we introduce traditional Chinese medicine modernization (TCMM), the currently largest modernized TCM database that integrates pioneering intelligent pipelines. 
-          By aligning high-quality TCM and modern medicine data, TCMM boasts the most extensive TCM modernization knowledge, including 20 types of modernized TCM concepts such as prescription, ingredient, target and 46 biological relations among them, totaling 3,447,023 records. 
-          We demonstrate the efficacy and reliability of TCMM with two features, prescription generation and knowledge discovery, the outcomes show consistency with biological experimental results. 
-          A publicly available web interface is at https://www.tcmm.net.cn/.
+          Protein function prediction is traditionally approached through sequence or structural modeling, often neglecting the effective fusion of diverse data sources. Protein domains, as functionally independent building blocks, determine a protein’s biological function, yet their potential has not been fully exploited in function prediction tasks. To address this, we introduce a modality-fused neural network leveraging function-aware domain embeddings as a bridge. We pre-train these embeddings by aligning domain semantics with Gene Ontology (GO) terms and textual descriptions. Additionally, we partition proteins into sub-views based on continuous domain regions for contrastive learning, supervised by a novel triplet InfoNCE loss. Our method outperforms state-of-the-art approaches across various benchmarks, and clearly differentiates proteins carrying distinct functions compared to the competitor.
         </p>
       </div>
     </div>
