@@ -6,7 +6,7 @@ author_profile: true
 ---
 
 <!-- AI for Small Molecule 部分 -->
-<h1>AI for Small Molecule</h1>
+<h1>AI for Chemical Molecule</h1>
 <p>
   Our research focuses on advancing small-molecule modeling through deep geometric learning, multimodal large language models, and knowledge-driven molecular representations. 
   We developed frameworks such as GIT-Mol, which unifies graph, image, and textual information for comprehensive molecular understanding, and 3D-Mol, which leverages geometric decomposition and contrastive pretraining to capture conformational structure with high fidelity. 
@@ -19,7 +19,7 @@ author_profile: true
 </p>
 
 <!-- AI for Protein 部分 -->
-<h1>AI for Protein</h1>
+<h1>AI for Protein Science</h1>
 <p>
   This research theme explores AI for Protein Science, with a focus on combining geometric representation learning and multimodal large language models to advance our understanding of protein behavior. 
   The goal is to develop unified computational frameworks that jointly capture protein geometry, sequence context, and functional signals. 
@@ -28,109 +28,25 @@ author_profile: true
   Leveraging these enriched representations, the team develops functional prediction approaches that generalize better and remain aligned with biological principles. 
   We also adapt state-of-the-art protein language models such as ESM-2 to downstream biological scenarios, including tasks like predicting mutation-induced protein stability changes. 
   Together, these efforts contribute to building more capable and biologically grounded AI systems for protein science.
+  <div style="border: 1px solid #ccc; padding: 20px; margin-bottom: 20px;">
+    <img src="/images/protein.png" alt="Paper 1 Image" style="width: 70%; height: auto; display: block; margin: 5px auto 10px auto;">
+  </div>
 </p>
-
-<!-- 每个论文的div -->
-<div style="border: 1px solid #ccc; padding: 20px; margin-bottom: 20px;">
-    <!-- 论文标题 -->
-    <h3><a href="https://www.sciencedirect.com/science/article/pii/S0957417425008681" target="_blank">Aligning sequence and structure representations leveraging protein domains for function prediction</a></h3>
-    <div style="display: flex;">
-      <div>
-        <!-- 图片部分，使用 float 来让图片浮动在文字左边 -->  
-        <img src="/images/ProtFAD.png" alt="Paper 1 Image" style="float: left; width: 60%; height: auto; margin-right: 20px; margin-bottom: 0px; margin-top: 5px;">
-        <!-- 论文描述，文字会自然环绕图片 -->
-        <p>
-          Protein function prediction is traditionally approached through sequence or structural modeling, often neglecting the effective fusion of diverse data sources. Protein domains, as functionally independent building blocks, determine a protein’s biological function, yet their potential has not been fully exploited in function prediction tasks. To address this, we introduce a modality-fused neural network leveraging function-aware domain embeddings as a bridge. We pre-train these embeddings by aligning domain semantics with Gene Ontology (GO) terms and textual descriptions. Additionally, we partition proteins into sub-views based on continuous domain regions for contrastive learning, supervised by a novel triplet InfoNCE loss. Our method outperforms state-of-the-art approaches across various benchmarks, and clearly differentiates proteins carrying distinct functions compared to the competitor.
-        </p>
-      </div>
-    </div>
-</div>
-
-<!-- 每个论文的div -->
-<div style="border: 1px solid #ccc; padding: 20px; margin-bottom: 20px;">
-    <!-- 论文标题 -->
-    <h3><a href="https://academic.oup.com/bib/article/26/3/bbaf276/8168831" target="_blank">Generative prediction of real-world prevalent SARS-CoV-2 mutation with in silico virus evolution</a></h3>
-    <div style="display: flex;">
-      <div>
-        <!-- 图片部分，使用 float 来让图片浮动在文字左边 -->  
-        <img src="/images/SARS-CoV-2.png" alt="Paper 1 Image" style="float: left; width: 60%; height: auto; margin-right: 20px; margin-bottom: 0px; margin-top: 5px;">
-        <!-- 论文描述，文字会自然环绕图片 -->
-        <p>
-          Predicting the mutation prevalence trends of emerging viruses in the real world is an efficient means to update vaccines or drugs in advance. It is crucial to develop a computational method for the prediction of real-world prevalent SARS-CoV-2 mutations considering the impact of multiple selective pressures within and between hosts. Here, a deep-learning generative framework for real-world prevalent SARS-CoV-2 mutation prediction, named ViralForesight, is developed on top of protein language models and in silico virus evolution. Through the paradigm of host-to-herd in silico virus evolution, ViralForesight reproduced previous real-world prevalent SARS-CoV-2 mutations for multiple lineages with superior performance. More importantly, ViralForesight correctly predicted the future prevalent mutations that dominated the COVID-19 pandemic in the real world more than half a year in advance with in vitro experimental validation. Overall, ViralForesight demonstrates a proactive approach to the prevention of emerging viral infections, accelerating the process of discovering future prevalent mutations with the power of generative deep learning.
-        </p>
-      </div>
-    </div>
-</div>
 
 <!-- AI for transcriptomics 部分 -->
-<h1>AI for transcriptomics</h1>
+<h1>AI for Omics Data Analysis</h1>
 <p>
-  Our research group focuses on "AI for transcriptomics", leveraging machine learning and deep learning techniques to analyze complex gene expression data, including bulk RNA-seq, single-cell RNA-seq, and spatial transcriptomics. This approach enables us to uncover hidden patterns in high-dimensional data and supports a wide range of downstream tasks such as cell type annotation, gene regulatory network inference, trajectory analysis, drug response prediction, and multi-omics integration. By developing interpretable and robust AI models, our goal is to extract meaningful biological insights, facilitate precision medicine, and enhance our understanding of cellular diversity and disease mechanisms.
+  Multi-omics modeling integrates multi-layered molecular data such as genomics and proteomics to systematically reveal cellular states, differentiation trajectories, and gene regulatory networks, providing a panoramic view for understanding fundamental biological processes like development and immunity. 
+  In traditional biology, it supports cell type identification, highly variable gene detection, and cell-cell communication analysis, thereby elucidating the dynamic regulatory mechanisms of tissue function and life activities. 
+  In oncology, multi-omics approaches enable the identification of driver mutations, biomarkers, and tumor heterogeneity, aiding in cancer subtyping, prognosis assessment, and targeted therapy design. 
+  Deep learning techniques such as representation learning and clustering analysis can extract key features from high-dimensional, sparse multi-omics data, achieving cross-modal information fusion and data imputation. 
+  Combined with technologies like spatial transcriptomics, multi-omics modeling can also dissect the tumor microenvironment at spatial scales, revealing cellular interactions and immune escape mechanisms. 
+  Despite challenges such as data integration and interpretability, multi-omics modeling has become a crucial bridge connecting basic biological discoveries with clinical medical applications. 
+  Looking ahead, with continuous advances in computational methods and interdisciplinary collaboration, multi-omics analysis will further drive the development of precision medicine and systems biology.
+  <div style="border: 1px solid #ccc; padding: 20px; margin-bottom: 20px;">
+    <img src="/images/protein.png" alt="Paper 1 Image" style="width: 70%; height: auto; display: block; margin: 5px auto 10px auto;">
+  </div>
 </p>
 
-<!-- 每个论文的div -->
-<div style="border: 1px solid #ccc; padding: 20px; margin-bottom: 20px;">
-    <!-- 论文标题 -->
-    <h3><a href="https://academic.oup.com/bib/article/25/3/bbae163/7644137" target="_blank">Self-supervised learning on millions of primary RNA sequences from 72 vertebrates improves sequence-based RNA splicing prediction</a></h3>
-    <div style="display: flex;">
-      <div>
-        <!-- 图片部分，使用 float 来让图片浮动在文字左边 -->  
-        <img src="/images/DeepProSite.png" alt="Paper 1 Image" style="float: left; width: 60%; height: auto; margin-right: 20px; margin-bottom: 0px; margin-top: 5px;">
-        <!-- 论文描述，文字会自然环绕图片 -->
-        <p>
-          Language models pretrained by self-supervised learning (SSL) have been widely utilized to study protein sequences, while few models were developed for genomic sequences and were limited to single species. 
-          Due to the lack of genomes from different species, these models cannot effectively leverage evolutionary information. 
-          In this study, we have developed SpliceBERT, a language model pretrained on primary ribonucleic acids (RNA) sequences from 72 vertebrates by masked language modeling, and applied it to sequence-based modeling of RNA splicing. 
-          Pretraining SpliceBERT on diverse species enables effective identification of evolutionarily conserved elements. 
-          Meanwhile, the learned hidden states and attention weights can characterize the biological properties of splice sites. 
-          As a result, SpliceBERT was shown effective on several downstream tasks: zero-shot prediction of variant effects on splicing, prediction of branchpoints in humans, and cross-species prediction of splice sites. 
-          Our study highlighted the importance of pretraining genomic language models on a diverse range of species and suggested that SSL is a promising approach to enhance our understanding of the regulatory logic underlying genomic sequences.
-        </p>
-      </div>
-    </div>
-</div>
-
-<!-- 每个论文的div -->
-<div style="border: 1px solid #ccc; padding: 20px; margin-bottom: 20px;">
-    <!-- 论文标题 -->
-    <h3><a href="https://www.sciencedirect.com/science/article/abs/pii/S1476927124000136" target="_blank">Cytokine expression patterns: A single-cell RNA sequencing and machine learning based roadmap for cancer classification</a></h3>
-    <div style="display: flex;">
-      <div>
-        <!-- 图片部分，使用 float 来让图片浮动在文字左边 -->  
-        <img src="/images/paper6.png" alt="Paper 1 Image" style="float: left; width: 60%; height: auto; margin-right: 20px; margin-bottom: 0px; margin-top: 5px;">
-        <!-- 论文描述，文字会自然环绕图片 -->
-        <p>
-          Cytokines are small protein molecules that exhibit potent immunoregulatory properties, which are known as the essential components of the tumor immune microenvironment (TIME). 
-          While some cytokines are known to be universally upregulated in TIME, the unique cytokine expression patterns have not been fully resolved in specific types of cancers. 
-          To address this challenge, we develop a TIME single-cell RNA sequencing (scRNA-seq) dataset, which is designed to study cytokine expression patterns for precise cancer classification. 
-          The dataset, including 39 cancers, is constructed by integrating 684 tumor scRNA-seq samples from multiple public repositories. 
-          After screening and processing, the dataset retains only the expression data of immune cells. 
-          With a machine learning classification model, unique cytokine expression patterns are identified for various cancer categories and pioneering applied to cancer classification with an accuracy rate of 78.01%. 
-          Our method will not only boost the understanding of cancer-type-specific immune modulations in TIME but also serve as a crucial reference for future diagnostic and therapeutic research in cancer immunity.
-        </p>
-      </div>
-    </div>
-</div>
-
-<!-- 每个论文的div -->
-<div style="border: 1px solid #ccc; padding: 20px; margin-bottom: 20px;">
-    <!-- 论文标题 -->
-    <h3><a href="https://www.sciencedirect.com/science/article/pii/S2001037024001053" target="_blank">TCMM: A unified database for traditional Chinese medicine modernization and therapeutic innovations</a></h3>
-    <div style="display: flex;">
-      <div>
-        <!-- 图片部分，使用 float 来让图片浮动在文字左边 -->  
-        <img src="/images/paper1.png" alt="Paper 1 Image" style="float: left; width: 60%; height: auto; margin-right: 20px; margin-bottom: 0px; margin-top: 5px;">
-        <!-- 论文描述，文字会自然环绕图片 -->
-        <p>
-          Mining the potential of traditional Chinese medicine (TCM) in treating modern diseases requires a profound understanding of its action mechanism and a comprehensive knowledge system that seamlessly bridges modern medical insights with traditional theories. 
-          However, existing databases for modernizing TCM are plagued by varying degrees of information loss, which impede the multidimensional dissection of pharmacological effects. 
-          To address this challenge, we introduce traditional Chinese medicine modernization (TCMM), the currently largest modernized TCM database that integrates pioneering intelligent pipelines. 
-          By aligning high-quality TCM and modern medicine data, TCMM boasts the most extensive TCM modernization knowledge, including 20 types of modernized TCM concepts such as prescription, ingredient, target and 46 biological relations among them, totaling 3,447,023 records. 
-          We demonstrate the efficacy and reliability of TCMM with two features, prescription generation and knowledge discovery, the outcomes show consistency with biological experimental results. 
-          A publicly available web interface is at <h3>https://www.tcmm.net.cn/.</h3>
-        </p>
-      </div>
-    </div>
-</div>
 
     
