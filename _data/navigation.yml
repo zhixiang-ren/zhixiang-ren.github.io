@@ -13,8 +13,8 @@ main:
   - title: "Software"
     url: /Software/
 
-  - title: "Services"
-    url: /Services/
+  # - title: "Services"
+  #   url: /Services/
 
   - title: "People"
     url: /People/
