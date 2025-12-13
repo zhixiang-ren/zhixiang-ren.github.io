@@ -8,59 +8,15 @@ author_profile: true
 <!-- AI for Small Molecule 部分 -->
 <h1>AI for Small Molecule</h1>
 <p>
-  Our team has focused extensively on multi-modal scientific data integration and intelligent platform development, leveraging a range of advanced technologies. 
-  Through building comprehensive datasets across genomics, transcriptomics, proteomics, and metabolomics, and developing predictive models such as MetaSCDrug, 3D-Mol, and ProtFAD, the team has advanced drug response prediction, molecular property modeling, and protein function analysis. 
-  This research emphasizes the deep integration of domain knowledge into AI models, enhancing explainability and prediction accuracy. 
-  The team has published over ten research papers, contributing significantly to the acceleration of drug discovery, precise medical research, and the broader application of data-driven life science innovations.
+  Our research focuses on advancing small-molecule modeling through deep geometric learning, multimodal large language models, and knowledge-driven molecular representations. 
+  We developed frameworks such as GIT-Mol, which unifies graph, image, and textual information for comprehensive molecular understanding, and 3D-Mol, which leverages geometric decomposition and contrastive pretraining to capture conformational structure with high fidelity. 
+  In parallel, we explore knowledge-prior and concept-injection models, integrating chemical rules, functional-group semantics, and synthesis-aware constraints directly into the representation or generation process to ensure chemically grounded outputs. 
+  Building on these capabilities, we further investigate reasoning-oriented molecular models and agent-style systems that enable stepwise molecular refinement and feedback-guided optimization. 
+  Together, these directions aim to create a unified, geometry-aware, knowledge-enhanced foundation for intelligent small-molecule modeling and design.
+  <!-- 图片部分，使用 float 来让图片浮动在文字左边 -->  
+  <img src="/images/concept-based.png" alt="Paper 1 Image" style="float: left; width: 60%; height: auto; margin-right: 20px; margin-bottom: 0px; margin-top: 5px;">
+  <!-- 论文描述，文字会自然环绕图片 -->
 </p>
-
-<!-- 每个论文的div -->
-<div style="border: 1px solid #ccc; padding: 20px; margin-bottom: 20px;">
-    <!-- 论文标题 -->
-    <h3><a href="https://www.nature.com/articles/s42256-024-00977-6" target="_blank">A quantitative analysis of knowledge-learning preferences in large language models in molecular science</a></h3>
-    <div style="display: flex;">
-      <div>
-        <!-- 图片部分，使用 float 来让图片浮动在文字左边 -->  
-        <img src="/images/NMI.png" alt="Paper 1 Image" style="float: left; width: 60%; height: auto; margin-right: 20px; margin-bottom: 0px; margin-top: 5px;">
-        <!-- 论文描述，文字会自然环绕图片 -->
-        <p>
-          Deep learning has significantly advanced molecular modelling and design, enabling an efficient understanding and discovery of novel molecules. In particular, large language models introduce a fresh research paradigm to tackle scientific problems from a natural language processing perspective. Large language models significantly enhance our understanding and generation of molecules, often surpassing existing methods with their capabilities to decode and synthesize complex molecular patterns. However, two key issues remain: how to quantify the match between model and data modalities and how to identify the knowledge-learning preferences of models. To address these challenges, we propose a multimodal benchmark, named ChEBI-20-MM, and perform 1,263 experiments to assess the model’s compatibility with data modalities and knowledge acquisition. Through the modal transition probability matrix, we provide insights into the most suitable modalities for tasks. Furthermore, we introduce a statistically interpretable approach to discover context-specific knowledge mapping by localized feature filtering. Our analysis offers an exploration of the learning mechanism and paves the way for advancing large language models in molecular science.
-        </p>
-      </div>
-    </div>
-</div>
-
-<!-- 每个论文的div -->
-<div style="border: 1px solid #ccc; padding: 20px; margin-bottom: 20px;">
-    <!-- 论文标题 -->
-    <h3><a href="https://www.sciencedirect.com/science/article/pii/S0010482524001574" target="_blank">GIT-Mol: A multi-modal large language model for molecular science with graph, image, and text</a></h3>
-    <div style="display: flex;">
-      <div>
-        <!-- 图片部分，使用 float 来让图片浮动在文字左边 -->  
-        <img src="/images/GIT-Mol.png" alt="Paper 1 Image" style="float: left; width: 60%; height: auto; margin-right: 20px; margin-bottom: 0px; margin-top: 5px;">
-        <!-- 论文描述，文字会自然环绕图片 -->
-        <p>
-          Large language models have made significant strides in natural language processing, enabling innovative applications in molecular science by processing textual representations of molecules. However, most existing language models cannot capture the rich information with complex molecular structures or images. In this paper, we introduce GIT-Mol, a multi-modal large language model that integrates the Graph, Image, and Text information. To facilitate the integration of multi-modal molecular data, we propose GIT-Former, a novel architecture that is capable of aligning all modalities into a unified latent space. We achieve a 5%–10% accuracy increase in properties prediction and a 20.2% boost in molecule generation validity compared to the baselines. With the any-to-language molecular translation strategy, our model has the potential to perform more downstream tasks, such as compound name recognition and chemical reaction prediction.
-        </p>
-      </div>
-    </div>
-</div>
-
-<!-- 每个论文的div -->
-<div style="border: 1px solid #ccc; padding: 20px; margin-bottom: 20px;">
-    <!-- 论文标题 -->
-    <h3><a href="https://arxiv.org/abs/2503.08160" target="_blank">Concept-Driven Deep Learning for Enhanced Protein-Specific Molecular Generation</a></h3>
-    <div style="display: flex;">
-      <div>
-        <!-- 图片部分，使用 float 来让图片浮动在文字左边 -->  
-        <img src="/images/concept-based.png" alt="Paper 1 Image" style="float: left; width: 60%; height: auto; margin-right: 20px; margin-bottom: 0px; margin-top: 5px;">
-        <!-- 论文描述，文字会自然环绕图片 -->
-        <p>
-          In recent years, deep learning techniques have made significant strides in molecular generation for specific targets, driving advancements in drug discovery. However, existing molecular generation methods present significant limitations: those operating at the atomic level often lack synthetic feasibility, drug-likeness, and interpretability, while fragment-based approaches frequently overlook comprehensive factors that influence protein-molecule interactions. To address these challenges, we propose a novel fragment-based molecular generation framework tailored for specific proteins. Our method begins by constructing a protein subpocket and molecular arm concept-based neural network, which systematically integrates interaction force information and geometric complementarity to sample molecular arms for specific protein subpockets. Subsequently, we introduce a diffusion model to generate molecular backbones that connect these arms, ensuring structural integrity and chemical diversity. Our approach significantly improves synthetic feasibility and binding affinity, with a 4% increase in drug-likeness and a 6% improvement in synthetic feasibility. Furthermore, by integrating explicit interaction data through a concept-based model, our framework enhances interpretability, offering valuable insights into the molecular design process.
-        </p>
-      </div>
-    </div>
-</div>
 
 <!-- AI for Protein 部分 -->
 <h1>AI for Protein</h1>
