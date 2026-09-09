@@ -21,12 +21,6 @@ const { title, titleZh = title, description, structuredData } = Astro.props
   <head>
     <BaseHead title={title} description={description} structuredData={structuredData} />
     <link rel="preload" href={geistSansLatin} as="font" type="font/woff2" crossorigin="anonymous" />
-    <script is:inline>
-      try {
-        document.documentElement.lang =
-          localStorage.getItem("site-language") === "zh" ? "zh-CN" : "en"
-      } catch {}
-    </script>
   </head>
   <body data-title-en={title} data-title-zh={titleZh}>
     <div class="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden="true">
@@ -81,38 +75,6 @@ const { title, titleZh = title, description, structuredData } = Astro.props
     </main>
     <SiteFooter />
 
-    <script is:inline>
-      function initializeLanguageToggle() {
-        const button = document.getElementById("language-toggle")
-        if (!button || button.dataset.ready === "true") return
-        button.dataset.ready = "true"
-        const updateState = () => {
-          const isChinese = document.documentElement.lang === "zh-CN"
-          button.setAttribute("aria-pressed", String(isChinese))
-          button.setAttribute("aria-label", isChinese ? "Switch to English" : "切换到中文")
-          document.title = isChinese ? document.body.dataset.titleZh : document.body.dataset.titleEn
-        }
-        button.addEventListener("click", () => {
-          const nextChinese = document.documentElement.lang !== "zh-CN"
-          const applyLanguage = () => {
-            document.documentElement.lang = nextChinese ? "zh-CN" : "en"
-            try {
-              localStorage.setItem("site-language", nextChinese ? "zh" : "en")
-            } catch {}
-            updateState()
-          }
-          if (
-            document.startViewTransition &&
-            !matchMedia("(prefers-reduced-motion: reduce)").matches
-          ) {
-            document.startViewTransition(applyLanguage)
-          } else applyLanguage()
-        })
-        updateState()
-      }
-      initializeLanguageToggle()
-      document.addEventListener("astro:page-load", initializeLanguageToggle)
-    </script>
     <script>
       const initializeProtectedEmail = () => {
         const link = document.querySelector<HTMLAnchorElement>("#email-contact[data-email-cipher]")

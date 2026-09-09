@@ -134,7 +134,7 @@ Whenever changing layout, verify both a desktop viewport and a modern iPhone-siz
 - Markdown supports math through `remark-math` and `rehype-katex`. KaTeX CSS is not global because the current public pages contain no formulas; import `katex/dist/katex.min.css` only in a page or component that actually renders KaTeX markup.
 - Markdown syntax highlighting is intentionally disabled in `astro.config.mjs`: the current site has no rendered code blocks, and Shiki's generated inline styles conflict with the native hash-based CSP. Re-enable it only with an explicit CSP-compatible highlighting strategy.
 - Astro 7's default Markdown processor is intentionally replaced with the official `@astrojs/markdown-remark` unified processor so the existing remark/rehype math plugins remain supported.
-- Astro's native build-time CSP is enabled. Keep public scripts and styles local and verify the generated CSP meta tag after adding any inline, external, or dynamically injected resource.
+- Astro's native build-time CSP is enabled. Keep public scripts and styles local and verify the generated CSP meta tag after adding any inline, external, or dynamically injected resource. Theme and language bootstrap logic intentionally lives in local external files under `public/js/`; do not move it back into classic inline scripts, which production CSP will block.
 - No React, Vue, Svelte, or other client framework is used.
 - Client JavaScript is intentionally limited to theme/language behavior, protected email interaction, and intent-based external-link preconnection.
 - Package manager of record: **npm**. Keep `package-lock.json` authoritative; do not introduce pnpm/yarn lockfiles.
@@ -180,7 +180,9 @@ If port 4321 is occupied, Astro selects another port. Check the command output r
 ├── .github/workflows/deploy.yml       # Pages build, weekly Scholar refresh, deployment
 ├── public/
 │   ├── favicon.svg                    # site favicon
-│   └── js/theme.js                    # early theme initialization and header state
+│   └── js/
+│       ├── theme.js                   # early theme initialization and header state
+│       └── language.js                # CSP-safe language initialization and toggle state
 ├── scripts/
 │   ├── audit_release.mjs              # source/output privacy and secret audit
 │   ├── fetch_publication_metadata.mjs # DOI/arXiv importer
@@ -369,9 +371,11 @@ English and Chinese share the same generated page. This is not a two-route local
 - `.lang-en` and `.lang-zh` visibility is controlled by `html[lang="zh-CN"]` in `global.css`.
 - The language preference is stored in `localStorage` under `site-language`.
 - The language button updates `document.title` and uses the native View Transitions API when supported.
+- Language initialization and button binding live in `public/js/language.js`; this must remain a local external script because the production CSP blocks classic inline handlers.
 - Reduced-motion users receive an immediate change with no transition.
 - Theme initialization lives in `public/js/theme.js` so the correct theme is applied early and flash is minimized.
 - Theme and language controls remain in a fixed, empty top utility bar with a masked gradient blur behind them.
+- At desktop widths (`min-width: 768px`), the root font size is intentionally `125%`, reproducing a 125% browser-zoom composition through rem scaling. Mobile remains at the browser-default 16px root size. Keep component dimensions in rem-based Tailwind utilities when they should participate in this scaling.
 - Do not add central navigation back into that header.
 
 When adding localized UI copy, include both spans:

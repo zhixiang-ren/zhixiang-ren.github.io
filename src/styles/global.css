@@ -24,6 +24,13 @@ html {
   font-family: var(--font-sans);
 }
 
+/* Reproduce the former 125% desktop browser-zoom composition with standards-based rem scaling. */
+@media (min-width: 768px) {
+  html {
+    font-size: 125%;
+  }
+}
+
 html.dark {
   color-scheme: dark;
   background-color: rgb(9 9 11);
@@ -268,7 +275,7 @@ main {
     @apply absolute top-1 -left-[1.47rem] size-2 rounded-full border-2 border-zinc-50 bg-zinc-400 ring-1 ring-zinc-300 dark:border-zinc-950 dark:bg-zinc-600 dark:ring-zinc-700;
   }
   .timeline-date {
-    @apply block font-mono text-[10px] font-medium tracking-[0.12em] text-zinc-400 uppercase dark:text-zinc-500;
+    @apply block font-mono text-[0.625rem] font-medium tracking-[0.12em] text-zinc-400 uppercase dark:text-zinc-500;
   }
   .timeline-title {
     @apply mt-1 text-xs leading-5 font-semibold text-zinc-800 dark:text-zinc-200;
