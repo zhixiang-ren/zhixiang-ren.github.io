@@ -1,0 +1,50 @@
+{
+  "name": "zhixiang-ren-academic-site",
+  "type": "module",
+  "version": "1.0.0",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.12.0",
+    "npm": ">=10.8.2"
+  },
+  "scripts": {
+    "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
+    "dev:network": "ASTRO_TELEMETRY_DISABLED=1 astro dev --host",
+    "add-paper": "node scripts/fetch_publication_metadata.mjs",
+    "fetch:scholar": "python3 scripts/fetch_scholar_stats.py",
+    "start": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
+    "check": "npm run format:check && npm run check:astro && npm run check:ts",
+    "check:all": "npm run check && npm run check:py",
+    "check:astro": "ASTRO_TELEMETRY_DISABLED=1 astro check",
+    "check:ts": "tsc --noEmit",
+    "check:py": "ruff check scripts && ruff format --check scripts",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "format:py": "ruff check scripts --fix && ruff format scripts",
+    "build": "node scripts/audit_release.mjs --source && npm run check && ASTRO_TELEMETRY_DISABLED=1 astro build && node scripts/audit_release.mjs --output",
+    "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
+    "preview:network": "ASTRO_TELEMETRY_DISABLED=1 astro preview --host",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/markdown-remark": "^7.3.1",
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource-variable/geist": "^5.3.0",
+    "@fontsource-variable/geist-mono": "^5.3.0",
+    "@resvg/resvg-js": "^2.6.2",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.3.2",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0",
+    "satori": "^0.33.4",
+    "sharp": "^0.35.4",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "prettier": "^3.9.6",
+    "prettier-plugin-astro": "^1.0.0",
+    "prettier-plugin-tailwindcss": "^0.8.1"
+  }
+}

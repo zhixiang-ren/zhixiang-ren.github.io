@@ -1,0 +1,31 @@
+---
+import { getEntry } from "astro:content"
+
+interface Props {
+  class?: string
+}
+const { class: className = "" } = Astro.props
+const recruitmentEntry = await getEntry("recruitment", "open-positions")
+if (!recruitmentEntry) throw new Error("Missing recruitment content")
+const recruitment = recruitmentEntry.data
+---
+
+<aside
+  class:list={[
+    "rounded-xl border border-emerald-500/20 bg-emerald-500/[0.055] p-3.5 text-xs text-emerald-700 dark:text-emerald-400",
+    className,
+  ]}
+>
+  <div class="mb-2 flex items-center gap-2 font-mono font-semibold">
+    <span class="relative flex size-2">
+      <span class="absolute inline-flex size-full motion-safe:animate-ping rounded-full bg-emerald-400 opacity-70"></span>
+      <span class="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
+    </span>
+    <span class="lang-en">{recruitment.label.en}</span>
+    <span class="lang-zh">{recruitment.label.zh}</span>
+  </div>
+  <p class="leading-5">
+    <span class="lang-en">{recruitment.summary.en}</span>
+    <span class="lang-zh">{recruitment.summary.zh}</span>
+  </p>
+</aside>

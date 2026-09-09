@@ -1,0 +1,68 @@
+---
+interface LocalizedText {
+  en: string
+  zh: string
+}
+
+interface ExperienceItem {
+  start: string
+  end?: string
+  kind: "appointment" | "education"
+  title: LocalizedText
+  organization: LocalizedText
+  location?: LocalizedText
+  detail?: LocalizedText
+}
+
+interface Props {
+  items: ExperienceItem[]
+}
+
+const { items } = Astro.props
+const year = (value: string) => value.slice(0, 4)
+const period = (item: ExperienceItem, language: "en" | "zh") =>
+  `${year(item.start)} — ${item.end ? year(item.end) : language === "en" ? "PRESENT" : "至今"}`
+const organization = (item: ExperienceItem, language: "en" | "zh") =>
+  [item.organization[language], item.location?.[language]].filter(Boolean).join(" · ")
+---
+
+<section class="order-4 md:order-none" aria-labelledby="experience-heading">
+  <h2 id="experience-heading" class="content-heading">
+    <span class="lang-en">Experience</span>
+    <span class="lang-zh">经历</span>
+  </h2>
+
+  <ol class="mt-4">
+    {items.map((item) => (
+      <li class="group flex gap-4 md:gap-6">
+        <div class="flex w-3 shrink-0 flex-col items-center" aria-hidden="true">
+          <span class="mt-1.5 size-2.5 shrink-0 rounded-full border-2 border-zinc-50 bg-blue-500/75 ring-1 ring-blue-500/20 dark:border-zinc-950 dark:bg-blue-400/70 dark:ring-blue-400/20"></span>
+          <span class="my-2 w-px flex-1 bg-zinc-200 group-last:hidden dark:bg-zinc-800"></span>
+        </div>
+
+        <div class="min-w-0 flex-1 pb-6 group-last:pb-0">
+          <div class="flex items-baseline justify-between gap-4">
+            <h3 class="min-w-0 text-sm font-semibold leading-5 text-zinc-900 dark:text-zinc-100">
+              <span class="lang-en">{item.title.en}</span>
+              <span class="lang-zh">{item.title.zh}</span>
+            </h3>
+            <time class="shrink-0 font-mono text-[10px] font-medium tracking-[0.06em] text-zinc-400 md:text-[11px] dark:text-zinc-500">
+              <span class="lang-en">{period(item, "en")}</span>
+              <span class="lang-zh">{period(item, "zh")}</span>
+            </time>
+          </div>
+          <p class="mt-1 text-xs font-medium leading-5 text-zinc-600 dark:text-zinc-300">
+            <span class="lang-en">{organization(item, "en")}</span>
+            <span class="lang-zh">{organization(item, "zh")}</span>
+          </p>
+          {item.detail && (
+            <p class="mt-1 text-xs leading-5 text-zinc-500">
+              <span class="lang-en">{item.detail.en}</span>
+              <span class="lang-zh">{item.detail.zh}</span>
+            </p>
+          )}
+        </div>
+      </li>
+    ))}
+  </ol>
+</section>

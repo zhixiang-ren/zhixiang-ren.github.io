@@ -1,0 +1,237 @@
+---
+// Preserved experiment. This component is intentionally not mounted by Layout.astro.
+---
+
+<div
+  class="penrose-hero pointer-events-none absolute inset-x-0 top-0 z-0 h-[720px] overflow-hidden"
+  aria-hidden="true"
+>
+  <canvas id="penrose-canvas" class="h-full w-full"></canvas>
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-zinc-50/25 to-zinc-50 dark:via-zinc-950/35 dark:to-zinc-950"></div>
+</div>
+
+<style>
+  #penrose-canvas {
+    opacity: 0.74;
+    mask-image: radial-gradient(
+      ellipse 78% 68% at 72% 42%,
+      black 16%,
+      rgb(0 0 0 / 0.72) 52%,
+      transparent 88%
+    );
+    -webkit-mask-image: radial-gradient(
+      ellipse 78% 68% at 72% 42%,
+      black 16%,
+      rgb(0 0 0 / 0.72) 52%,
+      transparent 88%
+    );
+  }
+  :global(html.dark) #penrose-canvas {
+    opacity: 0.9;
+  }
+  @media (max-width: 767px) {
+    .penrose-hero {
+      height: 620px;
+    }
+    #penrose-canvas {
+      opacity: 0.56;
+      mask-image: radial-gradient(
+        ellipse 96% 66% at 68% 36%,
+        black 10%,
+        rgb(0 0 0 / 0.65) 48%,
+        transparent 92%
+      );
+      -webkit-mask-image: radial-gradient(
+        ellipse 96% 66% at 68% 36%,
+        black 10%,
+        rgb(0 0 0 / 0.65) 48%,
+        transparent 92%
+      );
+    }
+    :global(html.dark) #penrose-canvas {
+      opacity: 0.72;
+    }
+  }
+</style>
+
+<script>
+  type Point = [number, number]
+
+  class RobinsonTriangle {
+    constructor(
+      public type: 0 | 1,
+      public a: Point,
+      public b: Point,
+      public c: Point,
+    ) {}
+
+    subdivide(phi: number): RobinsonTriangle[] {
+      const [ax, ay] = this.a
+      const [bx, by] = this.b
+      const [cx, cy] = this.c
+      if (this.type === 0) {
+        const p: Point = [ax + (bx - ax) / phi, ay + (by - ay) / phi]
+        return [
+          new RobinsonTriangle(0, this.c, p, this.b),
+          new RobinsonTriangle(1, p, this.c, this.a),
+        ]
+      }
+      const q: Point = [bx + (ax - bx) / phi, by + (ay - by) / phi]
+      const r: Point = [bx + (cx - bx) / phi, by + (cy - by) / phi]
+      return [
+        new RobinsonTriangle(1, r, this.c, this.a),
+        new RobinsonTriangle(0, q, r, this.b),
+        new RobinsonTriangle(1, r, q, this.a),
+      ]
+    }
+  }
+
+  const setupPenrose = () => {
+    const canvas = document.querySelector<HTMLCanvasElement>("#penrose-canvas")
+    if (!canvas || canvas.dataset.ready === "true") return
+    const context = canvas.getContext("2d")
+    if (!context) return
+    canvas.dataset.ready = "true"
+
+    const phi = (1 + Math.sqrt(5)) / 2
+    const duration = 2800
+    let width = 0
+    let height = 0
+    let triangles: RobinsonTriangle[] = []
+    let frame = 0
+    let startTime: number | null = null
+    let cursor: Point | null = null
+
+    const steps = () => (window.innerWidth < 768 ? 3 : 5)
+    const center = () => ({
+      x: width * (width < 768 ? 0.68 : 0.72),
+      y: height * (width < 768 ? 0.36 : 0.42),
+    })
+    const palette = () =>
+      document.documentElement.classList.contains("dark")
+        ? {
+            line: "rgba(226,232,240,.20)",
+            wave: "rgba(224,231,255,.46)",
+            glow: "rgba(165,180,252,.42)",
+            a: "rgba(59,130,246,.028)",
+            b: "rgba(147,51,234,.022)",
+          }
+        : {
+            line: "rgba(63,63,70,.095)",
+            wave: "rgba(63,63,70,.24)",
+            glow: "rgba(99,102,241,.18)",
+            a: "rgba(59,130,246,.006)",
+            b: "rgba(147,51,234,.005)",
+          }
+
+    const seed = () => {
+      triangles = []
+      const { x, y } = center()
+      const radius = Math.max(width, height) * 1.34
+      for (let index = 0; index < 10; index += 1) {
+        const leftAngle = ((2 * index - 1) * Math.PI) / 10
+        const rightAngle = ((2 * index + 1) * Math.PI) / 10
+        const left: Point = [x + radius * Math.cos(leftAngle), y + radius * Math.sin(leftAngle)]
+        const right: Point = [x + radius * Math.cos(rightAngle), y + radius * Math.sin(rightAngle)]
+        triangles.push(
+          index % 2 === 0
+            ? new RobinsonTriangle(0, [x, y], left, right)
+            : new RobinsonTriangle(0, [x, y], right, left),
+        )
+      }
+    }
+
+    const subdivideTo = (count: number) => {
+      for (let step = 0; step < count; step += 1) {
+        triangles = triangles.flatMap((triangle) => triangle.subdivide(phi))
+      }
+    }
+
+    const draw = (radius = Number.POSITIVE_INFINITY) => {
+      context.clearRect(0, 0, width, height)
+      const colors = palette()
+      const { x, y } = center()
+      context.lineWidth = 0.8
+      for (const triangle of triangles) {
+        const tx = (triangle.a[0] + triangle.b[0] + triangle.c[0]) / 3
+        const ty = (triangle.a[1] + triangle.b[1] + triangle.c[1]) / 3
+        const distance = Math.hypot(tx - x, ty - y)
+        if (distance > radius) continue
+        const cursorDistance = cursor ? Math.hypot(tx - cursor[0], ty - cursor[1]) : Infinity
+        context.strokeStyle =
+          cursorDistance < 130 ? colors.glow : distance > radius - 105 ? colors.wave : colors.line
+        context.fillStyle = triangle.type === 0 ? colors.a : colors.b
+        context.beginPath()
+        context.moveTo(...triangle.a)
+        context.lineTo(...triangle.b)
+        context.lineTo(...triangle.c)
+        context.closePath()
+        context.fill()
+        context.stroke()
+      }
+    }
+
+    const resize = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2)
+      width = window.innerWidth
+      height = width < 768 ? 620 : 720
+      canvas.width = Math.round(width * dpr)
+      canvas.height = Math.round(height * dpr)
+      canvas.style.width = `${width}px`
+      canvas.style.height = `${height}px`
+      context.setTransform(dpr, 0, 0, dpr, 0, 0)
+      seed()
+      subdivideTo(steps())
+    }
+
+    const animate = (timestamp: number) => {
+      if (startTime === null) startTime = timestamp
+      const elapsed = timestamp - startTime
+      const eased = 1 - Math.pow(1 - Math.min(elapsed / 2300, 1), 3)
+      draw(Math.hypot(width, height) * 1.25 * eased)
+      if (elapsed < duration) frame = requestAnimationFrame(animate)
+      else draw()
+    }
+
+    let resizeTimer = 0
+    window.addEventListener(
+      "resize",
+      () => {
+        window.clearTimeout(resizeTimer)
+        resizeTimer = window.setTimeout(() => {
+          cancelAnimationFrame(frame)
+          startTime = null
+          resize()
+          frame = requestAnimationFrame(animate)
+        }, 140)
+      },
+      { passive: true },
+    )
+    window.addEventListener(
+      "pointermove",
+      (event) => {
+        if (
+          event.clientY > height ||
+          startTime === null ||
+          performance.now() - startTime < duration
+        )
+          return
+        cursor = [event.clientX, event.clientY]
+        cancelAnimationFrame(frame)
+        frame = requestAnimationFrame(() => draw())
+      },
+      { passive: true },
+    )
+    new MutationObserver(() => draw()).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    })
+
+    resize()
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) draw()
+    else frame = requestAnimationFrame(animate)
+  }
+
+  setupPenrose()
+  document.addEventListener("astro:page-load", setupPenrose)
+</script>

@@ -1,0 +1,272 @@
+---
+import "@styles/global.css"
+import "@fontsource-variable/geist"
+import "@fontsource-variable/geist/wght-italic.css"
+import "@fontsource-variable/geist-mono"
+import geistSansLatin from "@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url"
+import BaseHead from "@components/BaseHead.astro"
+import SiteFooter from "@components/SiteFooter.astro"
+
+interface Props {
+  title: string
+  titleZh?: string
+  description: string
+  structuredData?: Record<string, unknown>
+}
+const { title, titleZh = title, description, structuredData } = Astro.props
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <BaseHead title={title} description={description} structuredData={structuredData} />
+    <link rel="preload" href={geistSansLatin} as="font" type="font/woff2" crossorigin="anonymous" />
+    <script is:inline>
+      try {
+        document.documentElement.lang =
+          localStorage.getItem("site-language") === "zh" ? "zh-CN" : "en"
+      } catch {}
+    </script>
+  </head>
+  <body data-title-en={title} data-title-zh={titleZh}>
+    <div class="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden="true">
+      <div class="ambient-spotlight absolute left-1/2 top-0 -translate-x-1/2"></div>
+      <div class="bg-grid-dots absolute inset-0"></div>
+    </div>
+    <header id="header" class="fixed inset-x-0 top-0 z-50 px-4 py-4">
+      <div class="header-gradient-blur" aria-hidden="true"></div>
+      <div class="relative mx-auto flex max-w-4xl items-center justify-end gap-2 font-mono text-xs">
+        <button
+          id="language-toggle"
+          class="functional-button min-w-[4.5rem] px-3"
+          type="button"
+          aria-label="Switch language"
+          aria-pressed="false"
+        >
+          <span class="lang-en">EN / 中</span>
+          <span class="lang-zh">中 / EN</span>
+        </button>
+        <button
+          id="header-theme-button"
+          class="functional-button grid size-11 place-items-center md:size-8"
+          type="button"
+          aria-label="Toggle light and dark theme"
+        >
+          <svg
+            class="size-4 block dark:hidden"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path>
+          </svg>
+          <svg
+            class="size-4 hidden dark:block"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            aria-hidden="true"
+          >
+            <path d="M21 12.8A8.5 8.5 0 1 1 11.2 3 6.5 6.5 0 0 0 21 12.8Z"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+    <main class="relative z-10 mx-auto w-full max-w-4xl flex-1 px-5 pb-8 pt-24 sm:px-8">
+      <slot />
+    </main>
+    <SiteFooter />
+
+    <script is:inline>
+      function initializeLanguageToggle() {
+        const button = document.getElementById("language-toggle")
+        if (!button || button.dataset.ready === "true") return
+        button.dataset.ready = "true"
+        const updateState = () => {
+          const isChinese = document.documentElement.lang === "zh-CN"
+          button.setAttribute("aria-pressed", String(isChinese))
+          button.setAttribute("aria-label", isChinese ? "Switch to English" : "切换到中文")
+          document.title = isChinese ? document.body.dataset.titleZh : document.body.dataset.titleEn
+        }
+        button.addEventListener("click", () => {
+          const nextChinese = document.documentElement.lang !== "zh-CN"
+          const applyLanguage = () => {
+            document.documentElement.lang = nextChinese ? "zh-CN" : "en"
+            try {
+              localStorage.setItem("site-language", nextChinese ? "zh" : "en")
+            } catch {}
+            updateState()
+          }
+          if (
+            document.startViewTransition &&
+            !matchMedia("(prefers-reduced-motion: reduce)").matches
+          ) {
+            document.startViewTransition(applyLanguage)
+          } else applyLanguage()
+        })
+        updateState()
+      }
+      initializeLanguageToggle()
+      document.addEventListener("astro:page-load", initializeLanguageToggle)
+    </script>
+    <script>
+      const initializeProtectedEmail = () => {
+        const link = document.querySelector<HTMLAnchorElement>("#email-contact[data-email-cipher]")
+        if (!link || link.dataset.emailReady === "true") return
+        link.dataset.emailReady = "true"
+        let resetTimer = 0
+        let unlocked = false
+        let keyboardIntentUntil = 0
+        let touchIntentUntil = 0
+        const motion = { points: 0, distance: 0, firstAt: 0, lastAt: 0, x: 0, y: 0 }
+
+        const decode = () =>
+          (link.dataset.emailCipher || "")
+            .split(",")
+            .map((value, index) => String.fromCharCode(Number(value) ^ ((index * 29 + 73) % 251)))
+            .join("")
+
+        const unlock = () => {
+          const address = decode()
+          if (!address) return false
+          const protocol = ["mail", "to"].join("")
+          link.href = `${protocol}:${address}`
+          unlocked = true
+          window.clearTimeout(resetTimer)
+          resetTimer = window.setTimeout(() => {
+            link.setAttribute("href", "#")
+            unlocked = false
+          }, 30000)
+          return true
+        }
+
+        const hasPointerPath = () =>
+          motion.points >= 4 && motion.distance >= 18 && motion.lastAt - motion.firstAt >= 60
+
+        const isInsideLink = (event: MouseEvent | PointerEvent) => {
+          const bounds = link.getBoundingClientRect()
+          return (
+            event.clientX > bounds.left &&
+            event.clientX < bounds.right &&
+            event.clientY > bounds.top &&
+            event.clientY < bounds.bottom
+          )
+        }
+
+        document.addEventListener(
+          "pointermove",
+          (event) => {
+            if (!event.isTrusted || event.pointerType === "touch") return
+            const now = performance.now()
+            if (motion.lastAt === 0) {
+              motion.firstAt = now
+              motion.lastAt = now
+              motion.x = event.clientX
+              motion.y = event.clientY
+              return
+            }
+            if (now - motion.lastAt < 12) return
+            const distance = Math.hypot(event.clientX - motion.x, event.clientY - motion.y)
+            if (distance > 0 && distance < 240) {
+              motion.points += 1
+              motion.distance += distance
+            }
+            motion.lastAt = now
+            motion.x = event.clientX
+            motion.y = event.clientY
+          },
+          { passive: true },
+        )
+
+        document.addEventListener(
+          "keydown",
+          (event) => {
+            if (event.isTrusted && ["Tab", "Enter", " "].includes(event.key)) {
+              keyboardIntentUntil = performance.now() + 2000
+            }
+          },
+          { passive: true },
+        )
+
+        link.addEventListener(
+          "pointerenter",
+          (event) => {
+            if (event.isTrusted && hasPointerPath()) unlock()
+          },
+          { passive: true },
+        )
+
+        link.addEventListener(
+          "pointerdown",
+          (event) => {
+            if (!event.isTrusted || event.pointerType !== "touch" || !isInsideLink(event)) return
+            touchIntentUntil = performance.now() + 1500
+            unlock()
+          },
+          { passive: true },
+        )
+
+        link.addEventListener(
+          "focus",
+          (event) => {
+            if (event.isTrusted && performance.now() <= keyboardIntentUntil) unlock()
+          },
+          { passive: true },
+        )
+
+        link.addEventListener("click", (event) => {
+          if (unlocked) return
+          event.preventDefault()
+          if (!event.isTrusted) return
+          const keyboardAccess = event.detail === 0 && performance.now() <= keyboardIntentUntil
+          const touchAccess = performance.now() <= touchIntentUntil
+          const pointerAccess = event.detail > 0 && hasPointerPath() && isInsideLink(event)
+          if ((keyboardAccess || touchAccess || pointerAccess) && unlock()) {
+            window.location.assign(link.href)
+          }
+        })
+      }
+
+      const initializeIntentPreconnect = () => {
+        document.querySelectorAll<HTMLAnchorElement>("a[data-preconnect]").forEach((anchor) => {
+          if (anchor.dataset.preconnectReady === "true") return
+          anchor.dataset.preconnectReady = "true"
+          let timer = 0
+          const connect = () => {
+            const origin = new URL(anchor.href).origin
+            if (document.head.querySelector(`link[data-intent-origin="${origin}"]`)) return
+            const dns = document.createElement("link")
+            dns.rel = "dns-prefetch"
+            dns.href = origin
+            dns.dataset.intentOrigin = origin
+            const preconnect = document.createElement("link")
+            preconnect.rel = "preconnect"
+            preconnect.href = origin
+            preconnect.crossOrigin = "anonymous"
+            preconnect.dataset.intentOrigin = origin
+            document.head.append(dns, preconnect)
+          }
+          anchor.addEventListener(
+            "pointerenter",
+            () => {
+              timer = window.setTimeout(connect, 100)
+            },
+            { passive: true },
+          )
+          anchor.addEventListener("pointerleave", () => window.clearTimeout(timer), {
+            passive: true,
+          })
+          anchor.addEventListener("focus", connect, { passive: true })
+        })
+      }
+      initializeProtectedEmail()
+      initializeIntentPreconnect()
+      document.addEventListener("astro:page-load", initializeProtectedEmail)
+      document.addEventListener("astro:page-load", initializeIntentPreconnect)
+    </script>
+  </body>
+</html>

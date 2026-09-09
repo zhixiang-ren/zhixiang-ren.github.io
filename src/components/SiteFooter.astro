@@ -1,0 +1,80 @@
+---
+import { getEntry } from "astro:content"
+
+const profileEntry = await getEntry("profile", "identity")
+if (!profileEntry) throw new Error("Missing profile identity content")
+
+const profile = profileEntry.data
+const basePath = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`
+const publicPath = (path: string) => `${basePath}${path.replace(/^\/+/, "")}`
+const buildDate = new Date()
+const year = buildDate.getUTCFullYear()
+const updatedEn = new Intl.DateTimeFormat("en", {
+  month: "short",
+  year: "numeric",
+  timeZone: "UTC",
+}).format(buildDate)
+const updatedZh = new Intl.DateTimeFormat("zh-CN", {
+  month: "long",
+  year: "numeric",
+  timeZone: "UTC",
+}).format(buildDate)
+---
+
+<footer class="relative z-10 mt-12 w-full px-5 pb-8 sm:px-8">
+  <div class="mx-auto max-w-4xl">
+    <div class="footer-hairline" aria-hidden="true"></div>
+    <div class="flex flex-col items-center justify-between gap-3 pt-5 font-mono text-[11px] text-zinc-400 sm:flex-row dark:text-zinc-500">
+      <div class="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 sm:justify-start">
+        <span>
+          © {year} <span class="lang-en">{profile.name}</span>
+          <span class="lang-zh">{profile.nameZh}</span>
+        </span>
+        <span class="text-zinc-300 dark:text-zinc-700" aria-hidden="true">
+          ·
+        </span>
+        <a
+          href={publicPath("llms.txt")}
+          class="group relative transition-colors hover:text-zinc-700 focus-visible:text-zinc-700 focus-visible:underline focus-visible:underline-offset-4 focus-visible:outline-none dark:hover:text-zinc-300 dark:focus-visible:text-zinc-300"
+          aria-label="LLM-readable academic profile"
+          aria-describedby="llms-tooltip"
+        >
+          llms.txt
+          <span
+            id="llms-tooltip"
+            role="tooltip"
+            class="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 -translate-x-1/2 translate-y-1 whitespace-nowrap rounded-md border border-zinc-200/70 bg-white/95 px-2 py-1.5 text-[10px] font-normal text-zinc-600 opacity-0 shadow-lg shadow-zinc-950/5 backdrop-blur-md transition-[opacity,transform] duration-150 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 dark:border-zinc-800/80 dark:bg-zinc-950/95 dark:text-zinc-300 dark:shadow-black/20"
+          >
+            <span class="lang-en">Prompt-ready plain-text profile</span>
+            <span class="lang-zh">面向 AI 的纯文本资料</span>
+          </span>
+        </a>
+        <span class="text-zinc-300 dark:text-zinc-700" aria-hidden="true">
+          ·
+        </span>
+        <a
+          href={publicPath("rss.xml")}
+          class="transition-colors hover:text-zinc-700 dark:hover:text-zinc-300"
+          aria-label="Subscribe to recent papers via RSS"
+        >
+          RSS
+        </a>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 sm:justify-end">
+        <span>
+          <span class="lang-en">Built with Astro &amp; Tailwind</span>
+          <span class="lang-zh">使用 Astro &amp; Tailwind 构建</span>
+        </span>
+        <span class="text-zinc-300 dark:text-zinc-700" aria-hidden="true">
+          ·
+        </span>
+        <span>
+          <span class="lang-en">Updated {updatedEn}</span>
+          <span class="lang-zh">更新于 {updatedZh}</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>

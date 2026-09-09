@@ -1,0 +1,28 @@
+items:
+  - start: 2026-05
+    kind: appointment
+    title: { en: Chief AI Scientist, zh: AI 首席科学家 }
+    organization: { en: SmartLogic Tech, zh: 思朗科技 }
+    location: { en: Shanghai, zh: 上海 }
+  - start: 2020-04
+    end: 2026-04
+    kind: appointment
+    title: { en: Research Scientist · Ph.D. Supervisor, zh: 研究员 · 博士生导师 }
+    organization: { en: Peng Cheng Laboratory, zh: 鹏城国家实验室 }
+    detail: { en: "Head, AI for Science Lab", zh: 科学智能研究室负责人 }
+  - start: 2019-07
+    end: 2020-03
+    kind: appointment
+    title: { en: Associate Research Fellow, zh: 特聘副研究员 }
+    organization: { en: Sun Yat-sen University, zh: 中山大学 }
+  - start: 2018-12
+    end: 2019-05
+    kind: appointment
+    title: { en: Postdoctoral Fellow, zh: 博士后研究员 }
+    organization: { en: University of New Mexico, zh: 美国新墨西哥大学 }
+  - start: "2013"
+    end: "2018"
+    kind: education
+    title:
+      { en: Ph.D. · Computational Physics & Machine Learning, zh: 理学博士 · 计算物理与机器学习 }
+    organization: { en: University of New Mexico, zh: 美国新墨西哥大学 }

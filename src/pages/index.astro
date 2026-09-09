@@ -1,0 +1,304 @@
+---
+import { getEntry } from "astro:content"
+import Layout from "@layouts/Layout.astro"
+import AcademicIcon from "@components/AcademicIcon.astro"
+import ExperienceTimeline from "@components/ExperienceTimeline.astro"
+import OutlinedEmailLabel from "@components/OutlinedEmailLabel.astro"
+import RecentPapers from "@components/RecentPapers.astro"
+import RecruitmentCard from "@components/RecruitmentCard.astro"
+import portrait from "@assets/zhixiang-ren.webp"
+
+const [
+  profileEntry,
+  bioEntry,
+  experienceEntry,
+  servicesEntry,
+  honorsEntry,
+  publicationsEntry,
+  scholarEntry,
+] = await Promise.all([
+  getEntry("profile", "identity"),
+  getEntry("bio", "profile"),
+  getEntry("experience", "experience"),
+  getEntry("services", "academic-services"),
+  getEntry("honors", "representative-honors"),
+  getEntry("publications", "publications"),
+  getEntry("scholar", "metrics"),
+])
+
+if (
+  !profileEntry ||
+  !bioEntry ||
+  !experienceEntry ||
+  !servicesEntry ||
+  !honorsEntry ||
+  !publicationsEntry ||
+  !scholarEntry
+) {
+  throw new Error("One or more required profile content entries are missing")
+}
+
+const profile = profileEntry.data
+const bio = bioEntry.data
+const experience = experienceEntry.data.items
+const services = servicesEntry.data.groups
+const honors = honorsEntry.data
+const scholarData = scholarEntry.data
+const recentPapers = publicationsEntry.data.papers
+  .filter((paper) => paper.featured)
+  .sort((a, b) => b.date.getTime() - a.date.getTime())
+  .slice(0, 10)
+
+const reverse = (value: string) => [...value].reverse().join("")
+const emailLocal = profile.links.email.localParts.map(reverse).join(".")
+const emailDomain = profile.links.email.domainParts.map(reverse).join(".")
+const protectedEmail = [...`${emailLocal}${String.fromCharCode(64)}${emailDomain}`]
+  .map((character, index) => character.charCodeAt(0) ^ ((index * 29 + 73) % 251))
+  .join(",")
+
+const metricFormat = new Intl.NumberFormat("en-US")
+const renderInlineMarkdown = (value: string) =>
+  value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replace(/\*([^*\n]+)\*/g, "<em>$1</em>")
+
+const profileURL = new URL(import.meta.env.BASE_URL, Astro.site).href
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${profileURL}#person`,
+  name: profile.name,
+  alternateName: profile.nameZh,
+  honorificSuffix: profile.honorific,
+  url: profileURL,
+  image: new URL(portrait.src, Astro.site).href,
+  jobTitle: profile.jobTitle.en,
+  description: profile.description.en,
+  worksFor: { "@type": "Organization", name: profile.organization.en },
+  affiliation: profile.academicAffiliations.map((affiliation) => ({
+    "@type": "CollegeOrUniversity",
+    name: affiliation.en,
+  })),
+  alumniOf: [
+    ...new Set(
+      experience.filter((item) => item.kind === "education").map((item) => item.organization.en),
+    ),
+  ].map((institution) => ({
+    "@type": "CollegeOrUniversity",
+    name: institution,
+  })),
+  knowsAbout: profile.domains.map((domain) => domain.en),
+  award: honors.items.map((item) => `${item.year} ${item.name.en}`),
+  sameAs: [
+    profile.links.scholar,
+    profile.links.orcid,
+    profile.links.openalex,
+    profile.links.github,
+  ],
+}
+---
+
+<Layout
+  title={`${profile.name} · AI for Science`}
+  titleZh={`${profile.nameZh} · 科学智能`}
+  description={profile.description.en}
+  structuredData={personSchema}
+>
+  <section class="grid gap-7 md:grid-cols-12 md:gap-10">
+    <aside class="flex flex-col md:col-span-4">
+      <div class="flex w-full items-center gap-3 bg-transparent p-0 md:block md:rounded-2xl md:border md:border-zinc-200/80 md:bg-white/40 md:p-3.5 md:shadow-xs md:shadow-zinc-950/[0.03] md:backdrop-blur-xs md:dark:border-zinc-800/80 md:dark:bg-zinc-900/40 md:dark:shadow-none">
+        <div class="relative size-16 shrink-0 overflow-hidden rounded-2xl border border-zinc-200/80 bg-zinc-100 shadow-sm shadow-zinc-950/10 md:h-auto md:w-full md:aspect-[3/4] md:rounded-xl md:shadow-lg dark:border-zinc-700/60 dark:bg-zinc-950 md:dark:shadow-xl md:dark:shadow-black/20">
+          <img
+            src={portrait.src}
+            alt={profile.portraitAlt.en}
+            width={portrait.width}
+            height={portrait.height}
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            class="portrait-tone h-full w-full object-cover object-[50%_31%] md:object-[50%_50%]"
+          />
+          <span
+            class="pointer-events-none absolute inset-0 bg-gradient-to-t from-zinc-950/20 via-transparent to-white/5"
+            aria-hidden="true"
+          ></span>
+        </div>
+        <div class="min-w-0 flex-1 md:mt-4">
+          <h1 class="truncate text-xl font-bold tracking-[-0.03em] text-zinc-950 dark:text-zinc-100">
+            <span class="lang-en">{profile.name}</span>
+            <span class="lang-zh">{profile.nameZh}</span>
+          </h1>
+          <p class="mt-1 truncate font-mono text-xs leading-5 text-zinc-500">
+            <span class="lang-en">{profile.jobTitle.en}</span>
+            <span class="lang-zh">{profile.jobTitle.zh}</span>
+          </p>
+          <p class="truncate text-[11px] leading-5 text-zinc-400 dark:text-zinc-500">
+            <span class="lang-en">{profile.organization.en}</span>
+            <span class="lang-zh">{profile.organization.zh}</span>
+          </p>
+        </div>
+      </div>
+
+      <dl class="mt-3 flex items-center gap-3 font-mono md:mt-6 md:grid md:grid-cols-2 md:gap-0 md:rounded-xl md:border md:border-zinc-200/80 md:bg-white/45 md:p-2.5 md:shadow-xs md:shadow-zinc-950/[0.03] md:dark:border-zinc-800/80 md:dark:bg-zinc-900/45 md:dark:shadow-none">
+        <div class="flex items-baseline gap-1.5 md:block md:px-1.5">
+          <dd class="text-sm font-semibold tabular-nums text-zinc-800 md:text-xl md:font-bold md:text-zinc-950 dark:text-zinc-200 md:dark:text-zinc-100">
+            {metricFormat.format(scholarData.total_citations)}+
+          </dd>
+          <dt class="text-[9px] uppercase tracking-[0.1em] text-zinc-500 md:mt-1 md:tracking-[0.14em]">
+            <span class="lang-en">Citations</span>
+            <span class="lang-zh">引用次数</span>
+          </dt>
+        </div>
+        <div class="flex items-baseline gap-1.5 border-l border-zinc-200/80 pl-3 md:block dark:border-zinc-800/80">
+          <dd class="text-sm font-semibold tabular-nums text-zinc-800 md:text-xl md:font-bold md:text-zinc-950 dark:text-zinc-200 md:dark:text-zinc-100">
+            {metricFormat.format(scholarData.h_index)}
+          </dd>
+          <dt class="text-[9px] uppercase tracking-[0.1em] text-zinc-500 md:mt-1 md:tracking-[0.14em]">
+            h-index
+          </dt>
+        </div>
+      </dl>
+
+      <nav
+        class="mt-4 grid grid-cols-4 gap-1.5 font-mono text-xs md:mt-6 md:grid-cols-2 md:gap-2"
+        aria-label="Academic profiles"
+      >
+        <a
+          href={profile.links.scholar}
+          class="academic-link"
+          target="_blank"
+          rel="noreferrer"
+          data-preconnect
+        >
+          <AcademicIcon name="scholar" />
+          <span>Scholar</span>
+        </a>
+        <a
+          href={profile.links.orcid}
+          class="academic-link"
+          target="_blank"
+          rel="me noreferrer"
+          data-preconnect
+        >
+          <AcademicIcon name="orcid" />
+          <span>ORCID</span>
+        </a>
+        <a
+          href={profile.links.github}
+          class="academic-link"
+          target="_blank"
+          rel="noreferrer"
+          data-preconnect
+        >
+          <AcademicIcon name="github" />
+          <span>GitHub</span>
+        </a>
+        <a
+          href="#"
+          id="email-contact"
+          class="academic-link"
+          aria-label="Email"
+          data-email-cipher={protectedEmail}
+        >
+          <AcademicIcon name="email" />
+          <OutlinedEmailLabel />
+        </a>
+      </nav>
+
+      <div class="mt-4 flex min-w-0 items-start gap-2 md:mt-6 md:block">
+        <p class="shrink-0 pt-px text-[11px] font-medium leading-4 text-zinc-400 md:pt-0 md:font-mono md:text-xs md:uppercase md:leading-normal md:tracking-wider dark:text-zinc-500">
+          <span class="md:hidden">
+            <span class="lang-en">Focus:</span>
+            <span class="lang-zh">方向：</span>
+          </span>
+          <span class="hidden md:inline">
+            <span class="lang-en">Domains</span>
+            <span class="lang-zh">研究领域</span>
+          </span>
+        </p>
+        <div class="flex min-w-0 flex-wrap items-center gap-x-1.5 gap-y-1 md:mt-2">
+          {profile.domains.map((domain, index) => (
+            <span class="shrink-0 text-[11px] leading-4 text-zinc-500 md:inline-flex md:min-h-0 md:items-center md:rounded-md md:border md:border-zinc-200/80 md:bg-zinc-100/80 md:px-2.5 md:py-1 md:font-mono md:leading-normal md:text-zinc-600 md:dark:border-zinc-800/80 md:dark:bg-zinc-900/80 md:dark:text-zinc-300">
+              <span class="lang-en">{domain.en}</span>
+              <span class="lang-zh">{domain.zh}</span>
+              {index < profile.domains.length - 1 && (
+                <span class="ml-1.5 text-zinc-300 md:hidden dark:text-zinc-700" aria-hidden="true">
+                  ·
+                </span>
+              )}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <RecruitmentCard class="mt-5 hidden md:block" />
+    </aside>
+
+    <div class="flex flex-col gap-6 text-sm text-zinc-600 md:col-span-8 md:text-base dark:text-zinc-400">
+      <div class="order-1 md:order-none">
+        <h2 class="text-pretty text-2xl font-bold leading-[1.12] tracking-[-0.035em] text-zinc-950 md:text-[1.75rem] dark:text-zinc-100">
+          <span class="lang-en">{bio.slogan.en}</span>
+          <span class="lang-zh">{bio.slogan.zh}</span>
+        </h2>
+        <p class="academic-bio mt-4 max-w-prose leading-7">
+          <span class="lang-en" set:html={renderInlineMarkdown(bio.summary.en)} />
+          <span class="lang-zh">{bio.summary.zh}</span>
+        </p>
+      </div>
+
+      <RecruitmentCard class="order-2 md:hidden" />
+
+      <RecentPapers papers={recentPapers} class="order-3 md:hidden" />
+
+      <ExperienceTimeline items={experience} />
+
+      <section class="order-5 md:order-none">
+        <h2 class="content-heading">
+          <span class="lang-en">Services &amp; Honors</span>
+          <span class="lang-zh">学术服务与荣誉</span>
+        </h2>
+        <dl class="mt-3 divide-y divide-dashed divide-zinc-200/70 border-y border-zinc-200/70 text-sm leading-5 md:overflow-hidden md:rounded-xl md:border md:border-zinc-200/80 md:bg-white/35 dark:divide-zinc-800/60 dark:border-zinc-800/60 md:dark:border-zinc-800/70 md:dark:bg-zinc-900/35">
+          {services.map((group) => (
+            <div class="grid gap-1 py-3 md:grid-cols-[6rem_1fr] md:gap-4 md:p-4">
+              <dt class="font-mono text-xs font-medium text-zinc-700 dark:text-zinc-300">
+                <span class="lang-en">{group.label.en}</span>
+                <span class="lang-zh">{group.label.zh}</span>
+              </dt>
+              <dd>
+                <span class="lang-en">
+                  {[group.role?.en, ...group.entries.map((entry) => entry.en)]
+                    .filter(Boolean)
+                    .join(" · ")}
+                </span>
+                <span class="lang-zh">
+                  {[...group.entries.map((entry) => entry.zh), group.role?.zh]
+                    .filter(Boolean)
+                    .join(" · ")}
+                </span>
+              </dd>
+            </div>
+          ))}
+          <div class="grid gap-1 py-3 md:grid-cols-[6rem_1fr] md:gap-4 md:p-4">
+            <dt class="font-mono text-xs font-medium text-zinc-700 dark:text-zinc-300">
+              <span class="lang-en">{honors.label.en}</span>
+              <span class="lang-zh">{honors.label.zh}</span>
+            </dt>
+            <dd class="text-zinc-700 dark:text-zinc-300">
+              <span class="lang-en">
+                {honors.items.map((item) => `${item.year} ${item.name.en}`).join(" · ")}
+              </span>
+              <span class="lang-zh">
+                {honors.items.map((item) => `${item.year} ${item.name.zh}`).join(" · ")}
+              </span>
+            </dd>
+          </div>
+        </dl>
+      </section>
+    </div>
+  </section>
+
+  <RecentPapers papers={recentPapers} class="mt-14 hidden md:block" breakout />
+</Layout>

@@ -1,0 +1,190 @@
+---
+interface LocalizedText {
+  en: string
+  zh: string
+}
+
+interface Paper {
+  date: Date
+  title: LocalizedText
+  authors: Array<{ name: string; principal?: boolean }>
+  venue: string
+  venueShort?: string
+  status?: LocalizedText
+  bibtex?: string
+  links: {
+    doi?: string
+    arxiv?: string
+    paper?: string
+    code?: string
+  }
+}
+
+interface Props {
+  papers: Paper[]
+  class?: string
+  breakout?: boolean
+}
+
+const { papers, class: className, breakout = false } = Astro.props
+
+const formatBibtex = (value: string) => {
+  const text = value.trim()
+  const firstComma = text.indexOf(",")
+  const closingBrace = text.lastIndexOf("}")
+  if (!text.startsWith("@") || firstComma < 0 || closingBrace <= firstComma) return text
+
+  const fields: string[] = []
+  let current = ""
+  let depth = 0
+  for (const character of text.slice(firstComma + 1, closingBrace)) {
+    if (character === "{") depth += 1
+    if (character === "}") depth -= 1
+    if (character === "," && depth === 0) {
+      if (current.trim()) fields.push(current.trim())
+      current = ""
+    } else {
+      current += character
+    }
+  }
+  if (current.trim()) fields.push(current.trim())
+  if (!fields.length) return text
+  return `${text.slice(0, firstComma).trim()},\n${fields.map((field) => `  ${field}`).join(",\n")}\n}`
+}
+---
+
+<section class:list={["text-zinc-700 dark:text-zinc-300", className]}>
+  <div class:list={["flex items-center justify-between", breakout ? "mb-5" : "mb-4"]}>
+    <h2 class="content-heading">
+      <span class="lang-en">Recent Papers</span>
+      <span class="lang-zh">近期论文</span>
+    </h2>
+    <span class="font-mono text-[11px] font-normal tabular-nums text-zinc-400 dark:text-zinc-500">
+      {papers.length}
+    </span>
+  </div>
+  <ol class="divide-y divide-zinc-200/70 dark:divide-zinc-800/60">
+    {papers.map((paper) => (
+      <li
+        class:list={[
+          "publication-row group relative isolate overflow-hidden rounded-xl",
+          breakout ? "-mx-4 px-4 py-5" : "-mx-2 px-2 py-4",
+        ]}
+      >
+        <div class="mb-1.5 flex flex-wrap items-center gap-2 font-mono text-[10px]">
+          <span
+            class="rounded-full border border-blue-500/15 bg-blue-500/[0.06] px-2 py-0.5 tracking-[0.035em] text-blue-700 dark:text-blue-300"
+            title={paper.venue}
+          >
+            {paper.status?.en === "Published" ? (paper.venueShort ?? paper.venue) : paper.venue}
+          </span>
+          <time class="tracking-[0.08em] text-zinc-400" datetime={paper.date.toISOString()}>
+            {paper.date.getFullYear()}
+          </time>
+          {paper.status && (
+            <span class="uppercase tracking-[0.08em] text-zinc-400">
+              <span class="lang-en">{paper.status.en}</span>
+              <span class="lang-zh">{paper.status.zh}</span>
+            </span>
+          )}
+        </div>
+        <h3
+          class:list={[
+            "font-semibold text-zinc-900 transition-colors duration-200 md:group-hover:text-zinc-950 dark:text-zinc-100 md:dark:group-hover:text-white",
+            breakout ? "text-[15px] leading-6" : "text-[13px] leading-5 md:text-sm",
+          ]}
+        >
+          {paper.title.en}
+        </h3>
+        <p
+          class:list={[
+            "mt-1 text-zinc-500",
+            breakout ? "text-xs leading-5" : "text-[11px] leading-5 md:text-xs",
+          ]}
+        >
+          {paper.authors.map((author, index) => (
+            <>
+              <span
+                class:list={[
+                  author.principal &&
+                    "font-semibold text-zinc-800 underline decoration-zinc-300 underline-offset-2 dark:text-zinc-200 dark:decoration-zinc-700",
+                ]}
+              >
+                {author.name}
+              </span>
+              {index < paper.authors.length - 1 ? ", " : ""}
+            </>
+          ))}
+        </p>
+        {(paper.links.doi ||
+          paper.links.arxiv ||
+          paper.links.paper ||
+          paper.links.code ||
+          paper.bibtex) && (
+          <div class="mt-2 flex flex-wrap items-start gap-x-3 gap-y-2 font-mono text-[10px] text-zinc-500">
+            {paper.links.doi && (
+              <a
+                class="hover:text-zinc-950 dark:hover:text-zinc-100"
+                href={paper.links.doi}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {paper.status?.en === "Preprint" ? paper.venue : "DOI"} ↗
+              </a>
+            )}
+            {paper.links.arxiv && (
+              <a
+                class="hover:text-zinc-950 dark:hover:text-zinc-100"
+                href={paper.links.arxiv}
+                target="_blank"
+                rel="noreferrer"
+              >
+                arXiv ↗
+              </a>
+            )}
+            {paper.links.paper && (
+              <a
+                class="hover:text-zinc-950 dark:hover:text-zinc-100"
+                href={paper.links.paper}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span class="lang-en">Paper ↗</span>
+                <span class="lang-zh">论文 ↗</span>
+              </a>
+            )}
+            {paper.links.code && (
+              <a
+                class="hover:text-zinc-950 dark:hover:text-zinc-100"
+                href={paper.links.code}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span class="lang-en">Code ↗</span>
+                <span class="lang-zh">代码 ↗</span>
+              </a>
+            )}
+            {paper.bibtex && (
+              <details class="group min-w-0 open:basis-full">
+                <summary class="w-fit cursor-pointer list-none select-none hover:text-zinc-950 focus-visible:rounded-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500/40 dark:hover:text-zinc-100">
+                  <span class="inline-flex items-center gap-1">
+                    <span
+                      class="text-[8px] transition-transform group-open:rotate-90"
+                      aria-hidden="true"
+                    >
+                      ▶
+                    </span>
+                    BibTeX
+                  </span>
+                </summary>
+                <div class="mt-2 max-w-full overflow-hidden rounded-lg border border-zinc-200/70 bg-white/45 dark:border-zinc-800/70 dark:bg-zinc-950/35">
+                  <pre class="max-h-64 overflow-auto whitespace-pre-wrap break-words p-3 text-[10px] leading-5 tabular-nums text-zinc-600 dark:text-zinc-400"><code>{formatBibtex(paper.bibtex)}</code></pre>
+                </div>
+              </details>
+            )}
+          </div>
+        )}
+      </li>
+    ))}
+  </ol>
+</section>

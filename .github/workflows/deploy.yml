@@ -1,0 +1,71 @@
+name: Deploy Astro site to GitHub Pages
+
+on:
+  push:
+    branches: [master]
+  schedule:
+    - cron: "0 0 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Check Python crawler
+        uses: astral-sh/ruff-action@v4.1.0
+        with:
+          version: "0.11.7"
+          args: "check"
+          src: "./scripts"
+
+      - name: Check Python formatting
+        run: ruff format --check scripts
+
+      - name: Set up Python
+        if: ${{ github.event_name != 'push' }}
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Refresh citation metrics
+        if: ${{ github.event_name != 'push' }}
+        env:
+          SCHOLAR_AUTHOR_KEY: ec_pCdEAAAAJ
+          SCHOLAR_PROXY_URL: ${{ secrets.SCHOLAR_PROXY_URL }}
+        run: python scripts/fetch_scholar_stats.py --allow-stale
+
+      - name: Configure GitHub Pages path
+        shell: bash
+        run: |
+          echo "SITE_URL=https://${GITHUB_REPOSITORY_OWNER}.github.io" >> "$GITHUB_ENV"
+          if [[ "${GITHUB_REPOSITORY#*/}" == "${GITHUB_REPOSITORY_OWNER}.github.io" ]]; then
+            echo "BASE_PATH=/" >> "$GITHUB_ENV"
+          else
+            echo "BASE_PATH=/${GITHUB_REPOSITORY#*/}" >> "$GITHUB_ENV"
+          fi
+
+      - name: Build and upload site
+        uses: withastro/action@v6
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
