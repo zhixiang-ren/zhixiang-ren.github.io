@@ -187,6 +187,7 @@ If port 4321 is occupied, Astro selects another port. Check the command output r
 │   ├── audit_release.mjs              # source/output privacy and secret audit
 │   ├── fetch_publication_metadata.mjs # DOI/arXiv importer
 │   ├── fetch_scholar_stats.py         # resilient Scholar scraper
+│   ├── generate_scholar_avatar.mjs    # reusable square/circular-safe portrait generator
 │   └── llmtxt-instructions.md         # internal editorial guidance for llms.txt
 ├── src/
 │   ├── content.config.ts              # Content Layer loaders and all collection schemas

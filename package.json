@@ -11,6 +11,7 @@
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
     "dev:network": "ASTRO_TELEMETRY_DISABLED=1 astro dev --host",
     "add-paper": "node scripts/fetch_publication_metadata.mjs",
+    "generate:scholar-avatar": "node scripts/generate_scholar_avatar.mjs",
     "fetch:scholar": "python3 scripts/fetch_scholar_stats.py",
     "start": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
     "check": "npm run format:check && npm run check:astro && npm run check:ts",

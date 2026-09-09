@@ -121,6 +121,16 @@ Replace [`src/assets/zhixiang-ren.webp`](./src/assets/zhixiang-ren.webp) with a 
 
 The homepage and Open Graph generator use the same source portrait.
 
+### Generate a Google Scholar avatar
+
+Create a square upload asset from the canonical portrait without stretching the subject:
+
+```sh
+npm run generate:scholar-avatar
+```
+
+The script writes `src/assets/scholar-avatar.png` as an unreferenced backup asset. It scales the portrait without distortion, crops it around the face, and extends the existing edge background so Google Scholar's circular crop retains comfortable horizontal spacing. Run `npm run generate:scholar-avatar -- --help` to see optional size, input, output, and subject-scale controls.
+
 ## Deployment
 
 The workflow in [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml):
