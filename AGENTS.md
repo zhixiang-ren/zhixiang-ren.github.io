@@ -83,7 +83,7 @@ The footer currently uses:
 - an extremely subtle upward neutral glow;
 - automatically generated UTC build year/month;
 - identical typography for copyright, machine-readable links, build credit, and update date;
-- low-emphasis `llms.txt` and RSS entry points beside the copyright line.
+- a distinct `Source` link for this personal-site repository plus low-emphasis `llms.txt` and RSS entry points beside the copyright line; the profile GitHub link remains the separate research-team code destination.
 
 Do not add a footer-level BibTeX download unless explicitly requested. Each publication already exposes its reviewed BibTeX record inline, so an aggregate footer export would duplicate the current workflow.
 
