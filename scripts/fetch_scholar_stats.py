@@ -16,7 +16,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-OUTPUT_PATH = PROJECT_ROOT / "src" / "data" / "scholar.json"
+OUTPUT_PATH = PROJECT_ROOT / "src" / "content" / "scholar.json"
 DEFAULT_AUTHOR_KEY = "ec_pCdEAAAAJ"
 DEFAULT_LOCAL_PROXY = "socks5h://127.0.0.1:7897"
 USER_AGENT = (

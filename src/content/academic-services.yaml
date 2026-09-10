@@ -1,12 +1,9 @@
 groups:
   - label: { en: Editorial, zh: 编辑工作 }
-    role: { en: Associate Editor, zh: 副主编 }
-    entries:
-      - { en: Big Data Mining and Analytics, zh: 《Big Data Mining and Analytics》 }
-      - { en: CAAI Artificial Intelligence Research, zh: 《CAAI Artificial Intelligence Research》 }
-      - { en: Frontiers in Big Data, zh: 《Frontiers in Big Data》 }
+    summary:
+      en: Associate Editor of Big Data Mining and Analytics, CAAI Artificial Intelligence Research, and Frontiers in Big Data.
+      zh: 担任 Big Data Mining and Analytics、CAAI Artificial Intelligence Research 与 Frontiers in Big Data 副主编。
   - label: { en: Reviewing, zh: 评审工作 }
-    entries:
-      - { en: KDD Program Committee, zh: KDD 程序委员会委员 }
-      - { en: Reviewer for Nature portfolio journals, zh: Nature 系列期刊审稿人 }
-      - { en: Reviewer for IEEE Transactions journals, zh: IEEE Transactions 期刊审稿人 }
+    summary:
+      en: Program committee member for the ACM SIGKDD and referee for Nature Portfolio and IEEE Transactions journals.
+      zh: 担任 ACM SIGKDD 程序委员会委员，并为 Nature 系列及 IEEE Transactions 期刊审稿。

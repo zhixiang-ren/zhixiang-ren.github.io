@@ -1,21 +1,7 @@
-name: Zhixiang Ren
-nameZh: 任智祥
+name:
+  en: Zhixiang Ren
+  zh: 任智祥
 honorific: Ph.D.
-jobTitle:
-  en: Chief AI Scientist
-  zh: AI 首席科学家
-organization:
-  en: SmartLogic Tech
-  zh: 思朗科技
-location:
-  en: Shanghai
-  zh: 上海
-description:
-  en: AI scientist working across AI for Science, drug discovery, bioinformatics, multimodal foundation models, and AI agents.
-  zh: 从事科学智能、AI 药物研发、生物信息学、多模态基础模型与 AI 智能体研究。
-portraitAlt:
-  en: Portrait of Zhixiang Ren
-  zh: 任智祥肖像
 domains:
   - en: AI for Science
     zh: 科学智能
@@ -28,15 +14,10 @@ domains:
   - en: AI Agents
     zh: AI 智能体
 academicRoles:
-  - en: Doctoral supervisor at Tsinghua University
-    zh: 清华大学博士生导师
-  - en: Doctoral supervisor at Southern University of Science and Technology
-    zh: 南方科技大学博士生导师
-academicAffiliations:
-  - en: Tsinghua University
-    zh: 清华大学
-  - en: Southern University of Science and Technology
-    zh: 南方科技大学
+  - title: { en: Doctoral supervisor, zh: 博士生导师 }
+    organization: { en: Tsinghua University, zh: 清华大学 }
+  - title: { en: Doctoral supervisor, zh: 博士生导师 }
+    organization: { en: Southern University of Science and Technology, zh: 南方科技大学 }
 links:
   scholar: https://scholar.google.com/citations?hl=en&user=ec_pCdEAAAAJ&view_op=list_works&sortby=pubdate
   orcid: https://orcid.org/0000-0002-4104-3790

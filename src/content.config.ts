@@ -4,20 +4,18 @@ import { z } from "astro/zod"
 
 const localizedText = z.object({ en: z.string(), zh: z.string() })
 
-const profile = defineCollection({
+const identity = defineCollection({
   loader: glob({ base: "./src/content", pattern: "identity.{yaml,yml}" }),
   schema: z.object({
-    name: z.string(),
-    nameZh: z.string(),
+    name: localizedText,
     honorific: z.string(),
-    jobTitle: localizedText,
-    organization: localizedText,
-    location: localizedText,
-    description: localizedText,
-    portraitAlt: localizedText,
     domains: z.array(localizedText).min(1),
-    academicRoles: z.array(localizedText),
-    academicAffiliations: z.array(localizedText),
+    academicRoles: z.array(
+      z.object({
+        title: localizedText,
+        organization: localizedText,
+      }),
+    ),
     links: z.object({
       scholar: z.url(),
       orcid: z.url(),
@@ -31,10 +29,11 @@ const profile = defineCollection({
   }),
 })
 
-const bio = defineCollection({
+const profile = defineCollection({
   loader: glob({ base: "./src/content", pattern: "profile.{md,mdx}" }),
   schema: z.object({
     slogan: localizedText,
+    description: localizedText,
     summary: localizedText,
   }),
 })
@@ -65,8 +64,7 @@ const services = defineCollection({
     groups: z.array(
       z.object({
         label: localizedText,
-        role: localizedText.optional(),
-        entries: z.array(localizedText).min(1),
+        summary: localizedText,
       }),
     ),
   }),
@@ -80,6 +78,7 @@ const honors = defineCollection({
       z.object({
         year: z.number().int(),
         name: localizedText,
+        level: localizedText.optional(),
         detail: localizedText.optional(),
       }),
     ),
@@ -132,7 +131,7 @@ const publications = defineCollection({
 })
 
 const scholar = defineCollection({
-  loader: file("src/data/scholar.json", {
+  loader: file("src/content/scholar.json", {
     parser: (content) => ({ metrics: JSON.parse(content) }),
   }),
   schema: z.object({
@@ -148,8 +147,8 @@ const scholar = defineCollection({
 })
 
 export const collections = {
+  identity,
   profile,
-  bio,
   experience,
   services,
   honors,

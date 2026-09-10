@@ -28,7 +28,7 @@ Built with [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.
 
 ## Quick start
 
-Requires Node.js **22.12.0 or newer** and npm **10.8.2 or newer**. The repository includes `.nvmrc`; run `nvm use` when using NVM.
+Requires Node.js **22.12.0 or newer** and npm **10.8.2 or newer**. Python 3.13, Ruff 0.11.7, and the system `curl` executable are needed only when refreshing or checking Scholar metrics. The checked-in `.nvmrc` and `.python-version` files define the canonical local runtime versions.
 
 ```sh
 npm install
@@ -58,8 +58,8 @@ npm run preview
 | `npm run dev:network`               | Expose development preview to the local network         |
 | `npm run build`                     | Run release audits, checks, and the production build    |
 | `npm run preview`                   | Preview the generated production site                   |
-| `npm run check`                     | Check Prettier formatting and Astro/TypeScript          |
-| `npm run check:all`                 | Also check Python with Ruff 0.11.7                      |
+| `npm run check`                     | Check Prettier, Astro/TypeScript, and Python with Ruff  |
+| `npm run check:web`                 | Check only Prettier formatting and Astro/TypeScript     |
 | `npm run format`                    | Format code, content data, and documentation            |
 | `npm run add-paper -- <DOI\|arXiv>` | Import one publication into the shared publication file |
 | `npm run fetch:scholar`             | Refresh local Scholar metrics                           |
@@ -68,16 +68,16 @@ npm run preview
 
 Most editorial changes require no component work:
 
-| Update                                                    | File                                                                                 |
-| --------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| Name, role, organization, domains, identifiers, and links | [`src/content/identity.yaml`](./src/content/identity.yaml)                           |
-| English and Chinese slogan and biography                  | [`src/content/profile.md`](./src/content/profile.md)                                 |
-| Professional and academic experience                      | [`src/content/experience.yaml`](./src/content/experience.yaml)                       |
-| Editorial and reviewing service                           | [`src/content/academic-services.yaml`](./src/content/academic-services.yaml)         |
-| Representative honors                                     | [`src/content/representative-honors.yaml`](./src/content/representative-honors.yaml) |
-| Recruitment and collaboration message                     | [`src/content/open-positions.md`](./src/content/open-positions.md)                   |
-| Complete publication dataset                              | [`src/content/publications.md`](./src/content/publications.md)                       |
-| Fallback Scholar statistics                               | [`src/data/scholar.json`](./src/data/scholar.json)                                   |
+| Update                                                  | File                                                                                 |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Name, domains, academic roles, identifiers, and links   | [`src/content/identity.yaml`](./src/content/identity.yaml)                           |
+| Current role, organization, and professional experience | [`src/content/experience.yaml`](./src/content/experience.yaml)                       |
+| English and Chinese slogan, metadata, and biography     | [`src/content/profile.md`](./src/content/profile.md)                                 |
+| Editorial and reviewing service                         | [`src/content/academic-services.yaml`](./src/content/academic-services.yaml)         |
+| Representative honors                                   | [`src/content/representative-honors.yaml`](./src/content/representative-honors.yaml) |
+| Recruitment and collaboration message                   | [`src/content/open-positions.md`](./src/content/open-positions.md)                   |
+| Complete publication dataset                            | [`src/content/publications.md`](./src/content/publications.md)                       |
+| Fallback Scholar statistics                             | [`src/content/scholar.json`](./src/content/scholar.json)                             |
 
 Bilingual fields use `{ en: ..., zh: ... }`. Update both languages together. Publication titles intentionally remain in their official English form in both interface languages.
 
@@ -107,9 +107,9 @@ Crossref metadata distinguishes published work from repositories such as bioRxiv
 npm run fetch:scholar
 ```
 
-The script validates all metrics before atomically replacing `src/data/scholar.json`. Local requests fall back to `socks5h://127.0.0.1:7897` when direct access fails. Scholar may occasionally return a CAPTCHA; scheduled builds preserve the last valid dataset instead of publishing zero or partial values.
+The script validates all metrics before atomically replacing `src/content/scholar.json`. Local requests fall back to `socks5h://127.0.0.1:7897` when direct access fails. Scholar may occasionally return a CAPTCHA; scheduled builds preserve the last valid dataset instead of publishing zero or partial values.
 
-Operational details are in [`GITHUB_PAGES.md`](./GITHUB_PAGES.md).
+Operational details are in [`docs/deployment.md`](./docs/deployment.md).
 
 ### Replace the portrait
 
@@ -129,7 +129,7 @@ Create a square upload asset from the canonical portrait without stretching the 
 npm run generate:scholar-avatar
 ```
 
-The script writes `src/assets/scholar-avatar.png` as an unreferenced backup asset. It scales the portrait without distortion, crops it around the face, and extends the existing edge background so Google Scholar's circular crop retains comfortable horizontal spacing. Run `npm run generate:scholar-avatar -- --help` to see optional size, input, output, and subject-scale controls.
+The script writes `resources/scholar-avatar.png` as an offline upload asset that is not part of Astro's source graph or deployment output. It scales the portrait without distortion, crops it around the face, and extends the existing edge background so Google Scholar's circular crop retains comfortable horizontal spacing. Run `npm run generate:scholar-avatar -- --help` to see optional size, input, output, and subject-scale controls.
 
 ## Deployment
 
@@ -148,7 +148,7 @@ For first-time setup:
 3. In **Settings → Pages**, select **GitHub Actions** as the source.
 4. Optionally provide a usable remote proxy URL through the `SCHOLAR_PROXY_URL` Actions secret.
 
-See [`GITHUB_PAGES.md`](./GITHUB_PAGES.md) for deployment and failure behavior. Never commit proxy credentials.
+See [`docs/deployment.md`](./docs/deployment.md) for deployment and failure behavior. Never commit proxy credentials.
 
 ## Generated and machine-readable output
 

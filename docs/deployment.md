@@ -1,6 +1,6 @@
-# GitHub Pages setup
+# GitHub Pages deployment
 
-The site renders citation metrics from `src/data/scholar.json`. A scheduled GitHub Action attempts to refresh that file in the build workspace from Zhixiang Ren's public Google Scholar profile before Astro builds the static site. Nothing is fetched in a visitor's browser.
+The site renders citation metrics from `src/content/scholar.json`. A scheduled GitHub Action attempts to refresh that file in the build workspace from Zhixiang Ren's public Google Scholar profile before Astro builds the static site. Nothing is fetched in a visitor's browser.
 
 ## Failure behavior
 

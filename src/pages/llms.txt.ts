@@ -1,9 +1,10 @@
 import type { APIRoute } from "astro"
 import { getEntry } from "astro:content"
+import { getCurrentPosition } from "@lib/experience"
 
 const [
+  identityEntry,
   profileEntry,
-  bioEntry,
   experienceEntry,
   servicesEntry,
   honorsEntry,
@@ -11,8 +12,8 @@ const [
   publicationsEntry,
   scholarEntry,
 ] = await Promise.all([
-  getEntry("profile", "identity"),
-  getEntry("bio", "profile"),
+  getEntry("identity", "identity"),
+  getEntry("profile", "profile"),
   getEntry("experience", "experience"),
   getEntry("services", "academic-services"),
   getEntry("honors", "representative-honors"),
@@ -22,8 +23,8 @@ const [
 ])
 
 if (
+  !identityEntry ||
   !profileEntry ||
-  !bioEntry ||
   !experienceEntry ||
   !servicesEntry ||
   !honorsEntry ||
@@ -34,10 +35,11 @@ if (
   throw new Error("One or more required content entries for llms.txt are missing")
 }
 
-const profile = profileEntry.data
-const bio = bioEntry.data
+const profile = identityEntry.data
+const bio = profileEntry.data
 const recruitment = recruitmentEntry.data
 const experience = experienceEntry.data.items
+const currentPosition = getCurrentPosition(experience)
 const services = servicesEntry.data.groups
 const honors = honorsEntry.data.items
 const scholarData = scholarEntry.data
@@ -56,15 +58,13 @@ const experienceLines = experience
   })
   .join("\n")
 
-const serviceLines = services
-  .map(
-    (group) =>
-      `- ${group.label.en}: ${group.role ? `${group.role.en} — ` : ""}${group.entries.map((entry) => entry.en).join("; ")}`,
-  )
-  .join("\n")
+const serviceLines = services.map((group) => `- ${group.label.en}: ${group.summary.en}`).join("\n")
 
 const honorLines = honors
-  .map((item) => `- ${item.year} — ${item.name.en}${item.detail ? `; ${item.detail.en}` : ""}`)
+  .map(
+    (item) =>
+      `- ${item.year} — ${item.name.en}${item.level ? `, ${item.level.en}` : ""}${item.detail ? `; ${item.detail.en}` : ""}`,
+  )
   .join("\n")
 
 const recentPapers = publicationsEntry.data.papers
@@ -77,9 +77,13 @@ const recentPapers = publicationsEntry.data.papers
   })
   .join("\n")
 
-const llmsTxt = `# ${profile.name} (${profile.nameZh}), ${profile.honorific}
+const academicRoles = profile.academicRoles
+  .map((role) => `${role.title.en}, ${role.organization.en}`)
+  .join("; ")
 
-> ${profile.jobTitle.en} and researcher in AI for Science.
+const llmsTxt = `# ${profile.name.en} (${profile.name.zh}), ${profile.honorific}
+
+> ${currentPosition.title.en} and researcher in AI for Science.
 > ${bio.slogan.en}.
 > Profile generated: ${buildDate}.
 
@@ -87,9 +91,9 @@ This file is generated from the same validated Astro Content Collections as the 
 
 ## Profile
 
-- Name: ${profile.name} (${profile.nameZh})
-- Current position: ${profile.jobTitle.en}, ${profile.organization.en}, ${profile.location.en}
-- Current academic roles: ${profile.academicRoles.map((role) => role.en).join("; ")}
+- Name: ${profile.name.en} (${profile.name.zh})
+- Current position: ${currentPosition.title.en}, ${currentPosition.organization.en}${currentPosition.location ? `, ${currentPosition.location.en}` : ""}
+- Current academic roles: ${academicRoles}
 - Research areas: ${profile.domains.map((domain) => domain.en).join("; ")}
 - Research statement: ${bio.slogan.en}
 - Homepage: [Official academic homepage](./)

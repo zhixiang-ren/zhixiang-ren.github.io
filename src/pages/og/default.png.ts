@@ -5,6 +5,7 @@ import { resolve } from "node:path"
 import { Resvg } from "@resvg/resvg-js"
 import satori from "satori"
 import sharp from "sharp"
+import { getCurrentPosition } from "@lib/experience"
 
 export const prerender = true
 
@@ -20,19 +21,23 @@ const node = (
 ) => ({ type, props: { ...attributes, style, children } })
 
 export const GET: APIRoute = async () => {
-  const [profileEntry, bioEntry, portrait, regular, semibold, mono] = await Promise.all([
-    getEntry("profile", "identity"),
-    getEntry("bio", "profile"),
-    asset("src/assets/zhixiang-ren.webp"),
-    asset("src/assets/fonts/Geist-Regular.ttf"),
-    asset("src/assets/fonts/Geist-SemiBold.ttf"),
-    asset("src/assets/fonts/GeistMono-Medium.ttf"),
-  ])
+  const [identityEntry, profileEntry, experienceEntry, portrait, regular, semibold, mono] =
+    await Promise.all([
+      getEntry("identity", "identity"),
+      getEntry("profile", "profile"),
+      getEntry("experience", "experience"),
+      asset("src/assets/zhixiang-ren.webp"),
+      asset("src/assets/fonts/Geist-Regular.ttf"),
+      asset("src/assets/fonts/Geist-SemiBold.ttf"),
+      asset("src/assets/fonts/GeistMono-Medium.ttf"),
+    ])
 
-  if (!profileEntry || !bioEntry) throw new Error("Missing profile content for Open Graph image")
+  if (!identityEntry || !profileEntry || !experienceEntry)
+    throw new Error("Missing profile content for Open Graph image")
 
-  const profile = profileEntry.data
-  const bio = bioEntry.data
+  const profile = identityEntry.data
+  const bio = profileEntry.data
+  const currentPosition = getCurrentPosition(experienceEntry.data.items)
   // Satori/resvg does not reliably decode WebP data URIs. Convert only the
   // in-memory OG composite input; the homepage still serves the original WebP.
   const portraitPng = await sharp(portrait)
@@ -128,7 +133,7 @@ export const GET: APIRoute = async () => {
               node(
                 "div",
                 { display: "flex", color: "#a1a1aa" },
-                profile.organization.en.toUpperCase(),
+                currentPosition.organization.en.toUpperCase(),
               ),
             ],
           ),
@@ -161,7 +166,7 @@ export const GET: APIRoute = async () => {
                       letterSpacing: "-0.045em",
                       color: "#fafafa",
                     },
-                    profile.name,
+                    profile.name.en,
                   ),
                   node(
                     "div",
@@ -172,7 +177,7 @@ export const GET: APIRoute = async () => {
                       lineHeight: 1.25,
                       color: "#d4d4d8",
                     },
-                    profile.jobTitle.en,
+                    currentPosition.title.en,
                   ),
                   node(
                     "div",
@@ -266,7 +271,9 @@ export const GET: APIRoute = async () => {
                   node(
                     "div",
                     { display: "flex" },
-                    `${profile.location.en.toUpperCase()} · AI FOR SCIENCE`,
+                    [currentPosition.location?.en.toUpperCase(), "AI FOR SCIENCE"]
+                      .filter(Boolean)
+                      .join(" · "),
                   ),
                   node("div", { display: "flex", color: "#52525b" }, "ORCID 0000-0002-4104-3790"),
                 ],

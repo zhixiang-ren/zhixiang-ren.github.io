@@ -9,14 +9,16 @@ const escapeXML = (value: string) =>
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&apos;")
 
-const profileEntry = await getEntry("profile", "identity")
+const identityEntry = await getEntry("identity", "identity")
+const profileEntry = await getEntry("profile", "profile")
 const publicationsEntry = await getEntry("publications", "publications")
 
-if (!profileEntry || !publicationsEntry) {
+if (!identityEntry || !profileEntry || !publicationsEntry) {
   throw new Error("Missing profile or publication content required for RSS")
 }
 
-const profile = profileEntry.data
+const profile = identityEntry.data
+const bio = profileEntry.data
 const papers = [...publicationsEntry.data.papers].sort(
   (left, right) => right.date.getTime() - left.date.getTime(),
 )
@@ -50,9 +52,9 @@ const items = papers
 const rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>${escapeXML(`${profile.name} · Recent Papers`)}</title>
+    <title>${escapeXML(`${profile.name.en} · Recent Papers`)}</title>
     <link>${escapeXML(siteURL.href)}</link>
-    <description>${escapeXML(profile.description.en)}</description>
+    <description>${escapeXML(bio.description.en)}</description>
     <language>en</language>
     <atom:link href="${escapeXML(feedURL.href)}" rel="self" type="application/rss+xml" />
 ${items}

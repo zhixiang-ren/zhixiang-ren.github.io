@@ -28,7 +28,7 @@
 
 ## 快速开始
 
-需要 Node.js **22.12.0 或更高版本**及 npm **10.8.2 或更高版本**。仓库包含 `.nvmrc`，使用 NVM 时可直接运行 `nvm use`。
+需要 Node.js **22.12.0 或更高版本**及 npm **10.8.2 或更高版本**。只有刷新或检查 Scholar 指标时才需要 Python 3.13、Ruff 0.11.7 和系统 `curl` 命令。仓库中的 `.nvmrc` 与 `.python-version` 是本地运行时版本的统一依据。
 
 ```sh
 npm install
@@ -52,32 +52,32 @@ npm run preview
 
 ## 常用命令
 
-| 命令                                | 用途                         |
-| ----------------------------------- | ---------------------------- |
-| `npm run dev`                       | 启动本地开发服务器           |
-| `npm run dev:network`               | 将开发预览开放到本地网络     |
-| `npm run build`                     | 执行发布审计、检查和生产构建 |
-| `npm run preview`                   | 预览生成后的生产网站         |
-| `npm run check`                     | 检查 Prettier 与 Astro/TS    |
-| `npm run check:all`                 | 使用 Ruff 0.11.7 检查 Python |
-| `npm run format`                    | 格式化代码、内容数据和文档   |
-| `npm run add-paper -- <DOI\|arXiv>` | 将一篇论文导入统一论文文件   |
-| `npm run fetch:scholar`             | 刷新本地 Scholar 指标        |
+| 命令                                | 用途                            |
+| ----------------------------------- | ------------------------------- |
+| `npm run dev`                       | 启动本地开发服务器              |
+| `npm run dev:network`               | 将开发预览开放到本地网络        |
+| `npm run build`                     | 执行发布审计、检查和生产构建    |
+| `npm run preview`                   | 预览生成后的生产网站            |
+| `npm run check`                     | 检查 Prettier、Astro/TS 与 Ruff |
+| `npm run check:web`                 | 仅检查 Prettier 与 Astro/TS     |
+| `npm run format`                    | 格式化代码、内容数据和文档      |
+| `npm run add-paper -- <DOI\|arXiv>` | 将一篇论文导入统一论文文件      |
+| `npm run fetch:scholar`             | 刷新本地 Scholar 指标           |
 
 ## 日常内容维护
 
 绝大部分文字更新都不需要修改组件：
 
-| 更新内容                               | 文件                                                                                 |
-| -------------------------------------- | ------------------------------------------------------------------------------------ |
-| 姓名、职位、机构、研究领域、身份和链接 | [`src/content/identity.yaml`](./src/content/identity.yaml)                           |
-| 中英文标题句与简介                     | [`src/content/profile.md`](./src/content/profile.md)                                 |
-| 工作和学术经历                         | [`src/content/experience.yaml`](./src/content/experience.yaml)                       |
-| 编辑与审稿服务                         | [`src/content/academic-services.yaml`](./src/content/academic-services.yaml)         |
-| 代表性荣誉                             | [`src/content/representative-honors.yaml`](./src/content/representative-honors.yaml) |
-| 招聘与合作说明                         | [`src/content/open-positions.md`](./src/content/open-positions.md)                   |
-| 完整论文数据                           | [`src/content/publications.md`](./src/content/publications.md)                       |
-| Scholar 兜底数据                       | [`src/data/scholar.json`](./src/data/scholar.json)                                   |
+| 更新内容                       | 文件                                                                                 |
+| ------------------------------ | ------------------------------------------------------------------------------------ |
+| 姓名、研究领域、学术身份和链接 | [`src/content/identity.yaml`](./src/content/identity.yaml)                           |
+| 当前职位、机构及工作和学术经历 | [`src/content/experience.yaml`](./src/content/experience.yaml)                       |
+| 中英文标题句、页面元描述与简介 | [`src/content/profile.md`](./src/content/profile.md)                                 |
+| 编辑与审稿服务                 | [`src/content/academic-services.yaml`](./src/content/academic-services.yaml)         |
+| 代表性荣誉                     | [`src/content/representative-honors.yaml`](./src/content/representative-honors.yaml) |
+| 招聘与合作说明                 | [`src/content/open-positions.md`](./src/content/open-positions.md)                   |
+| 完整论文数据                   | [`src/content/publications.md`](./src/content/publications.md)                       |
+| Scholar 兜底数据               | [`src/content/scholar.json`](./src/content/scholar.json)                             |
 
 双语字段使用 `{ en: ..., zh: ... }`，修改时应同步更新两种语言。按照当前设计，论文标题在中英文界面中均显示正式英文原题。
 
@@ -107,9 +107,9 @@ Crossref 元数据会区分正式发表与 bioRxiv 等预印本平台。正式�
 npm run fetch:scholar
 ```
 
-脚本会在原子替换 `src/data/scholar.json` 前校验全部指标。本地直连失败时会尝试 `socks5h://127.0.0.1:7897`。Scholar 偶尔可能返回验证码，定时构建会保留最后一份有效数据，不会发布零值或残缺指标。
+脚本会在原子替换 `src/content/scholar.json` 前校验全部指标。本地直连失败时会尝试 `socks5h://127.0.0.1:7897`。Scholar 偶尔可能返回验证码，定时构建会保留最后一份有效数据，不会发布零值或残缺指标。
 
-运行细节见 [`GITHUB_PAGES.md`](./GITHUB_PAGES.md)。
+运行细节见 [`docs/deployment.md`](./docs/deployment.md)。
 
 ### 更换照片
 
@@ -120,6 +120,16 @@ npm run fetch:scholar
 - 自动生成的 `/og/default.png` 预览。
 
 主页与 Open Graph 生成器共用同一张源照片。
+
+### 生成 Google Scholar 头像
+
+从站点标准肖像生成一张不拉伸人物的正方形上传文件：
+
+```sh
+npm run generate:scholar-avatar
+```
+
+脚本会将 `resources/scholar-avatar.png` 写成离线上传资产；它不在 Astro 源码依赖图中，也不会进入部署产物。脚本会围绕面部裁切照片，并延展现有边缘背景，让 Google Scholar 的圆形裁切保留舒适的横向空间。运行 `npm run generate:scholar-avatar -- --help` 可查看尺寸、输入、输出和人物比例参数。
 
 ## 部署
 
@@ -138,7 +148,7 @@ npm run fetch:scholar
 3. 在 **Settings → Pages** 中选择 **GitHub Actions** 作为来源。
 4. 如有 GitHub Runner 可访问的远程代理，可通过 Actions Secret `SCHOLAR_PROXY_URL` 提供。
 
-部署与失败处理详见 [`GITHUB_PAGES.md`](./GITHUB_PAGES.md)。禁止提交代理凭证。
+部署与失败处理详见 [`docs/deployment.md`](./docs/deployment.md)。禁止提交代理凭证。
 
 ## 自动生成与机器可读产物
 

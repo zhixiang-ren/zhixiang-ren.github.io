@@ -1,3 +1,4 @@
+import { mkdir } from "node:fs/promises"
 import path from "node:path"
 import process from "node:process"
 
@@ -5,14 +6,14 @@ import sharp from "sharp"
 
 const PROJECT_ROOT = path.resolve(import.meta.dirname, "..")
 const DEFAULT_INPUT = path.join(PROJECT_ROOT, "src/assets/zhixiang-ren.webp")
-const DEFAULT_OUTPUT = path.join(PROJECT_ROOT, "src/assets/scholar-avatar.png")
+const DEFAULT_OUTPUT = path.join(PROJECT_ROOT, "resources/scholar-avatar.png")
 
 const usage = `Usage:
   npm run generate:scholar-avatar -- [options]
 
 Options:
   --input <path>          Source portrait (default: src/assets/zhixiang-ren.webp)
-  --output <path>         Generated PNG (default: src/assets/scholar-avatar.png)
+  --output <path>         Generated PNG (default: resources/scholar-avatar.png)
   --size <pixels>         Square output size (default: 800)
   --subject-scale <ratio> Foreground width as a fraction of the canvas (default: 0.86)
   --help                  Show this help`
@@ -73,6 +74,8 @@ function parseArguments(argv) {
 async function generateScholarAvatar({ input, output, size, subjectScale }) {
   const metadata = await sharp(input).metadata()
   if (!metadata.width || !metadata.height) throw new Error("Could not read source dimensions")
+
+  await mkdir(path.dirname(output), { recursive: true })
 
   const subjectWidth = Math.round(size * subjectScale)
   const { data: resizedSubject, info: resizedInfo } = await sharp(input)

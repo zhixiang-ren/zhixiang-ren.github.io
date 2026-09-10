@@ -7,18 +7,19 @@ import OutlinedEmailLabel from "@components/OutlinedEmailLabel.astro"
 import RecentPapers from "@components/RecentPapers.astro"
 import RecruitmentCard from "@components/RecruitmentCard.astro"
 import portrait from "@assets/zhixiang-ren.webp"
+import { getCurrentPosition } from "@lib/experience"
 
 const [
+  identityEntry,
   profileEntry,
-  bioEntry,
   experienceEntry,
   servicesEntry,
   honorsEntry,
   publicationsEntry,
   scholarEntry,
 ] = await Promise.all([
-  getEntry("profile", "identity"),
-  getEntry("bio", "profile"),
+  getEntry("identity", "identity"),
+  getEntry("profile", "profile"),
   getEntry("experience", "experience"),
   getEntry("services", "academic-services"),
   getEntry("honors", "representative-honors"),
@@ -27,8 +28,8 @@ const [
 ])
 
 if (
+  !identityEntry ||
   !profileEntry ||
-  !bioEntry ||
   !experienceEntry ||
   !servicesEntry ||
   !honorsEntry ||
@@ -38,9 +39,10 @@ if (
   throw new Error("One or more required profile content entries are missing")
 }
 
-const profile = profileEntry.data
-const bio = bioEntry.data
+const profile = identityEntry.data
+const bio = profileEntry.data
 const experience = experienceEntry.data.items
+const currentPosition = getCurrentPosition(experience)
 const services = servicesEntry.data.groups
 const honors = honorsEntry.data
 const scholarData = scholarEntry.data
@@ -70,17 +72,17 @@ const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
   "@id": `${profileURL}#person`,
-  name: profile.name,
-  alternateName: profile.nameZh,
+  name: profile.name.en,
+  alternateName: profile.name.zh,
   honorificSuffix: profile.honorific,
   url: profileURL,
   image: new URL(portrait.src, Astro.site).href,
-  jobTitle: profile.jobTitle.en,
-  description: profile.description.en,
-  worksFor: { "@type": "Organization", name: profile.organization.en },
-  affiliation: profile.academicAffiliations.map((affiliation) => ({
+  jobTitle: currentPosition.title.en,
+  description: bio.description.en,
+  worksFor: { "@type": "Organization", name: currentPosition.organization.en },
+  affiliation: profile.academicRoles.map((role) => ({
     "@type": "CollegeOrUniversity",
-    name: affiliation.en,
+    name: role.organization.en,
   })),
   alumniOf: [
     ...new Set(
@@ -91,7 +93,9 @@ const personSchema = {
     name: institution,
   })),
   knowsAbout: profile.domains.map((domain) => domain.en),
-  award: honors.items.map((item) => `${item.year} ${item.name.en}`),
+  award: honors.items.map(
+    (item) => `${item.year} ${item.name.en}${item.level ? `, ${item.level.en}` : ""}`,
+  ),
   sameAs: [
     profile.links.scholar,
     profile.links.orcid,
@@ -102,9 +106,9 @@ const personSchema = {
 ---
 
 <Layout
-  title={`${profile.name} · AI for Science`}
-  titleZh={`${profile.nameZh} · 科学智能`}
-  description={profile.description.en}
+  title={`${profile.name.en} · AI for Science`}
+  titleZh={`${profile.name.zh} · 科学智能`}
+  description={bio.description.en}
   structuredData={personSchema}
 >
   <section class="grid gap-7 md:grid-cols-12 md:gap-10">
@@ -113,7 +117,7 @@ const personSchema = {
         <div class="relative size-16 shrink-0 overflow-hidden rounded-2xl border border-zinc-200/80 bg-zinc-100 shadow-sm shadow-zinc-950/10 md:h-auto md:w-full md:aspect-[3/4] md:rounded-xl md:shadow-lg dark:border-zinc-700/60 dark:bg-zinc-950 md:dark:shadow-xl md:dark:shadow-black/20">
           <img
             src={portrait.src}
-            alt={profile.portraitAlt.en}
+            alt=""
             width={portrait.width}
             height={portrait.height}
             loading="eager"
@@ -128,16 +132,16 @@ const personSchema = {
         </div>
         <div class="min-w-0 flex-1 md:mt-4">
           <h1 class="truncate text-xl font-bold tracking-[-0.03em] text-zinc-950 dark:text-zinc-100">
-            <span class="lang-en">{profile.name}</span>
-            <span class="lang-zh">{profile.nameZh}</span>
+            <span class="lang-en">{profile.name.en}</span>
+            <span class="lang-zh">{profile.name.zh}</span>
           </h1>
           <p class="mt-1 truncate font-mono text-xs leading-5 text-zinc-500">
-            <span class="lang-en">{profile.jobTitle.en}</span>
-            <span class="lang-zh">{profile.jobTitle.zh}</span>
+            <span class="lang-en">{currentPosition.title.en}</span>
+            <span class="lang-zh">{currentPosition.title.zh}</span>
           </p>
           <p class="truncate text-[0.6875rem] leading-5 text-zinc-400 dark:text-zinc-500">
-            <span class="lang-en">{profile.organization.en}</span>
-            <span class="lang-zh">{profile.organization.zh}</span>
+            <span class="lang-en">{currentPosition.organization.en}</span>
+            <span class="lang-zh">{currentPosition.organization.zh}</span>
           </p>
         </div>
       </div>
@@ -267,17 +271,9 @@ const personSchema = {
                 <span class="lang-en">{group.label.en}</span>
                 <span class="lang-zh">{group.label.zh}</span>
               </dt>
-              <dd>
-                <span class="lang-en">
-                  {[group.role?.en, ...group.entries.map((entry) => entry.en)]
-                    .filter(Boolean)
-                    .join(" · ")}
-                </span>
-                <span class="lang-zh">
-                  {[...group.entries.map((entry) => entry.zh), group.role?.zh]
-                    .filter(Boolean)
-                    .join(" · ")}
-                </span>
+              <dd class="leading-5 text-zinc-700 dark:text-zinc-300">
+                <span class="lang-en">{group.summary.en}</span>
+                <span class="lang-zh">{group.summary.zh}</span>
               </dd>
             </div>
           ))}
@@ -287,12 +283,27 @@ const personSchema = {
               <span class="lang-zh">{honors.label.zh}</span>
             </dt>
             <dd class="text-zinc-700 dark:text-zinc-300">
-              <span class="lang-en">
-                {honors.items.map((item) => `${item.year} ${item.name.en}`).join(" · ")}
-              </span>
-              <span class="lang-zh">
-                {honors.items.map((item) => `${item.year} ${item.name.zh}`).join(" · ")}
-              </span>
+              <ul class="space-y-2">
+                {honors.items.map((item) => (
+                  <li class="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3">
+                    <span class="min-w-0 text-pretty leading-5 text-zinc-800 dark:text-zinc-200">
+                      <span>
+                        <span class="lang-en">{item.name.en}</span>
+                        <span class="lang-zh">{item.name.zh}</span>
+                      </span>
+                      {item.level && (
+                        <span class="ml-2 font-medium">
+                          <span class="lang-en">{item.level.en}</span>
+                          <span class="lang-zh">{item.level.zh}</span>
+                        </span>
+                      )}
+                    </span>
+                    <time class="pt-0.5 font-mono text-xs tabular-nums text-zinc-400 dark:text-zinc-500">
+                      {item.year}
+                    </time>
+                  </li>
+                ))}
+              </ul>
             </dd>
           </div>
         </dl>

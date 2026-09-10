@@ -6,7 +6,12 @@
     "noUnusedParameters": false,
     "baseUrl": ".",
     "paths": {
-      "@*": ["src/*"]
+      "@/*": ["src/*"],
+      "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@lib/*": ["src/lib/*"],
+      "@styles/*": ["src/styles/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.astro"],

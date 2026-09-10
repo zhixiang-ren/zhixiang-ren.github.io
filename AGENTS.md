@@ -67,7 +67,7 @@ The production background is CSS-only and has no runtime animation:
 The former Canvas Penrose implementation is preserved at:
 
 ```text
-src/components/experiments/PenroseHero.astro
+src/experiments/PenroseHero.astro
 ```
 
 It is intentionally unmounted because its line density reduced long-form readability. Treat it as an experiment/reference, not a production dependency.
@@ -139,7 +139,7 @@ Whenever changing layout, verify both a desktop viewport and a modern iPhone-siz
 - Client JavaScript is intentionally limited to theme/language behavior, protected email interaction, and intent-based external-link preconnection.
 - Package manager of record: **npm**. Keep `package-lock.json` authoritative; do not introduce pnpm/yarn lockfiles.
 - Minimum Node version: 22.12.0. Use the checked-in `.nvmrc` when NVM is available.
-- Python is needed only for Scholar refresh; the fetcher depends on the system `curl` executable and otherwise uses the standard library.
+- Python 3.13 is needed only for Scholar refresh. `.python-version` is the canonical local and CI interpreter version; the fetcher depends on the system `curl` executable and otherwise uses the standard library. Do not add a Python dependency manager or requirements file unless a real third-party Python dependency is introduced.
 
 ## 6. Quick start
 
@@ -160,8 +160,8 @@ Useful commands:
 
 ```sh
 npm run dev:network       # expose the dev server to the local network
-npm run check             # Prettier + Astro/content diagnostics + tsc --noEmit
-npm run check:all         # frontend checks + Ruff checks (requires Ruff 0.11.7)
+npm run check             # frontend checks + Ruff checks (requires Ruff 0.11.7)
+npm run check:web         # Prettier + Astro/content diagnostics + tsc --noEmit
 npm run format            # apply Prettier to supported repository files
 npm run format:py         # apply Ruff fixes and formatting to Python scripts
 npm run build             # privacy audits + check + production build
@@ -183,6 +183,8 @@ If port 4321 is occupied, Astro selects another port. Check the command output r
 │   └── js/
 │       ├── theme.js                   # early theme initialization and header state
 │       └── language.js                # CSP-safe language initialization and toggle state
+├── resources/
+│   └── scholar-avatar.png             # offline upload asset; never deployed
 ├── scripts/
 │   ├── audit_release.mjs              # source/output privacy and secret audit
 │   ├── fetch_publication_metadata.mjs # DOI/arXiv importer
@@ -201,8 +203,7 @@ If port 4321 is occupied, Astro selects another port. Check the command output r
 │   │   ├── OutlinedEmailLabel.astro   # geometric SVG label; no text node
 │   │   ├── RecentPapers.astro         # publication list and BibTeX disclosure
 │   │   ├── RecruitmentCard.astro      # shared responsive recruitment callout
-│   │   ├── SiteFooter.astro           # global micro-footer
-│   │   └── experiments/PenroseHero.astro
+│   │   └── SiteFooter.astro           # global micro-footer
 │   ├── content/
 │   │   ├── academic-services.yaml     # editorial and reviewing work
 │   │   ├── experience.yaml            # appointments and education
@@ -210,9 +211,12 @@ If port 4321 is occupied, Astro selects another port. Check the command output r
 │   │   ├── open-positions.md          # bilingual recruitment copy
 │   │   ├── profile.md                 # bilingual slogan and biography
 │   │   ├── publications.md            # complete publication dataset
-│   │   └── representative-honors.yaml # selected awards
-│   ├── data/scholar.json              # last validated static Scholar metrics
+│   │   ├── representative-honors.yaml # selected awards
+│   │   └── scholar.json               # last validated static Scholar metrics
+│   ├── experiments/
+│   │   └── PenroseHero.astro          # preserved, intentionally unmounted experiment
 │   ├── layouts/Layout.astro            # global shell, controls, background, email runtime
+│   ├── lib/experience.ts               # shared experience-domain selector
 │   ├── pages/
 │   │   ├── 404.astro                  # bilingual error page
 │   │   ├── index.astro                # data composition and homepage markup
@@ -225,8 +229,22 @@ If port 4321 is occupied, Astro selects another port. Check the command output r
 ├── README.md                          # English maintainer documentation
 ├── README.zh-CN.md                    # Chinese maintainer documentation
 ├── SECURITY.md                        # security model and hosting limits
-└── GITHUB_PAGES.md                    # Pages deployment operations
+└── docs/deployment.md                 # Pages deployment operations
 ```
+
+### Directory boundaries
+
+- `src/` contains only inputs that participate in the Astro application or its build-time content graph.
+- `src/content/` is intentionally flat. Each subject has one bilingual source, including the generated-but-validated Scholar snapshot. Do not restore one-file subdirectories.
+- `src/assets/` contains imported production assets. Files placed here must have a real homepage or build-time consumer.
+- `public/` contains browser-ready files copied verbatim to the deployment. Never place internal notes, source photography, credentials, or offline exports here.
+- `resources/` contains versioned maintainer deliverables that are intentionally excluded from Astro and `dist/`, currently the Google Scholar upload portrait.
+- `src/components/` contains mounted or reusable production UI. Unmounted visual prototypes belong in `src/experiments/`.
+- `src/lib/` contains small domain helpers shared by routes or components. Prefer a domain name such as `experience.ts` over a generic `utils.ts` or catch-all helpers directory.
+- `scripts/` contains maintainer automation. `llmtxt-instructions.md` remains colocated there because it specifies the behavior of the generated `llms.txt` workflow and must never be copied to `public/`.
+- `docs/` contains human-facing operational documentation that is not deployed as a website route.
+
+Do not introduce a new top-level or first-level `src/` directory for a single file unless it establishes one of these durable ownership boundaries. Prefer shallow, domain-oriented organization over framework-style nesting.
 
 ## 8. Content architecture: one bilingual source per subject
 
@@ -252,16 +270,18 @@ Do not bypass the Content Layer by importing raw YAML with an ad hoc parser or c
 
 ### Content source table
 
-| Subject                                      | Single source of truth                   | Consumers                                 |
-| -------------------------------------------- | ---------------------------------------- | ----------------------------------------- |
-| Identity, role, organization, domains, links | `src/content/identity.yaml`              | homepage, JSON-LD, footer, `llms.txt`     |
-| Headline and biography                       | `src/content/profile.md`                 | homepage, `llms.txt`                      |
-| Experience                                   | `src/content/experience.yaml`            | timeline, JSON-LD alumni data, `llms.txt` |
-| Editorial/reviewing service                  | `src/content/academic-services.yaml`     | homepage, `llms.txt`                      |
-| Representative honors                        | `src/content/representative-honors.yaml` | homepage, JSON-LD, `llms.txt`             |
-| Recruitment                                  | `src/content/open-positions.md`          | desktop/mobile card, `llms.txt`           |
-| Publications                                 | `src/content/publications.md`            | desktop/mobile list, `llms.txt`           |
-| Citation metrics                             | `src/data/scholar.json`                  | metrics block, `llms.txt`                 |
+| Subject                                  | Single source of truth                   | Consumers                                   |
+| ---------------------------------------- | ---------------------------------------- | ------------------------------------------- |
+| Identity, domains, academic roles, links | `src/content/identity.yaml`              | homepage, JSON-LD, footer, `llms.txt`       |
+| Headline, metadata, and biography        | `src/content/profile.md`                 | homepage, RSS, OG, `llms.txt`               |
+| Current position and experience          | `src/content/experience.yaml`            | homepage, OG, timeline, JSON-LD, `llms.txt` |
+| Editorial/reviewing service              | `src/content/academic-services.yaml`     | homepage, `llms.txt`                        |
+| Representative honors                    | `src/content/representative-honors.yaml` | homepage, JSON-LD, `llms.txt`               |
+| Recruitment                              | `src/content/open-positions.md`          | desktop/mobile card, `llms.txt`             |
+| Publications                             | `src/content/publications.md`            | desktop/mobile list, `llms.txt`             |
+| Citation metrics                         | `src/content/scholar.json`               | metrics block, `llms.txt`                   |
+
+Academic-service entries use one concise bilingual summary for each top-level Editorial or Reviewing group. Do not reintroduce nested role labels unless the content genuinely requires another hierarchy. Honors keep the award name, distinction level, and year in separate fields so the homepage can preserve typographic hierarchy without parsing strings.
 
 ### Editorial rules
 
@@ -336,7 +356,7 @@ For bioRxiv or other repositories not directly handled by the importer, add/revi
 The site never requests Google Scholar from a visitor's browser. It renders the last validated build-time snapshot in:
 
 ```text
-src/data/scholar.json
+src/content/scholar.json
 ```
 
 Local refresh:
@@ -453,7 +473,7 @@ Workflow: `.github/workflows/deploy.yml`.
 
 Triggers:
 
-- push to `main`;
+- push to `master`;
 - Monday 00:00 UTC schedule;
 - manual `workflow_dispatch`.
 
@@ -488,7 +508,7 @@ That command performs, in order:
 5. static production build to `dist/`;
 6. generated-output privacy audit.
 
-Run `npm run check:all` when modifying `scripts/fetch_scholar_stats.py`. The GitHub Pages workflow runs Ruff lint and format checks on every build, independently of the frontend build command.
+`npm run check` is the single local quality gate for both the web application and Python scripts. The GitHub Pages workflow also runs Ruff before the production build so Python failures surface early in CI.
 
 Do not report completion if the build fails. Read the first relevant error, correct it, and rerun the full command.
 

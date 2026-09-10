@@ -1,9 +1,4 @@
 {
-  "recommendations": [
-    "astro-build.astro-vscode",
-    "esbenp.prettier-vscode",
-    "charliermarsh.ruff",
-    "unifiedjs.vscode-mdx"
-  ],
+  "recommendations": ["astro-build.astro-vscode", "esbenp.prettier-vscode", "charliermarsh.ruff"],
   "unwantedRecommendations": []
 }
