@@ -190,6 +190,7 @@ If port 4321 is occupied, Astro selects another port. Check the command output r
 │   ├── fetch_publication_metadata.mjs # DOI/arXiv importer
 │   ├── fetch_scholar_stats.py         # resilient Scholar scraper
 │   ├── generate_scholar_avatar.mjs    # reusable square/circular-safe portrait generator
+│   ├── rewrite_linear_history.py      # dry-run-first Git ancestry repair utility
 │   └── llmtxt-instructions.md         # internal editorial guidance for llms.txt
 ├── src/
 │   ├── content.config.ts              # Content Layer loaders and all collection schemas
@@ -242,6 +243,7 @@ If port 4321 is occupied, Astro selects another port. Check the command output r
 - `src/components/` contains mounted or reusable production UI. Unmounted visual prototypes belong in `src/experiments/`.
 - `src/lib/` contains small domain helpers shared by routes or components. Prefer a domain name such as `experience.ts` over a generic `utils.ts` or catch-all helpers directory.
 - `scripts/` contains maintainer automation. `llmtxt-instructions.md` remains colocated there because it specifies the behavior of the generated `llms.txt` workflow and must never be copied to `public/`.
+- `scripts/rewrite_linear_history.py` is exceptional Git maintenance, not part of the site build or deployment. It accepts only a linear segment, previews by default, and with `--write` creates a new candidate branch rather than replacing the source. Preserve an external backup bundle and verify trees, authorship, and branch refs before any manual force-with-lease push; rewriting removes invalidated commit signatures.
 - `docs/` contains human-facing operational documentation that is not deployed as a website route.
 
 Do not introduce a new top-level or first-level `src/` directory for a single file unless it establishes one of these durable ownership boundaries. Prefer shallow, domain-oriented organization over framework-style nesting.
