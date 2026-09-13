@@ -178,6 +178,8 @@ If port 4321 is occupied, Astro selects another port. Check the command output r
 ```text
 .
 ├── .github/workflows/deploy.yml       # Pages build, weekly Scholar refresh, deployment
+├── .github/ISSUE_TEMPLATE/           # public bug/correction forms, active only if Issues is enabled
+├── .github/pull_request_template.md  # maintainer/invited-collaborator PR checklist
 ├── public/
 │   ├── favicon.svg                    # site favicon
 │   └── js/
@@ -229,6 +231,8 @@ If port 4321 is occupied, Astro selects another port. Check the command output r
 ├── tsconfig.json                      # strict TS and @ aliases
 ├── README.md                          # English maintainer documentation
 ├── README.zh-CN.md                    # Chinese maintainer documentation
+├── CONTRIBUTING.md                    # maintainer-led contribution and correction policy
+├── CODE_OF_CONDUCT.md                 # repository discussion standards
 ├── SECURITY.md                        # security model and hosting limits
 └── docs/deployment.md                 # Pages deployment operations
 ```

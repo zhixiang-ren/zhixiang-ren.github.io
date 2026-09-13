@@ -167,6 +167,10 @@ npm run generate:scholar-avatar
 
 修改联系方式、爬虫策略或部署基础设施前，请阅读 [`SECURITY.md`](./SECURITY.md)。
 
+## 参与和反馈
+
+这是由维护者主导的个人主页。欢迎反馈事实错误或网页故障，但不主动征集外部代码 PR。反馈渠道见 [`CONTRIBUTING.md`](./CONTRIBUTING.md)，讨论规范见 [`CODE_OF_CONDUCT.md`](./CODE_OF_CONDUCT.md)。如果仓库未开启 Issues，可使用主页上的 Email 按钮纠错。安全漏洞请勿公开提交，按 [`SECURITY.md`](./SECURITY.md) 处理。
+
 ## 来源与许可证
 
 视觉基础改编自 [Astro Sphere](https://github.com/markhorn-dev/astro-sphere)。Content Collections 模式与最初的 404 结构参考了 [Academic Portfolio Astro](https://github.com/rubzip/academic-portfolio-astro)。

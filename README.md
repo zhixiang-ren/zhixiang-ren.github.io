@@ -168,6 +168,10 @@ This public academic site remains open to legitimate search, academic, and AI cr
 
 Read [`SECURITY.md`](./SECURITY.md) before changing contact handling, crawler policy, or deployment infrastructure.
 
+## Participation
+
+This is a maintainer-led personal site. Factual corrections and website bug reports are welcome; unsolicited code pull requests are not requested. See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for the appropriate channels and [`CODE_OF_CONDUCT.md`](./CODE_OF_CONDUCT.md) for discussion standards. If repository Issues are disabled, use the homepage Email control for corrections. Do not report vulnerabilities publicly; follow [`SECURITY.md`](./SECURITY.md).
+
 ## Credits and license
 
 The visual foundation is adapted from [Astro Sphere](https://github.com/markhorn-dev/astro-sphere). Content-collection patterns and the initial 404 structure were informed by [Academic Portfolio Astro](https://github.com/rubzip/academic-portfolio-astro).

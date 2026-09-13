@@ -2,6 +2,10 @@
 
 This public academic site prioritizes accessibility to people, search engines, academic indexes, and compliant AI retrieval agents. It does not use CAPTCHAs, browser fingerprint blocking, JavaScript challenges, or content cloaking.
 
+## Reporting a vulnerability
+
+Please do not publish an exploitable finding in a public issue or pull request. Use the Email control on the [homepage](https://zhixiang-ren.github.io/) and use **Security report** as the subject. Include the affected URL, impact, and the minimum steps needed to reproduce the problem. Do not send credentials, private data, or unpublished research. The maintainers will review the report before discussing it publicly.
+
 ## Controls included in this repository
 
 - The public email address is stored as reversed content fragments and emitted to HTML only as an XOR-obfuscated byte stream.
