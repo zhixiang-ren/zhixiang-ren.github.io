@@ -83,6 +83,8 @@ jobs:
         uses: withastro/action@v6
 
   deploy:
+    # On pushes, sync_scholar is skipped; always() prevents that indirect skip from suppressing deployment.
+    if: ${{ always() && !cancelled() && needs.build.result == 'success' }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

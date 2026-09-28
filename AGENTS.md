@@ -493,6 +493,7 @@ Behavior:
 - Push builds use the checked-in Scholar snapshot and do not scrape.
 - Scheduled/manual syncs set up Node, run `fetch_scholar_stats.mjs --allow-stale`, and commit validated changes before building. Do not add a `prebuild` scrape: ordinary push builds deliberately use the checked-in snapshot.
 - Only the sync job receives `contents: write`; build and deploy keep narrower permissions. A bot push with `GITHUB_TOKEN` does not start a second push workflow, so the current run must build and deploy the updated `master` itself.
+- Keep an explicit status condition on `deploy`: a skipped `sync_scholar` job on ordinary pushes can otherwise propagate through `build` and silently skip deployment even when the build succeeds.
 - The workflow detects user-site versus project-site repository names and exports `SITE_URL`/`BASE_PATH`.
 - `withastro/action` installs and builds the site.
 - `actions/deploy-pages` deploys the artifact.
