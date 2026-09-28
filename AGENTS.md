@@ -387,12 +387,13 @@ Behavior and invariants:
 - The parser requires citations, h-index, and i10-index before writing.
 - Total citations are rounded down to the nearest hundred; the UI appends `+`.
 - Writes are atomic.
+- A successful fetch rewrites the JSON only when validated metric fields change; do not create timestamp-only weekly commits.
 - Local direct access falls back to `socks5h://127.0.0.1:7897`.
 - In CI, there is no localhost fallback. An optional complete remote proxy URL may be supplied as the `SCHOLAR_PROXY_URL` secret.
 - `--allow-stale` keeps the previous JSON and exits successfully if Google blocks the request, returns CAPTCHA, times out, or provides incomplete data.
 - Never replace failed metrics with zeroes, partial values, guesses, or OpenAlex counts. Different services have different coverage.
 
-GitHub Actions attempts a refresh on scheduled/manual runs and uses the checked-in validated snapshot on ordinary pushes.
+GitHub Actions attempts a refresh on scheduled/manual runs, commits changed metrics to `master`, and deploys that persisted revision. Ordinary pushes use the checked-in validated snapshot without scraping. Pull the latest `master` before local content pushes so bot-written metrics are not accidentally omitted from new work.
 
 ## 11. Language, theme, and client behavior
 
@@ -489,7 +490,8 @@ Triggers:
 Behavior:
 
 - Push builds use the checked-in Scholar snapshot and do not scrape.
-- Scheduled/manual builds set up Python and attempt `fetch_scholar_stats.py --allow-stale`.
+- Scheduled/manual syncs set up Python, run `fetch_scholar_stats.py --allow-stale`, and commit validated changes before building.
+- Only the sync job receives `contents: write`; build and deploy keep narrower permissions. A bot push with `GITHUB_TOKEN` does not start a second push workflow, so the current run must build and deploy the updated `master` itself.
 - The workflow detects user-site versus project-site repository names and exports `SITE_URL`/`BASE_PATH`.
 - `withastro/action` installs and builds the site.
 - `actions/deploy-pages` deploys the artifact.
@@ -498,7 +500,7 @@ Required repository setting: **Settings → Pages → Source: GitHub Actions**.
 
 Optional secret: `SCHOLAR_PROXY_URL` containing a complete remotely reachable proxy URL. Never use local `127.0.0.1:7897` on a hosted runner and never commit proxy credentials.
 
-When editing the workflow, preserve stale-metric deployment behavior: a Scholar outage must not block an otherwise valid site release.
+When editing the workflow, preserve stale-metric deployment behavior: a Scholar outage must not block an otherwise valid site release. An authorization or Git push failure must be visible as a failed sync, not silently treated as a successful persisted update.
 
 ## 15. Build, verification, and visual QA
 

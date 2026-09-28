@@ -13,7 +13,7 @@
 - **单页双语界面**：中英文使用同一套经过校验的内容源，并提供持久化的语言及深浅色切换。
 - **内容驱动维护**：身份、简介、经历、服务、荣誉、招聘和论文通过 Astro Content Layer 管理，而非写死在页面组件中。
 - **学术论文工作流**：全部论文集中维护在一个 Markdown 文件中；本地命令可以导入 DOI 或 arXiv 元数据、作者、期刊信息、链接和 BibTeX。
-- **静态 Scholar 指标**：引用数与 h-index 在构建阶段更新，访客浏览器不会直接请求 Google Scholar。
+- **静态 Scholar 指标**：每周定时任务将校验后的指标持久化到 Git，访客浏览器不会直接请求 Google Scholar。
 - **搜索与 AI 检索友好**：构建产物包含 Sitemap、`robots.txt`、自动生成的 `llms.txt`、Schema.org JSON-LD、Canonical 与品牌化 Open Graph 卡片。
 - **发布级静态产物**：包含响应式布局、双语 404、受保护的联系方式、源码/产物隐私审计及 GitHub Pages 自动部署。
 
@@ -107,7 +107,7 @@ Crossref 元数据会区分正式发表与 bioRxiv 等预印本平台。正式�
 npm run fetch:scholar
 ```
 
-脚本会在原子替换 `src/content/scholar.json` 前校验全部指标。本地直连失败时会尝试 `socks5h://127.0.0.1:7897`。Scholar 偶尔可能返回验证码，定时构建会保留最后一份有效数据，不会发布零值或残缺指标。
+脚本会在原子替换 `src/content/scholar.json` 前校验全部指标；数值未变化时不会改写文件。本地直连失败时会尝试 `socks5h://127.0.0.1:7897`。Scholar 偶尔可能返回验证码，定时同步会保留最后一份有效数据，不会发布零值或残缺指标。本地指标有变化时，请将该文件随其他改动一起提交。
 
 运行细节见 [`docs/deployment.md`](./docs/deployment.md)。
 
@@ -142,7 +142,7 @@ npm run generate:scholar-avatar -- --input src/assets/zhixiang-ren-20260928.webp
 [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml) 中的工作流会：
 
 - 在每次推送到 `master` 时构建并部署；
-- 每周一 UTC 00:00 尝试刷新 Scholar 数据；
+- 每周一 UTC 00:00 尝试刷新 Scholar 数据，并在部署前将变化提交回 `master`；
 - 刷新失败时保留最后一份有效指标；
 - 支持手动触发；
 - 兼容 GitHub 用户站点和仓库子路径。

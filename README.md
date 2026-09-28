@@ -13,7 +13,7 @@ Built with [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.
 - **One bilingual page** — English and Chinese use the same validated content sources, with persistent language and light/dark theme controls.
 - **Content-first maintenance** — profile, biography, experience, services, honors, recruitment, and publications use Astro's Content Layer rather than page templates.
 - **Academic publication workflow** — all publications are maintained in one Markdown file; a local command can import DOI or arXiv metadata, authors, venue information, links, and BibTeX.
-- **Static Scholar metrics** — citation count and h-index are refreshed at build time and rendered without client-side requests to Google Scholar.
+- **Static Scholar metrics** — a weekly Action persists validated citation metrics in Git, and the site renders them without visitor-side requests to Google Scholar.
 - **Search and AI discoverability** — the build produces a sitemap, `robots.txt`, generated `llms.txt`, Schema.org JSON-LD, canonical metadata, and a branded Open Graph card.
 - **Release-ready static output** — responsive layouts, a bilingual 404 page, protected contact access, source/output privacy audits, and GitHub Pages automation are included.
 
@@ -107,7 +107,7 @@ Crossref metadata distinguishes published work from repositories such as bioRxiv
 npm run fetch:scholar
 ```
 
-The script validates all metrics before atomically replacing `src/content/scholar.json`. Local requests fall back to `socks5h://127.0.0.1:7897` when direct access fails. Scholar may occasionally return a CAPTCHA; scheduled builds preserve the last valid dataset instead of publishing zero or partial values.
+The script validates all metrics before atomically replacing `src/content/scholar.json`; unchanged metrics leave the file untouched. Local requests fall back to `socks5h://127.0.0.1:7897` when direct access fails. Scholar may occasionally return a CAPTCHA; scheduled syncs preserve the last valid dataset instead of publishing zero or partial values. If the local snapshot changes, commit it with your work.
 
 Operational details are in [`docs/deployment.md`](./docs/deployment.md).
 
@@ -142,7 +142,7 @@ The script writes a versioned offline upload asset under `resources/`, outside A
 The workflow in [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml):
 
 - builds and deploys every push to `master`;
-- attempts a Scholar refresh every Monday at 00:00 UTC;
+- attempts a Scholar refresh every Monday at 00:00 UTC and commits changed metrics to `master` before deployment;
 - preserves the last valid metrics if that refresh fails;
 - supports manual runs;
 - handles both GitHub user sites and repository subpaths.

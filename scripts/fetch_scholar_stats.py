@@ -153,6 +153,25 @@ def write_atomically(data: dict) -> None:
     temp_path.replace(OUTPUT_PATH)
 
 
+def has_metric_changes(data: dict) -> bool:
+    """Ignore the fetch timestamp so unchanged metrics do not create weekly commits."""
+    try:
+        previous = json.loads(OUTPUT_PATH.read_text(encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError):
+        return True
+
+    fields = (
+        "source",
+        "author_key",
+        "author_name",
+        "total_citations",
+        "h_index",
+        "i10_index",
+        "is_placeholder",
+    )
+    return any(previous.get(field) != data[field] for field in fields)
+
+
 def refresh(author_key: str, proxy_url: str | None) -> dict:
     attempts: list[tuple[str, str | None]] = [("direct", None)]
     if proxy_url:
@@ -192,7 +211,6 @@ def main() -> int:
     )
     try:
         result = refresh(author_key, proxy_url)
-        write_atomically(result)
     except RuntimeError as error:
         if args.allow_stale and OUTPUT_PATH.is_file():
             print(f"::warning::Google Scholar sync failed; keeping existing metrics. {error}")
@@ -200,6 +218,11 @@ def main() -> int:
         print(f"Google Scholar sync failed: {error}", file=sys.stderr)
         return 1
 
+    if not has_metric_changes(result):
+        print("Google Scholar metrics are unchanged; keeping the checked-in snapshot")
+        return 0
+
+    write_atomically(result)
     print(
         f"Updated {OUTPUT_PATH.relative_to(PROJECT_ROOT)} for {result['author_name']} ({author_key})"
     )
