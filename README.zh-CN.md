@@ -28,7 +28,7 @@
 
 ## 快速开始
 
-需要 Node.js **22.12.0 或更高版本**及 npm **10.8.2 或更高版本**。只有刷新或检查 Scholar 指标时才需要 Python 3.13、Ruff 0.11.7 和系统 `curl` 命令。仓库中的 `.nvmrc` 与 `.python-version` 是本地运行时版本的统一依据。
+需要 Node.js **22.12.0 或更高版本**及 npm **10.8.2 或更高版本**。刷新 Scholar 指标还需系统 `curl` 命令，以支持 SOCKS5 代理。Python 和 Ruff 仅用于独立的 Git 历史维护工具，不参与日常构建。仓库中的 `.nvmrc` 定义网站使用的 Node 版本。
 
 ```sh
 npm install
@@ -52,17 +52,17 @@ npm run preview
 
 ## 常用命令
 
-| 命令                                | 用途                            |
-| ----------------------------------- | ------------------------------- |
-| `npm run dev`                       | 启动本地开发服务器              |
-| `npm run dev:network`               | 将开发预览开放到本地网络        |
-| `npm run build`                     | 执行发布审计、检查和生产构建    |
-| `npm run preview`                   | 预览生成后的生产网站            |
-| `npm run check`                     | 检查 Prettier、Astro/TS 与 Ruff |
-| `npm run check:web`                 | 仅检查 Prettier 与 Astro/TS     |
-| `npm run format`                    | 格式化代码、内容数据和文档      |
-| `npm run add-paper -- <DOI\|arXiv>` | 将一篇论文导入统一论文文件      |
-| `npm run fetch:scholar`             | 刷新本地 Scholar 指标           |
+| 命令                                | 用途                                      |
+| ----------------------------------- | ----------------------------------------- |
+| `npm run dev`                       | 启动本地开发服务器                        |
+| `npm run dev:network`               | 将开发预览开放到本地网络                  |
+| `npm run build`                     | 执行发布审计、检查和生产构建              |
+| `npm run preview`                   | 预览生成后的生产网站                      |
+| `npm run check`                     | 检查 Prettier、Astro/TS 与 Scholar 解析器 |
+| `npm run check:web`                 | 仅检查 Prettier 与 Astro/TS               |
+| `npm run format`                    | 格式化代码、内容数据和文档                |
+| `npm run add-paper -- <DOI\|arXiv>` | 将一篇论文导入统一论文文件                |
+| `npm run fetch:scholar`             | 刷新本地 Scholar 指标                     |
 
 ## 日常内容维护
 

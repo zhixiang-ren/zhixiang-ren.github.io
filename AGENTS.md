@@ -128,7 +128,7 @@ Whenever changing layout, verify both a desktop viewport and a modern iPhone-siz
 - Tailwind CSS 4 through `@tailwindcss/vite`. Theme tokens and the class-based dark variant live in `src/styles/global.css`; do not restore the removed `@astrojs/tailwind` integration or a JavaScript Tailwind config without a concrete need.
 - TypeScript strict mode.
 - Astro Content Layer collections with explicit local `glob()` loaders and Zod 4 validation. Import `z` from `astro/zod` in content schemas.
-- Scholar metrics remain an atomic JSON handoff from Python, but Astro consumes them through the built-in `file()` loader and validates the complete record before rendering. Do not bypass this collection with a raw JSON import.
+- Scholar metrics remain an atomic JSON handoff from the Node maintenance script, but Astro consumes them through the built-in `file()` loader and validates the complete record before rendering. Do not bypass this collection with a raw JSON import.
 - Geist Variable and Geist Mono are bundled locally with `@fontsource-variable`.
 - The primary Geist Sans Latin variable font is the only preloaded font. Real Geist italic outlines are loaded on demand; Mono and non-Latin subsets must not be preloaded without measurement. Chinese glyphs intentionally use the explicit local-system fallback stack in `global.css` rather than shipping a multi-megabyte CJK webfont.
 - Markdown supports math through `remark-math` and `rehype-katex`. KaTeX CSS is not global because the current public pages contain no formulas; import `katex/dist/katex.min.css` only in a page or component that actually renders KaTeX markup.
@@ -139,7 +139,7 @@ Whenever changing layout, verify both a desktop viewport and a modern iPhone-siz
 - Client JavaScript is intentionally limited to theme/language behavior, protected email interaction, and intent-based external-link preconnection.
 - Package manager of record: **npm**. Keep `package-lock.json` authoritative; do not introduce pnpm/yarn lockfiles.
 - Minimum Node version: 22.12.0. Use the checked-in `.nvmrc` when NVM is available.
-- Python 3.13 is needed only for Scholar refresh. `.python-version` is the canonical local and CI interpreter version; the fetcher depends on the system `curl` executable and otherwise uses the standard library. Do not add a Python dependency manager or requirements file unless a real third-party Python dependency is introduced.
+- Scholar refresh uses Node, Cheerio, and the system `curl` executable for SOCKS5 proxy support; it does not need Python. Python 3.13 and Ruff remain optional for the standalone Git-history rewrite utility only. `.python-version` records that exceptional maintenance runtime. Do not add Python setup to the ordinary build/deploy workflow.
 
 ## 6. Quick start
 
@@ -160,10 +160,10 @@ Useful commands:
 
 ```sh
 npm run dev:network       # expose the dev server to the local network
-npm run check             # frontend checks + Ruff checks (requires Ruff 0.11.7)
+npm run check             # frontend checks + Scholar parser tests; no Python runtime
 npm run check:web         # Prettier + Astro/content diagnostics + tsc --noEmit
 npm run format            # apply Prettier to supported repository files
-npm run format:py         # apply Ruff fixes and formatting to Python scripts
+npm run format:py         # optional: format the standalone Git-history utility with Ruff
 npm run build             # privacy audits + check + production build
 npm run preview           # preview dist/ locally
 npm run preview:network   # expose production preview to the local network
@@ -192,7 +192,8 @@ If port 4321 is occupied, Astro selects another port. Check the command output r
 │   ├── audit_release.mjs              # source/output privacy and secret audit
 │   ├── convert_image_to_webp.mjs      # Sharp-based, non-overwriting image conversion
 │   ├── fetch_publication_metadata.mjs # DOI/arXiv importer
-│   ├── fetch_scholar_stats.py         # resilient Scholar scraper
+│   ├── fetch_scholar_stats.mjs        # resilient Scholar scraper
+│   ├── fetch_scholar_stats.test.mjs   # parser and snapshot-change tests
 │   ├── generate_scholar_avatar.mjs    # reusable square/circular-safe portrait generator
 │   ├── rewrite_linear_history.py      # dry-run-first Git ancestry repair utility
 │   └── llmtxt-instructions.md         # internal editorial guidance for llms.txt
@@ -377,7 +378,7 @@ npm run fetch:scholar
 Resilient refresh:
 
 ```sh
-python3 scripts/fetch_scholar_stats.py --allow-stale
+npm run fetch:scholar -- --allow-stale
 ```
 
 Behavior and invariants:
@@ -490,7 +491,7 @@ Triggers:
 Behavior:
 
 - Push builds use the checked-in Scholar snapshot and do not scrape.
-- Scheduled/manual syncs set up Python, run `fetch_scholar_stats.py --allow-stale`, and commit validated changes before building.
+- Scheduled/manual syncs set up Node, run `fetch_scholar_stats.mjs --allow-stale`, and commit validated changes before building. Do not add a `prebuild` scrape: ordinary push builds deliberately use the checked-in snapshot.
 - Only the sync job receives `contents: write`; build and deploy keep narrower permissions. A bot push with `GITHUB_TOKEN` does not start a second push workflow, so the current run must build and deploy the updated `master` itself.
 - The workflow detects user-site versus project-site repository names and exports `SITE_URL`/`BASE_PATH`.
 - `withastro/action` installs and builds the site.
@@ -519,7 +520,7 @@ That command performs, in order:
 5. static production build to `dist/`;
 6. generated-output privacy audit.
 
-`npm run check` is the single local quality gate for both the web application and Python scripts. The GitHub Pages workflow also runs Ruff before the production build so Python failures surface early in CI.
+`npm run check` is the single local quality gate for the web application and Scholar parser tests. The exceptional Python Git-history utility can be checked separately with `npm run check:py`; it is not part of the website build or deployment.
 
 Do not report completion if the build fails. Read the first relevant error, correct it, and rerun the full command.
 

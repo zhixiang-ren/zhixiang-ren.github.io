@@ -28,7 +28,7 @@ Built with [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.
 
 ## Quick start
 
-Requires Node.js **22.12.0 or newer** and npm **10.8.2 or newer**. Python 3.13, Ruff 0.11.7, and the system `curl` executable are needed only when refreshing or checking Scholar metrics. The checked-in `.nvmrc` and `.python-version` files define the canonical local runtime versions.
+Requires Node.js **22.12.0 or newer** and npm **10.8.2 or newer**. Scholar refresh also uses the system `curl` executable for SOCKS5 proxy support. Python and Ruff are optional, needed only for the separate Git-history maintenance utility. The checked-in `.nvmrc` defines the site's Node version.
 
 ```sh
 npm install
@@ -58,8 +58,8 @@ npm run preview
 | `npm run dev:network`               | Expose development preview to the local network         |
 | `npm run build`                     | Run release audits, checks, and the production build    |
 | `npm run preview`                   | Preview the generated production site                   |
-| `npm run check`                     | Check Prettier, Astro/TypeScript, and Python with Ruff  |
-| `npm run check:web`                 | Check only Prettier formatting and Astro/TypeScript     |
+| `npm run check`                     | Check Prettier, Astro/TypeScript, and Scholar parser    |
+| `npm run check:web`                 | Check Prettier formatting and Astro/TypeScript          |
 | `npm run format`                    | Format code, content data, and documentation            |
 | `npm run add-paper -- <DOI\|arXiv>` | Import one publication into the shared publication file |
 | `npm run fetch:scholar`             | Refresh local Scholar metrics                           |

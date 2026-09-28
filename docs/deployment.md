@@ -29,7 +29,7 @@ npm run fetch:scholar
 npm run build
 ```
 
-If metrics changed, review and commit `src/content/scholar.json` with your other local changes. A failed fetch leaves the previous snapshot intact when using `python scripts/fetch_scholar_stats.py --allow-stale`.
+If metrics changed, review and commit `src/content/scholar.json` with your other local changes. A failed fetch leaves the previous snapshot intact when using `npm run fetch:scholar -- --allow-stale`.
 
 The default author key is `ec_pCdEAAAAJ`. Override it only when testing another profile:
 

@@ -13,12 +13,13 @@
     "add-paper": "node scripts/fetch_publication_metadata.mjs",
     "convert:image": "node scripts/convert_image_to_webp.mjs",
     "generate:scholar-avatar": "node scripts/generate_scholar_avatar.mjs",
-    "fetch:scholar": "python3 scripts/fetch_scholar_stats.py",
+    "fetch:scholar": "node scripts/fetch_scholar_stats.mjs",
     "start": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
-    "check": "npm run check:web && npm run check:py",
+    "check": "npm run check:web && npm run check:scholar",
     "check:web": "npm run format:check && npm run check:astro && npm run check:ts",
     "check:astro": "ASTRO_TELEMETRY_DISABLED=1 astro check",
     "check:ts": "tsc --noEmit",
+    "check:scholar": "node --test scripts/fetch_scholar_stats.test.mjs",
     "check:py": "ruff check scripts && ruff format --check scripts",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
@@ -45,6 +46,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "cheerio": "^1.2.0",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^1.0.0",
     "prettier-plugin-tailwindcss": "^0.8.1"
