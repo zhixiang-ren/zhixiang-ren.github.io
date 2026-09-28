@@ -113,23 +113,29 @@ Operational details are in [`docs/deployment.md`](./docs/deployment.md).
 
 ### Replace the portrait
 
-Replace [`src/assets/zhixiang-ren.webp`](./src/assets/zhixiang-ren.webp) with a compressed portrait using the same path and approximately the same **2:3** composition. Then check:
+Convert a PNG/JPEG to WebP with the existing Sharp dependency. For a profile portrait, an **800px maximum width**, preserved aspect ratio, Lanczos3 downsampling, and the default WebP quality of 82 are a practical balance of detail and transfer size:
+
+```sh
+npm run convert:image -- path/to/new-photo.png --output src/assets/zhixiang-ren-YYYYMMDD.webp --max-width 800
+```
+
+The converter will not overwrite an existing file. Point both `src/pages/index.astro` and `src/pages/og/default.png.ts` at the new versioned asset, keeping the earlier WebP available for rollback. Then check:
 
 - desktop and mobile crops;
 - light and dark themes;
 - the generated `/og/default.png` preview.
 
-The homepage and Open Graph generator use the same source portrait.
+The homepage and Open Graph generator use the same source portrait. Run `npm run convert:image -- --help` for general image dimensions and quality options.
 
 ### Generate a Google Scholar avatar
 
-Create a square upload asset from the canonical portrait without stretching the subject:
+Create a square upload asset from the same portrait without stretching the subject. The current photo already has enough horizontal space, so a full-width square crop avoids background-edge streaks:
 
 ```sh
-npm run generate:scholar-avatar
+npm run generate:scholar-avatar -- --input src/assets/zhixiang-ren-20260928.webp --output resources/scholar-avatar-20260928.png --subject-scale 1 --vertical-position 0.15
 ```
 
-The script writes `resources/scholar-avatar.png` as an offline upload asset that is not part of Astro's source graph or deployment output. It scales the portrait without distortion, crops it around the face, and extends the existing edge background so Google Scholar's circular crop retains comfortable horizontal spacing. Run `npm run generate:scholar-avatar -- --help` to see optional size, input, output, and subject-scale controls.
+The script writes a versioned offline upload asset under `resources/`, outside Astro's source graph and deployment output. For portraits that need more side room, reduce `--subject-scale` below 1 to extend the edge background. `--vertical-position` controls the crop without moving or stretching the subject. The previous portrait and square upload remain in place. Run `npm run generate:scholar-avatar -- --help` for all options.
 
 ## Deployment
 

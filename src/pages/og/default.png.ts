@@ -26,7 +26,7 @@ export const GET: APIRoute = async () => {
       getEntry("identity", "identity"),
       getEntry("profile", "profile"),
       getEntry("experience", "experience"),
-      asset("src/assets/zhixiang-ren.webp"),
+      asset("src/assets/zhixiang-ren-20260928.webp"),
       asset("src/assets/fonts/Geist-Regular.ttf"),
       asset("src/assets/fonts/Geist-SemiBold.ttf"),
       asset("src/assets/fonts/GeistMono-Medium.ttf"),

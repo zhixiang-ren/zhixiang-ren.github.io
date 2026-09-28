@@ -16,6 +16,7 @@ Options:
   --output <path>         Generated PNG (default: resources/scholar-avatar.png)
   --size <pixels>         Square output size (default: 800)
   --subject-scale <ratio> Foreground width as a fraction of the canvas (default: 0.86)
+  --vertical-position <ratio> Crop position: 0 is top, 0.5 is center (default: 0.5)
   --help                  Show this help`
 
 function parseArguments(argv) {
@@ -24,6 +25,7 @@ function parseArguments(argv) {
     output: DEFAULT_OUTPUT,
     size: 800,
     subjectScale: 0.86,
+    verticalPosition: 0.5,
   }
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -34,7 +36,10 @@ function parseArguments(argv) {
     }
 
     const nextValue = argv[index + 1]
-    if (["--input", "--output", "--size", "--subject-scale"].includes(value) && !nextValue) {
+    if (
+      ["--input", "--output", "--size", "--subject-scale", "--vertical-position"].includes(value) &&
+      !nextValue
+    ) {
       throw new Error(`${value} requires a value`)
     }
 
@@ -49,6 +54,9 @@ function parseArguments(argv) {
       index += 1
     } else if (value === "--subject-scale") {
       options.subjectScale = Number.parseFloat(nextValue)
+      index += 1
+    } else if (value === "--vertical-position") {
+      options.verticalPosition = Number.parseFloat(nextValue)
       index += 1
     } else if (value.startsWith("-")) {
       throw new Error(`Unknown option: ${value}`)
@@ -67,11 +75,18 @@ function parseArguments(argv) {
   ) {
     throw new Error("--subject-scale must be between 0.65 and 1")
   }
+  if (
+    !Number.isFinite(options.verticalPosition) ||
+    options.verticalPosition < 0 ||
+    options.verticalPosition > 1
+  ) {
+    throw new Error("--vertical-position must be between 0 and 1")
+  }
 
   return options
 }
 
-async function generateScholarAvatar({ input, output, size, subjectScale }) {
+async function generateScholarAvatar({ input, output, size, subjectScale, verticalPosition }) {
   const metadata = await sharp(input).metadata()
   if (!metadata.width || !metadata.height) throw new Error("Could not read source dimensions")
 
@@ -88,7 +103,7 @@ async function generateScholarAvatar({ input, output, size, subjectScale }) {
   const croppedSubject = await sharp(resizedSubject)
     .extract({
       left: 0,
-      top: Math.round((resizedInfo.height - size) / 2),
+      top: Math.round((resizedInfo.height - size) * verticalPosition),
       width: subjectWidth,
       height: size,
     })
@@ -108,7 +123,7 @@ async function generateScholarAvatar({ input, output, size, subjectScale }) {
 
   console.log(`Generated ${path.relative(PROJECT_ROOT, output)}`)
   console.log(
-    `${metadata.width}x${metadata.height} source -> ${size}x${size} PNG; subject scale ${subjectScale}`,
+    `${metadata.width}x${metadata.height} source -> ${size}x${size} PNG; subject scale ${subjectScale}; vertical position ${verticalPosition}`,
   )
 }
 

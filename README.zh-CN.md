@@ -113,23 +113,29 @@ npm run fetch:scholar
 
 ### 更换照片
 
-用压缩后的照片替换 [`src/assets/zhixiang-ren.webp`](./src/assets/zhixiang-ren.webp)，保持相同路径和大致 **2:3** 构图，然后检查：
+复用已有的 Sharp 依赖将 PNG/JPEG 转为 WebP。肖像建议**最大宽度 800px**，保持原始宽高比，使用 Lanczos3 缩小插值和默认的 WebP 质量 82，兼顾细节与加载体积：
+
+```sh
+npm run convert:image -- path/to/new-photo.png --output src/assets/zhixiang-ren-YYYYMMDD.webp --max-width 800
+```
+
+转换脚本不会覆盖已有文件。将 `src/pages/index.astro` 与 `src/pages/og/default.png.ts` 同时指向新版本文件，旧版 WebP 留作回退。然后检查：
 
 - 桌面端和移动端裁切；
 - 深色与浅色主题；
 - 自动生成的 `/og/default.png` 预览。
 
-主页与 Open Graph 生成器共用同一张源照片。
+主页与 Open Graph 生成器共用同一张源照片。通用尺寸与画质参数见 `npm run convert:image -- --help`。
 
 ### 生成 Google Scholar 头像
 
-从站点标准肖像生成一张不拉伸人物的正方形上传文件：
+从同一张肖像生成不拉伸人物的正方形上传文件。当前照片本身有充足的横向空间，直接全宽裁切可避免背景边缘出现拉伸纹：
 
 ```sh
-npm run generate:scholar-avatar
+npm run generate:scholar-avatar -- --input src/assets/zhixiang-ren-20260928.webp --output resources/scholar-avatar-20260928.png --subject-scale 1 --vertical-position 0.15
 ```
 
-脚本会将 `resources/scholar-avatar.png` 写成离线上传资产；它不在 Astro 源码依赖图中，也不会进入部署产物。脚本会围绕面部裁切照片，并延展现有边缘背景，让 Google Scholar 的圆形裁切保留舒适的横向空间。运行 `npm run generate:scholar-avatar -- --help` 可查看尺寸、输入、输出和人物比例参数。
+脚本会在 `resources/` 下生成带版本号的离线上传文件；它不在 Astro 源码依赖图中，也不会进入部署产物。若后续照片需要左右补宽，可把 `--subject-scale` 调低至 1 以下，沿用原有的边缘延展。`--vertical-position` 调整竖向裁切，不会移动或拉伸人物。旧版网页照片和方形头像均保留。全部参数见 `npm run generate:scholar-avatar -- --help`。
 
 ## 部署
 

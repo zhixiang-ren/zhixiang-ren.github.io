@@ -4,8 +4,8 @@ The MIT License in [`LICENSE`](./LICENSE) applies to the reusable software in th
 
 It does **not** grant permission to reuse the following personal content and identity assets:
 
-- the portrait photograph in `src/assets/zhixiang-ren.webp`;
-- the derived Google Scholar upload portrait in `resources/scholar-avatar.png`;
+- the current and retained earlier portrait photographs in `src/assets/zhixiang-ren-20260928.webp` and `src/assets/zhixiang-ren.webp`;
+- the derived Google Scholar upload portraits in `resources/scholar-avatar-20260928.png` and `resources/scholar-avatar.png`;
 - the name, likeness, personal identifiers, and profile identity of Zhixiang Ren;
 - original biographical, research-positioning, service, honor, experience, and recruitment copy maintained under `src/content/`;
 - branding, institutional marks, or other media expressly identified as belonging to a person or third party.

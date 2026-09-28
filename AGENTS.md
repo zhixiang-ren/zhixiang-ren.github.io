@@ -186,9 +186,11 @@ If port 4321 is occupied, Astro selects another port. Check the command output r
 │       ├── theme.js                   # early theme initialization and header state
 │       └── language.js                # CSP-safe language initialization and toggle state
 ├── resources/
-│   └── scholar-avatar.png             # offline upload asset; never deployed
+│   ├── scholar-avatar.png             # previous offline upload asset; never deployed
+│   └── scholar-avatar-20260928.png    # current offline upload asset; never deployed
 ├── scripts/
 │   ├── audit_release.mjs              # source/output privacy and secret audit
+│   ├── convert_image_to_webp.mjs      # Sharp-based, non-overwriting image conversion
 │   ├── fetch_publication_metadata.mjs # DOI/arXiv importer
 │   ├── fetch_scholar_stats.py         # resilient Scholar scraper
 │   ├── generate_scholar_avatar.mjs    # reusable square/circular-safe portrait generator
@@ -198,7 +200,8 @@ If port 4321 is occupied, Astro selects another port. Check the command output r
 │   ├── content.config.ts              # Content Layer loaders and all collection schemas
 │   ├── assets/
 │   │   ├── fonts/                    # vendored Geist TTFs for Satori
-│   │   └── zhixiang-ren.webp         # pre-optimized production portrait
+│   │   ├── zhixiang-ren.webp         # intentionally retained previous portrait
+│   │   └── zhixiang-ren-20260928.webp # current 800px WebP portrait
 │   ├── components/
 │   │   ├── AcademicIcon.astro         # social/academic link icon set
 │   │   ├── BaseHead.astro             # canonical, OG, favicon, JSON-LD hooks
@@ -241,7 +244,7 @@ If port 4321 is occupied, Astro selects another port. Check the command output r
 
 - `src/` contains only inputs that participate in the Astro application or its build-time content graph.
 - `src/content/` is intentionally flat. Each subject has one bilingual source, including the generated-but-validated Scholar snapshot. Do not restore one-file subdirectories.
-- `src/assets/` contains imported production assets. Files placed here must have a real homepage or build-time consumer.
+- `src/assets/` contains imported production assets. Files placed here must have a real homepage or build-time consumer, except for the explicitly retained previous portrait requested by the owner. Do not delete or re-encode that backup as incidental cleanup.
 - `public/` contains browser-ready files copied verbatim to the deployment. Never place internal notes, source photography, credentials, or offline exports here.
 - `resources/` contains versioned maintainer deliverables that are intentionally excluded from Astro and `dist/`, currently the Google Scholar upload portrait.
 - `src/components/` contains mounted or reusable production UI. Unmounted visual prototypes belong in `src/experiments/`.
@@ -590,12 +593,13 @@ Never put unpublished manuscripts, proprietary datasets, internal slides, creden
 
 ### Replace the portrait
 
-1. Keep the asset under `src/assets/` and import it so Astro emits a hashed deployment URL.
-2. The current WebP is already manually optimized. Render `portrait.src` with a native `<img>` to avoid a second lossy encode; keep eager loading, high fetch priority, and metadata-derived intrinsic dimensions.
-3. Compress any replacement before commit and update the OG endpoint's file path/MIME type together with the page import.
+1. Convert ordinary PNG/JPEG input with `npm run convert:image -- <input> --output src/assets/zhixiang-ren-YYYYMMDD.webp --max-width 800`. This uses the existing Sharp dependency, preserves aspect ratio, uses Lanczos3 for shrinking, defaults to WebP quality 82, and refuses to overwrite a previous file.
+2. Keep the versioned asset under `src/assets/` and import it so Astro emits a hashed deployment URL. Retain the previous portrait for rollback. Render `portrait.src` with a native `<img>` to avoid a second lossy encode; keep eager loading, high fetch priority, and metadata-derived intrinsic dimensions.
+3. Update the homepage import and OG endpoint file path together. Do not put the original high-resolution source under `public/`.
 4. Update `object-position` if needed.
 5. Check desktop, mobile, and generated OG crops separately; they intentionally use different framing.
 6. Preserve the `portrait-tone` treatment unless the design direction changes: light mode uses restrained color control, dark mode additionally reduces luminance, and only fine-pointer desktop hover returns to the unfiltered image. Mirror the dark-mode treatment in the Sharp pipeline inside the OG endpoint so the static social card and site remain consistent.
+7. Generate the corresponding offline Scholar upload with `npm run generate:scholar-avatar -- --input <new-webp> --output resources/scholar-avatar-YYYYMMDD.png`; tune `--subject-scale` and `--vertical-position` for each source. Preserve older Scholar uploads in `resources/`.
 
 ### Change theme/background styling
 
