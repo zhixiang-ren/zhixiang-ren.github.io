@@ -77,7 +77,7 @@ npm run preview
 | 编辑与审稿服务                 | [`src/content/academic-services.yaml`](./src/content/academic-services.yaml)         |
 | 代表性荣誉                     | [`src/content/representative-honors.yaml`](./src/content/representative-honors.yaml) |
 | 招聘与合作说明                 | [`src/content/open-positions.md`](./src/content/open-positions.md)                   |
-| 论文维护清单                   | [`src/data/publication-sources.yaml`](./src/data/publication-sources.yaml)           |
+| 论文维护清单                   | [`src/content/publication-sources.yaml`](./src/content/publication-sources.yaml)     |
 | 自动生成的论文数据快照         | [`src/content/publications.md`](./src/content/publications.md)                       |
 | Scholar 兜底数据               | [`src/content/scholar.json`](./src/content/scholar.json)                             |
 

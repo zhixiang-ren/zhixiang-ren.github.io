@@ -1,5 +1,5 @@
 ---
-# Generated publication snapshot. Edit src/data/publication-sources.yaml and
+# Generated publication snapshot. Edit src/content/publication-sources.yaml and
 # run `npm run sync:papers`; do not hand-edit this file.
 papers:
   - date: 2026-07-24

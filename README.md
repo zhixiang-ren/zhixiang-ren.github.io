@@ -77,7 +77,7 @@ Most editorial changes require no component work:
 | Editorial and reviewing service                         | [`src/content/academic-services.yaml`](./src/content/academic-services.yaml)         |
 | Representative honors                                   | [`src/content/representative-honors.yaml`](./src/content/representative-honors.yaml) |
 | Recruitment and collaboration message                   | [`src/content/open-positions.md`](./src/content/open-positions.md)                   |
-| Publication inputs (edit here)                          | [`src/data/publication-sources.yaml`](./src/data/publication-sources.yaml)           |
+| Publication inputs (edit here)                          | [`src/content/publication-sources.yaml`](./src/content/publication-sources.yaml)     |
 | Generated publication snapshot                          | [`src/content/publications.md`](./src/content/publications.md)                       |
 | Fallback Scholar statistics                             | [`src/content/scholar.json`](./src/content/scholar.json)                             |
 

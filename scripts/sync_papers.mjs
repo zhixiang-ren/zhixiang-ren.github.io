@@ -11,7 +11,7 @@ import {
 } from "./fetch_publication_metadata.mjs"
 
 const root = resolve(import.meta.dirname, "..")
-const sourcePath = resolve(root, "src/data/publication-sources.yaml")
+const sourcePath = resolve(root, "src/content/publication-sources.yaml")
 const outputPath = resolve(root, "src/content/publications.md")
 
 function key(identifier) {

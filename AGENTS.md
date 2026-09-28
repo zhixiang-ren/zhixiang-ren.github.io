@@ -220,11 +220,10 @@ If port 4321 is occupied, Astro selects another port. Check the command output r
 │   │   ├── identity.yaml              # identity, roles, domains, and links
 │   │   ├── open-positions.md          # bilingual recruitment copy
 │   │   ├── profile.md                 # bilingual slogan and biography
+│   │   ├── publication-sources.yaml   # canonical DOI/arXiv + optional code inputs
 │   │   ├── publications.md            # generated publication snapshot
 │   │   ├── representative-honors.yaml # selected awards
 │   │   └── scholar.json               # last validated static Scholar metrics
-│   ├── data/
-│   │   └── publication-sources.yaml   # canonical DOI/arXiv + optional code inputs
 │   ├── experiments/
 │   │   └── PenroseHero.astro          # preserved, intentionally unmounted experiment
 │   ├── layouts/Layout.astro            # global shell, controls, background, email runtime
@@ -293,7 +292,7 @@ Do not bypass the Content Layer by importing raw YAML with an ad hoc parser or c
 | Editorial/reviewing service              | `src/content/academic-services.yaml`     | homepage, `llms.txt`                        |
 | Representative honors                    | `src/content/representative-honors.yaml` | homepage, JSON-LD, `llms.txt`               |
 | Recruitment                              | `src/content/open-positions.md`          | desktop/mobile card, `llms.txt`             |
-| Publication inputs                       | `src/data/publication-sources.yaml`      | generated publication snapshot              |
+| Publication inputs                       | `src/content/publication-sources.yaml`   | generated publication snapshot              |
 | Publication snapshot                     | `src/content/publications.md`            | desktop/mobile list, `llms.txt`             |
 | Citation metrics                         | `src/content/scholar.json`               | metrics block, `llms.txt`                   |
 
@@ -313,7 +312,7 @@ Academic-service entries use one concise bilingual summary for each top-level Ed
 
 ## 9. Publications routine
 
-Edit DOI/arXiv IDs and optional verified code URLs in `src/data/publication-sources.yaml`. The generated snapshot consumed by Astro remains the single `src/content/publications.md` file.
+Edit DOI/arXiv IDs and optional verified code URLs in `src/content/publication-sources.yaml`. The generated snapshot consumed by Astro remains the single `src/content/publications.md` file. The Content Layer loader matches `publications.{md,mdx}` exactly, so it does not ingest the YAML input file as another collection entry.
 
 Do not split publications into one Markdown file per paper. The owner explicitly prefers a single maintainable list.
 
@@ -596,7 +595,7 @@ Never put unpublished manuscripts, proprietary datasets, internal slides, creden
 
 ### Add or correct a publication
 
-1. Add DOI/arXiv and optional verified code URL to `src/data/publication-sources.yaml`, or use `npm run add-paper -- <identifier> [--code URL] --dry-run` first.
+1. Add DOI/arXiv and optional verified code URL to `src/content/publication-sources.yaml`, or use `npm run add-paper -- <identifier> [--code URL] --dry-run` first.
 2. Review official status, venue, ISO 4 abbreviation, author order, principal flag, links, and BibTeX.
 3. Run `npm run sync:papers` to update the single generated `publications.md` snapshot.
 4. Add a verified code repository only when its README or publication explicitly establishes the match.
