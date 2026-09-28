@@ -41,9 +41,8 @@ export const GET: APIRoute = async () => {
   // Satori/resvg does not reliably decode WebP data URIs. Convert only the
   // in-memory OG composite input; the homepage still serves the original WebP.
   const portraitPng = await sharp(portrait)
-    .modulate({ brightness: 0.92, saturation: 0.95 })
-    // Match the dark-theme portrait treatment while keeping mid-tones stable.
-    .linear(1.03, 128 * (1 - 1.03))
+    // Match the dark-theme portrait treatment without extra contrast.
+    .modulate({ brightness: 0.85, saturation: 0.95 })
     .png()
     .toBuffer()
   const portraitData = `data:image/png;base64,${portraitPng.toString("base64")}`

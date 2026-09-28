@@ -611,7 +611,7 @@ Never put unpublished manuscripts, proprietary datasets, internal slides, creden
 3. Update the homepage import and OG endpoint file path together. Do not put the original high-resolution source under `public/`.
 4. Update `object-position` if needed.
 5. Check desktop, mobile, and generated OG crops separately; they intentionally use different framing.
-6. Preserve the `portrait-tone` treatment unless the design direction changes: light mode uses restrained color control, dark mode additionally reduces luminance, and only fine-pointer desktop hover returns to the unfiltered image. Mirror the dark-mode treatment in the Sharp pipeline inside the OG endpoint so the static social card and site remain consistent.
+6. Preserve the `portrait-tone` treatment unless the design direction changes: light mode uses restrained color control, dark mode additionally reduces luminance without extra contrast, and only fine-pointer desktop hover lightens the image. Dark-mode hover remains below full brightness. Mirror the dark-mode tone in the Sharp pipeline inside the OG endpoint so the static social card and site remain consistent.
 7. Generate the corresponding offline Scholar upload with `npm run generate:scholar-avatar -- --input <new-webp> --output resources/scholar-avatar-YYYYMMDD.png`; tune `--subject-scale` and `--vertical-position` for each source. Preserve older Scholar uploads in `resources/`.
 
 ### Change theme/background styling
