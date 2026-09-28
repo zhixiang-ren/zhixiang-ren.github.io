@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro"
 import { getEntry } from "astro:content"
 import { getCurrentPosition } from "@lib/experience"
+import { fillScholarBio } from "@lib/scholar-bio"
 
 const [
   identityEntry,
@@ -100,7 +101,7 @@ This file is generated from the same validated Astro Content Collections as the 
 
 ## Biography
 
-${bio.summary.en}
+${fillScholarBio(bio.summary.en, scholarData)}
 
 ## Experience
 

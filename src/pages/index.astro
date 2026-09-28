@@ -8,6 +8,7 @@ import RecentPapers from "@components/RecentPapers.astro"
 import RecruitmentCard from "@components/RecruitmentCard.astro"
 import portrait from "@assets/zhixiang-ren-20260928.webp"
 import { getCurrentPosition } from "@lib/experience"
+import { fillScholarBio } from "@lib/scholar-bio"
 
 const [
   identityEntry,
@@ -46,6 +47,8 @@ const currentPosition = getCurrentPosition(experience)
 const services = servicesEntry.data.groups
 const honors = honorsEntry.data
 const scholarData = scholarEntry.data
+const summaryEn = fillScholarBio(bio.summary.en, scholarData)
+const summaryZh = fillScholarBio(bio.summary.zh, scholarData)
 const recentPapers = publicationsEntry.data.papers
   .filter((paper) => paper.featured)
   .sort((a, b) => b.date.getTime() - a.date.getTime())
@@ -248,8 +251,8 @@ const personSchema = {
           <span class="lang-zh">{bio.slogan.zh}</span>
         </h2>
         <p class="academic-bio mt-4 max-w-prose leading-7">
-          <span class="lang-en" set:html={renderInlineMarkdown(bio.summary.en)} />
-          <span class="lang-zh">{bio.summary.zh}</span>
+          <span class="lang-en" set:html={renderInlineMarkdown(summaryEn)} />
+          <span class="lang-zh">{summaryZh}</span>
         </p>
       </div>
 

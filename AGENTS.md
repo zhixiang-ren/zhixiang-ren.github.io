@@ -296,6 +296,8 @@ Do not bypass the Content Layer by importing raw YAML with an ad hoc parser or c
 | Publication snapshot                     | `src/content/publications.md`            | desktop/mobile list, `llms.txt`             |
 | Citation metrics                         | `src/content/scholar.json`               | metrics block, `llms.txt`                   |
 
+The English and Chinese biography summaries in `profile.md` use `{{citations}}` and `{{hIndex}}` placeholders. `src/lib/scholar-bio.ts` fills them at build time from the validated Scholar snapshot for both the homepage and `llms.txt`. Keep the surrounding prose intact and do not hand-edit citation or h-index numbers in the summaries. The Bio deliberately has no extra `+` after either placeholder; its existing “over” / “余次” wording carries that meaning.
+
 Academic-service entries use one concise bilingual summary for each top-level Editorial or Reviewing group. Do not reintroduce nested role labels unless the content genuinely requires another hierarchy. Honors keep the award name, distinction level, and year in separate fields so the homepage can preserve typographic hierarchy without parsing strings.
 
 ### Editorial rules
