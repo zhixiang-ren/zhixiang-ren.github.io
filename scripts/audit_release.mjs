@@ -1,5 +1,6 @@
 import { access, readdir, readFile } from "node:fs/promises"
 import { extname, relative, resolve } from "node:path"
+import { checkLinks } from "./check_links.mjs"
 
 const projectRoot = resolve(import.meta.dirname, "..")
 const mode = process.argv[2]
@@ -132,3 +133,4 @@ if (findings.length > 0) {
 }
 
 console.log(`Release privacy audit passed (${mode.slice(2)}).`)
+if (mode === "--output" && process.env.SKIP_LINK_AUDIT !== "1") await checkLinks()

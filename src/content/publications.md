@@ -1,11 +1,11 @@
 ---
-# Single source of truth for the publication list. Entries are maintained
-# manually or appended with `npm run add-paper -- <DOI|arXiv>`.
+# Generated publication snapshot. Edit src/data/publication-sources.yaml and
+# run `npm run sync:papers`; do not hand-edit this file.
 papers:
   - date: 2026-07-24
     title:
       en: "Phenotype-driven de novo molecular design from gene expression signatures"
-      zh: "基于基因表达特征的表型驱动从头分子设计"
+      zh: "Phenotype-driven de novo molecular design from gene expression signatures"
     authors:
       - { name: "Yaxin Xu" }
       - { name: "Taojie Kuang" }
@@ -31,7 +31,7 @@ papers:
   - date: 2026-08-03
     title:
       en: "The limits of bio-molecular modeling with large language models: a cross-scale evaluation"
-      zh: "大语言模型生物分子建模的边界：跨尺度评估"
+      zh: "The limits of bio-molecular modeling with large language models: a cross-scale evaluation"
     authors:
       - { name: "Yaxin Xu" }
       - { name: "Yue Zhou" }
@@ -54,7 +54,7 @@ papers:
   - date: 2026-05-11
     title:
       en: "Pseudodata-Guided Invariant Representation Learning Boosts the Out-of-Distribution Generalization in Enzymatic Kinetic Parameter Prediction"
-      zh: "伪数据引导的不变表征学习提升酶动力学参数预测的分布外泛化能力"
+      zh: "Pseudodata-Guided Invariant Representation Learning Boosts the Out-of-Distribution Generalization in Enzymatic Kinetic Parameter Prediction"
     authors:
       - { name: "Haomin Wu" }
       - { name: "Zhiwei Nie" }
@@ -73,7 +73,7 @@ papers:
   - date: 2026-05-15
     title:
       en: "Improving Variant Effect Prediction by Steering Sparse Mechanistic Features in Protein Language Models"
-      zh: "通过调控蛋白质语言模型中的稀疏机制特征改进变异效应预测"
+      zh: "Improving Variant Effect Prediction by Steering Sparse Mechanistic Features in Protein Language Models"
     authors:
       - { name: "Mingqing Wang" }
       - { name: "Meng Yuan" }
@@ -93,7 +93,7 @@ papers:
   - date: 2026-03-08
     title:
       en: "Prototype-based continual cell-type annotation reveals cellular state transitions in expanding single-cell atlases"
-      zh: "基于原型的持续细胞类型注释揭示扩展单细胞图谱中的细胞状态转变"
+      zh: "Prototype-based continual cell-type annotation reveals cellular state transitions in expanding single-cell atlases"
     authors:
       - { name: "Shuang Ge" }
       - { name: "Qiming He" }
@@ -119,7 +119,7 @@ papers:
   - date: 2025-09-01
     title:
       en: "A self-feedback knowledge elicitation approach for chemical reaction predictions"
-      zh: "面向化学反应预测的自反馈知识引出方法"
+      zh: "A self-feedback knowledge elicitation approach for chemical reaction predictions"
     authors:
       - { name: "Pengfei Liu" }
       - { name: "Jun Tao" }
@@ -138,7 +138,7 @@ papers:
   - date: 2025-09-01
     title:
       en: "Deep learning methods for protein representation and function prediction: A comprehensive overview"
-      zh: "蛋白质表征与功能预测的深度学习方法：全面综述"
+      zh: "Deep learning methods for protein representation and function prediction: A comprehensive overview"
     authors:
       - { name: "Mingqing Wang" }
       - { name: "Zhiwei Nie" }
@@ -159,7 +159,7 @@ papers:
   - date: 2025-08-11
     title:
       en: "A Unified Peptide Generative Framework via a Weakly Order-Dependent Autoregressive Language Model and Lifelong Learning"
-      zh: "基于弱顺序依赖自回归语言模型与终身学习的统一肽生成框架"
+      zh: "A Unified Peptide Generative Framework via a Weakly Order-Dependent Autoregressive Language Model and Lifelong Learning"
     authors:
       - { name: "Zhiwei Nie" }
       - { name: "Daixi Li" }
@@ -190,7 +190,7 @@ papers:
   - date: 2025-08-01
     title:
       en: "A multi-modal genomic knowledge distillation framework for drug response prediction"
-      zh: "用于药物反应预测的多模态基因组知识蒸馏框架"
+      zh: "A multi-modal genomic knowledge distillation framework for drug response prediction"
     authors:
       - { name: "Shuang Ge" }
       - { name: "Shuqing Sun" }
@@ -210,7 +210,7 @@ papers:
   - date: 2025-07-02
     title:
       en: "Predicting protein stability changes upon mutations with dual-view ensemble learning from single sequence"
-      zh: "基于单序列双视图集成学习的蛋白质突变稳定性变化预测"
+      zh: "Predicting protein stability changes upon mutations with dual-view ensemble learning from single sequence"
     authors:
       - { name: "Zhiwei Nie" }
       - { name: "Yiming Ma" }
@@ -239,7 +239,7 @@ papers:
   - date: 2026-03-13
     title:
       en: "Enhanced Drug-drug Interaction Prediction Using Adaptive Knowledge Integration"
-      zh: "基于自适应知识整合的药物相互作用预测增强方法"
+      zh: "Enhanced Drug-drug Interaction Prediction Using Adaptive Knowledge Integration"
     authors:
       - { name: "Pengfei Liu" }
       - { name: "Jun Tao" }
@@ -265,7 +265,7 @@ papers:
   - date: 2026-05-12
     title:
       en: "Learning Protein Structure-Function Relationships through Knowledge-guided Representation Decomposition"
-      zh: "通过知识引导的表征分解学习蛋白质结构—功能关系"
+      zh: "Learning Protein Structure-Function Relationships through Knowledge-guided Representation Decomposition"
     authors:
       - { name: "Mingqing Wang" }
       - { name: "Zhiwei Nie" }
@@ -293,7 +293,7 @@ papers:
   - date: 2026-03-13
     title:
       en: "A Multi-task Large Reasoning Model for Molecular Science"
-      zh: "面向分子科学的多任务大推理模型"
+      zh: "A Multi-task Large Reasoning Model for Molecular Science"
     authors:
       - { name: "Pengfei Liu" }
       - { name: "Shuang Ge" }

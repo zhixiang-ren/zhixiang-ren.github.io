@@ -61,7 +61,8 @@ npm run preview
 | `npm run check`                     | 检查 Prettier、Astro/TS 与 Scholar 解析器 |
 | `npm run check:web`                 | 仅检查 Prettier 与 Astro/TS               |
 | `npm run format`                    | 格式化代码、内容数据和文档                |
-| `npm run add-paper -- <DOI\|arXiv>` | 将一篇论文导入统一论文文件                |
+| `npm run add-paper -- <DOI\|arXiv>` | 将论文标识符加入 YAML 清单                |
+| `npm run sync:papers`               | 根据清单更新论文数据快照                  |
 | `npm run fetch:scholar`             | 刷新本地 Scholar 指标                     |
 
 ## 日常内容维护
@@ -76,7 +77,8 @@ npm run preview
 | 编辑与审稿服务                 | [`src/content/academic-services.yaml`](./src/content/academic-services.yaml)         |
 | 代表性荣誉                     | [`src/content/representative-honors.yaml`](./src/content/representative-honors.yaml) |
 | 招聘与合作说明                 | [`src/content/open-positions.md`](./src/content/open-positions.md)                   |
-| 完整论文数据                   | [`src/content/publications.md`](./src/content/publications.md)                       |
+| 论文维护清单                   | [`src/data/publication-sources.yaml`](./src/data/publication-sources.yaml)           |
+| 自动生成的论文数据快照         | [`src/content/publications.md`](./src/content/publications.md)                       |
 | Scholar 兜底数据               | [`src/content/scholar.json`](./src/content/scholar.json)                             |
 
 双语字段使用 `{ en: ..., zh: ... }`，修改时应同步更新两种语言。按照当前设计，论文标题在中英文界面中均显示正式英文原题。
@@ -86,7 +88,7 @@ npm run preview
 使用 DOI 或 arXiv 标识符导入元数据：
 
 ```sh
-npm run add-paper -- 10.1021/acs.jcim.5c03204
+npm run add-paper -- 10.1021/acs.jcim.5c03204 --code https://github.com/example/project
 npm run add-paper -- 2603.12808
 ```
 
@@ -94,10 +96,13 @@ npm run add-paper -- 2603.12808
 
 ```sh
 npm run add-paper -- 2603.12808 --dry-run
-npm run add-paper -- 10.1021/acs.jcim.5c03204 --check
+npm run sync:papers
+npm run check:papers
 ```
 
-导入器会向唯一的 `publications.md` 论文集合追加数据，并拒绝重复标识符。导入后需要人工检查发表状态、作者顺序、本人作者标记、期刊缩写、BibTeX 与外链。只有在论文或仓库 README 明确证明对应关系时才添加代码仓库。无需出现在主页十篇精选中的论文应设置 `featured: false`。
+`publication-sources.yaml` 是唯一需要手动维护的论文清单：每篇填 DOI 或 arXiv ID，代码链接可选。构建会自动运行 `sync:papers`，复用已有数据快照，只为新增论文请求远程元数据；明确需要刷新全部元数据时运行 `npm run sync:papers -- --refresh`。旧论文可离线构建，新标识符首次生成需要联网。导入后仍需人工核对发表状态、作者顺序、本人作者标记、期刊缩写及 BibTeX。只有论文或仓库 README 能证明对应关系时才添加代码链接。无需出现在主页精选中的论文可在 YAML 中设置 `featured: false`。中英文页面都显示正式英文论文标题。
+
+构建后的发布审计还会检查网页及全部论文的外链。若站点不支持 HEAD，会用最小 GET 复核；确认的 404/410 会发出警告，限流或网络受限则记为未验证，不会因此阻断部署。已有 `dist/` 时可单独运行 `npm run check:links`。
 
 Crossref 元数据会区分正式发表与 bioRxiv 等预印本平台。正式期刊优先使用官方短名，缺失时调用 ISO 4 缩写服务；可选服务失败时保留完整期刊名，不自行猜测。
 

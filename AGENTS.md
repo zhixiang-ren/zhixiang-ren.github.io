@@ -168,7 +168,8 @@ npm run build             # privacy audits + check + production build
 npm run preview           # preview dist/ locally
 npm run preview:network   # expose production preview to the local network
 npm run fetch:scholar     # refresh Google Scholar metrics locally
-npm run add-paper -- ...  # import DOI/arXiv metadata
+npm run add-paper -- ...  # add DOI/arXiv + optional code URL to YAML and generate snapshot
+npm run sync:papers        # regenerate snapshot for YAML changes; reuse cached metadata
 ```
 
 If port 4321 is occupied, Astro selects another port. Check the command output rather than assuming the URL. Do not start duplicate background servers when an existing one can be reused or restarted.
@@ -190,8 +191,10 @@ If port 4321 is occupied, Astro selects another port. Check the command output r
 │   └── scholar-avatar-20260928.png    # current offline upload asset; never deployed
 ├── scripts/
 │   ├── audit_release.mjs              # source/output privacy and secret audit
+│   ├── check_links.mjs                # non-blocking external-link audit
 │   ├── convert_image_to_webp.mjs      # Sharp-based, non-overwriting image conversion
 │   ├── fetch_publication_metadata.mjs # DOI/arXiv importer
+│   ├── sync_papers.mjs                # YAML source to publication snapshot
 │   ├── fetch_scholar_stats.mjs        # resilient Scholar scraper
 │   ├── fetch_scholar_stats.test.mjs   # parser and snapshot-change tests
 │   ├── generate_scholar_avatar.mjs    # reusable square/circular-safe portrait generator
@@ -217,9 +220,11 @@ If port 4321 is occupied, Astro selects another port. Check the command output r
 │   │   ├── identity.yaml              # identity, roles, domains, and links
 │   │   ├── open-positions.md          # bilingual recruitment copy
 │   │   ├── profile.md                 # bilingual slogan and biography
-│   │   ├── publications.md            # complete publication dataset
+│   │   ├── publications.md            # generated publication snapshot
 │   │   ├── representative-honors.yaml # selected awards
 │   │   └── scholar.json               # last validated static Scholar metrics
+│   ├── data/
+│   │   └── publication-sources.yaml   # canonical DOI/arXiv + optional code inputs
 │   ├── experiments/
 │   │   └── PenroseHero.astro          # preserved, intentionally unmounted experiment
 │   ├── layouts/Layout.astro            # global shell, controls, background, email runtime
@@ -288,7 +293,8 @@ Do not bypass the Content Layer by importing raw YAML with an ad hoc parser or c
 | Editorial/reviewing service              | `src/content/academic-services.yaml`     | homepage, `llms.txt`                        |
 | Representative honors                    | `src/content/representative-honors.yaml` | homepage, JSON-LD, `llms.txt`               |
 | Recruitment                              | `src/content/open-positions.md`          | desktop/mobile card, `llms.txt`             |
-| Publications                             | `src/content/publications.md`            | desktop/mobile list, `llms.txt`             |
+| Publication inputs                       | `src/data/publication-sources.yaml`      | generated publication snapshot              |
+| Publication snapshot                     | `src/content/publications.md`            | desktop/mobile list, `llms.txt`             |
 | Citation metrics                         | `src/content/scholar.json`               | metrics block, `llms.txt`                   |
 
 Academic-service entries use one concise bilingual summary for each top-level Editorial or Reviewing group. Do not reintroduce nested role labels unless the content genuinely requires another hierarchy. Honors keep the award name, distinction level, and year in separate fields so the homepage can preserve typographic hierarchy without parsing strings.
@@ -307,7 +313,7 @@ Academic-service entries use one concise bilingual summary for each top-level Ed
 
 ## 9. Publications routine
 
-All papers live in `src/content/publications.md`.
+Edit DOI/arXiv IDs and optional verified code URLs in `src/data/publication-sources.yaml`. The generated snapshot consumed by Astro remains the single `src/content/publications.md` file.
 
 Do not split publications into one Markdown file per paper. The owner explicitly prefers a single maintainable list.
 
@@ -339,10 +345,11 @@ Each item supports:
 ### Import a DOI or arXiv record
 
 ```sh
-npm run add-paper -- 10.1038/example-doi --dry-run
-npm run add-paper -- 2603.12808 --zh-title "中文标题"
+npm run add-paper -- 10.1038/example-doi --code https://github.com/example/project --dry-run
+npm run add-paper -- 2603.12808
 npm run add-paper -- 2603.12808 --not-featured
-npm run add-paper -- 2603.12808 --check
+npm run sync:papers
+npm run check:papers
 ```
 
 The importer:
@@ -355,9 +362,9 @@ The importer:
 6. falls back to the open `abbrevIso`/LTWA service for ISO 4 abbreviations;
 7. retains the full venue rather than guessing when abbreviation lookup fails;
 8. rejects duplicate identifiers;
-9. atomically appends to the single publication file.
+9. writes the compact YAML source and generated publication snapshot.
 
-`--dry-run` prints candidate YAML without writing. `--check` validates remote metadata without printing YAML or changing files. Always inspect imported author names, publication status, venue casing, links, and BibTeX before publishing. Automatically retrieved metadata is not automatically authoritative.
+`--dry-run` prints candidate YAML without writing. `sync:papers` reuses the checked-in snapshot and only fetches new identifiers; `--refresh` explicitly refetches all. `check:papers` checks source/snapshot consistency offline. The existing Crossref official-short-title → ISO 4 abbreviation → full-title fallback must remain intact; do not guess conference abbreviations by keyword. English titles are canonical in both interface languages; do not require Chinese paper titles. Always inspect imported author names, publication status, venue casing, links, and BibTeX before publishing. Automatically retrieved metadata is not automatically authoritative.
 
 For bioRxiv or other repositories not directly handled by the importer, add/review the item manually and set the platform, status, and label semantics accurately.
 
@@ -515,11 +522,12 @@ npm run build
 That command performs, in order:
 
 1. source privacy/secret audit;
-2. Prettier format verification;
-3. `astro check` component/content validation;
-4. `tsc --noEmit` TypeScript validation;
-5. static production build to `dist/`;
-6. generated-output privacy audit.
+2. synchronize publications from the DOI/arXiv YAML source, reusing cached records;
+3. Prettier format verification;
+4. `astro check` component/content validation;
+5. `tsc --noEmit` TypeScript validation;
+6. static production build to `dist/`;
+7. generated-output privacy audit and non-blocking external-link check.
 
 `npm run check` is the single local quality gate for the web application and Scholar parser tests. The exceptional Python Git-history utility can be checked separately with `npm run check:py`; it is not part of the website build or deployment.
 
@@ -553,7 +561,7 @@ For content-only changes, build validation is still mandatory; visual QA can foc
 
 ## 16. Release privacy audit
 
-`scripts/audit_release.mjs` scans `src/` and `public/` before build and `dist/` afterward.
+`scripts/audit_release.mjs` scans `src/` and `public/` before build and `dist/` afterward. The output pass also checks external HTML anchors and all publication links using HEAD, then a minimal GET where needed. Only GET-confirmed 404/410 links are flagged as broken; 403/429/timeouts are unverified, not build failures. Do not allow a third-party outage to block static deployment. `SKIP_LINK_AUDIT=1` is an explicit offline escape hatch; leave auditing enabled in CI.
 
 It rejects:
 
@@ -588,9 +596,9 @@ Never put unpublished manuscripts, proprietary datasets, internal slides, creden
 
 ### Add or correct a publication
 
-1. Prefer `npm run add-paper -- <identifier> --dry-run`.
+1. Add DOI/arXiv and optional verified code URL to `src/data/publication-sources.yaml`, or use `npm run add-paper -- <identifier> [--code URL] --dry-run` first.
 2. Review official status, venue, ISO 4 abbreviation, author order, principal flag, links, and BibTeX.
-3. Append/import into the single `publications.md` file.
+3. Run `npm run sync:papers` to update the single generated `publications.md` snapshot.
 4. Add a verified code repository only when its README or publication explicitly establishes the match.
 5. Keep `featured: true` only if it belongs in the ten-paper homepage selection.
 6. Run the build and open the BibTeX drawer.

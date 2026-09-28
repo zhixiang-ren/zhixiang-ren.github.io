@@ -10,12 +10,16 @@
   "scripts": {
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
     "dev:network": "ASTRO_TELEMETRY_DISABLED=1 astro dev --host",
-    "add-paper": "node scripts/fetch_publication_metadata.mjs",
+    "add-paper": "node scripts/sync_papers.mjs --add",
+    "sync:papers": "node scripts/sync_papers.mjs",
+    "check:papers": "node scripts/sync_papers.mjs --check",
+    "check:links": "node scripts/check_links.mjs",
+    "check:scripts": "node --test scripts/check_links.test.mjs",
     "convert:image": "node scripts/convert_image_to_webp.mjs",
     "generate:scholar-avatar": "node scripts/generate_scholar_avatar.mjs",
     "fetch:scholar": "node scripts/fetch_scholar_stats.mjs",
     "start": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
-    "check": "npm run check:web && npm run check:scholar",
+    "check": "npm run check:web && npm run check:scholar && npm run check:papers && npm run check:scripts",
     "check:web": "npm run format:check && npm run check:astro && npm run check:ts",
     "check:astro": "ASTRO_TELEMETRY_DISABLED=1 astro check",
     "check:ts": "tsc --noEmit",
@@ -24,7 +28,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "format:py": "ruff check scripts --fix && ruff format scripts",
-    "build": "node scripts/audit_release.mjs --source && npm run check && ASTRO_TELEMETRY_DISABLED=1 astro build && node scripts/audit_release.mjs --output",
+    "build": "node scripts/audit_release.mjs --source && npm run sync:papers && npm run check && ASTRO_TELEMETRY_DISABLED=1 astro build && node scripts/audit_release.mjs --output",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
     "preview:network": "ASTRO_TELEMETRY_DISABLED=1 astro preview --host",
     "astro": "astro"
@@ -42,7 +46,8 @@
     "satori": "^0.33.4",
     "sharp": "^0.35.4",
     "tailwindcss": "^4.3.3",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "yaml": "^2.9.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",

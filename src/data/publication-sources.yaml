@@ -1,0 +1,26 @@
+# Canonical publication inputs. DOI/arXiv and an optional verified code URL are
+# the only fields needed for new entries. Three archive-only flags are retained.
+papers:
+  - doi: 10.64898/2026.07.21.739736
+    code: https://github.com/Yaxin-Xu/Tx2Mol
+  - doi: 10.1093/bioinformatics/btag550
+    code: https://github.com/AI-HPC-Research-Team/BioMol-LLM-Bench
+  - doi: 10.1021/acs.jcim.5c03204
+  - doi: 10.64898/2026.05.12.724472
+  - doi: 10.64898/2026.03.05.709973
+    code: https://github.com/AI-HPC-Research-Team/scEvolver
+  - doi: 10.1016/j.engappai.2025.111112
+    code: https://github.com/AI-HPC-Research-Team/SLM4CRP
+  - doi: 10.1016/j.engappai.2025.110977
+  - doi: 10.1021/acs.jcim.5c00623
+    featured: false
+  - doi: 10.1007/s10489-025-06768-9
+    featured: false
+  - doi: 10.1093/bib/bbaf319
+    featured: false
+  - arxiv: "2603.12885"
+    code: https://github.com/AI-HPC-Research-Team/Drug_drug_interaction_with_LLM
+  - arxiv: "2605.23960"
+    code: https://github.com/AI-HPC-Research-Team/ProtDiS
+  - arxiv: "2603.12808"
+    code: https://github.com/AI-HPC-Research-Team/Mol-Reasoning

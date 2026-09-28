@@ -1,51 +1,8 @@
-import { readFile, rename, writeFile } from "node:fs/promises"
-import path from "node:path"
-import process from "node:process"
-
-const PUBLICATIONS_FILE = path.resolve("src/content/publications.md")
 const PROFILE_ORCID = "0000-0002-4104-3790"
 const PROFILE_NAMES = new Set(["zhixiang ren", "ren zhixiang"])
 const USER_AGENT = "ZhixiangRenAcademicSite/1.0 (+https://github.com/AI-HPC-Research-Team)"
 
-const usage = `Usage:
-  npm run add-paper -- <DOI|arXiv ID> [options]
-
-Options:
-  --zh-title <title>  Set the Chinese title (defaults to the official title)
-  --not-featured      Import without showing the paper on the homepage
-  --check             Validate remote metadata without printing or writing YAML
-  --dry-run           Print the generated YAML without changing the file
-  --help              Show this help
-
-Examples:
-  npm run add-paper -- 10.1038/s41586-024-00000-0 --zh-title "中文标题"
-  npm run add-paper -- 2603.12808 --dry-run`
-
-function parseArguments(argv) {
-  const options = { input: "", zhTitle: "", featured: true, check: false, dryRun: false }
-  for (let index = 0; index < argv.length; index += 1) {
-    const value = argv[index]
-    if (value === "--help" || value === "-h") {
-      console.log(usage)
-      process.exit(0)
-    }
-    if (value === "--dry-run") options.dryRun = true
-    else if (value === "--check") options.check = true
-    else if (value === "--not-featured") options.featured = false
-    else if (value === "--zh-title") {
-      options.zhTitle = argv[index + 1] ?? ""
-      index += 1
-      if (!options.zhTitle) throw new Error("--zh-title requires a value")
-    } else if (value.startsWith("--zh-title=")) options.zhTitle = value.slice(11)
-    else if (value.startsWith("-")) throw new Error(`Unknown option: ${value}`)
-    else if (!options.input) options.input = value
-    else throw new Error(`Unexpected argument: ${value}`)
-  }
-  if (!options.input) throw new Error("Provide a DOI or arXiv identifier")
-  return options
-}
-
-function normalizeIdentifier(input) {
+export function normalizeIdentifier(input) {
   const decoded = decodeURIComponent(input.trim())
   const withoutQuery = decoded.split(/[?#]/, 1)[0]
   const doi = withoutQuery
@@ -167,7 +124,7 @@ async function fetchBibtex(doi) {
   }
 }
 
-async function fetchCrossref(doi) {
+export async function fetchCrossref(doi) {
   const response = await request(`https://api.crossref.org/works/${encodeURIComponent(doi)}`)
   const payload = await response.json()
   const item = payload?.message
@@ -228,7 +185,7 @@ function arxivBibtex(metadata, arxivId, category) {
   return `@misc{${key},\n  title = {${metadata.title}},\n  author = {${metadata.authors.map(({ name }) => name).join(" and ")}},\n  year = {${metadata.date.slice(0, 4)}},\n  eprint = {${arxivId}},\n  archivePrefix = {arXiv}${category ? `,\n  primaryClass = {${category}}` : ""}\n}`
 }
 
-async function fetchArxiv(arxivId) {
+export async function fetchArxiv(arxivId) {
   const response = await request(
     `https://export.arxiv.org/api/query?id_list=${encodeURIComponent(arxivId)}`,
   )
@@ -272,7 +229,7 @@ function yamlBlock(value, indentation = 6) {
     .join("\n")}`
 }
 
-function toYaml(metadata, options) {
+export function toYaml(metadata, options) {
   const authors = metadata.authors
     .map((author) => {
       const principal = isPrincipalAuthor(author) ? ", principal: true" : ""
@@ -295,62 +252,3 @@ ${metadata.venueShort ? `    venueShort: ${quote(metadata.venueShort)}\n` : ""} 
 ${links}
     featured: ${options.featured}`
 }
-
-function duplicateNeedle(identifier) {
-  return identifier.type === "doi"
-    ? `https://doi.org/${identifier.value}`.toLowerCase()
-    : `https://arxiv.org/abs/${identifier.value}`.toLowerCase()
-}
-
-async function appendToCollection(snippet, identifier) {
-  const existing = await readFile(PUBLICATIONS_FILE, "utf8")
-  if (existing.toLowerCase().includes(duplicateNeedle(identifier))) {
-    throw new Error(`${identifier.value} already exists in publications.md`)
-  }
-  const closingFence = existing.lastIndexOf("\n---")
-  if (!existing.startsWith("---\n") || closingFence < 4 || !existing.includes("\npapers:\n")) {
-    throw new Error("publications.md does not contain the expected frontmatter and papers array")
-  }
-  const updated = `${existing.slice(0, closingFence).trimEnd()}\n\n${snippet}\n---${existing.slice(closingFence + 4)}`
-  const temporary = `${PUBLICATIONS_FILE}.tmp`
-  await writeFile(temporary, updated, "utf8")
-  await rename(temporary, PUBLICATIONS_FILE)
-}
-
-async function main() {
-  const options = parseArguments(process.argv.slice(2))
-  const identifier = normalizeIdentifier(options.input)
-  console.log(
-    `Fetching ${identifier.type === "doi" ? "Crossref" : "arXiv"} metadata for ${identifier.value}...`,
-  )
-  const metadata =
-    identifier.type === "doi"
-      ? await fetchCrossref(identifier.value)
-      : await fetchArxiv(identifier.value)
-  const snippet = toYaml(metadata, options)
-  if (options.check) {
-    console.log(
-      `Validated: ${metadata.title} · ${metadata.date.slice(0, 4)} · ${metadata.venueShort || metadata.venue} · ${metadata.authors.length} authors${metadata.bibtex ? " · BibTeX" : ""}`,
-    )
-    return
-  }
-  if (options.dryRun) {
-    console.log(`\n${snippet}\n`)
-    return
-  }
-  await appendToCollection(snippet, identifier)
-  console.log(`Added “${metadata.title}” to src/content/publications.md`)
-  if (!options.zhTitle)
-    console.warn(
-      "Chinese title defaults to the official title; translate the zh field before publishing if needed.",
-    )
-  if (!metadata.authors.some(isPrincipalAuthor))
-    console.warn(
-      "Zhixiang Ren was not identified automatically; review the authors and principal flag.",
-    )
-}
-
-main().catch((error) => {
-  console.error(`Failed to add publication: ${error.message}`)
-  process.exitCode = 1
-})

@@ -12,7 +12,7 @@ Built with [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.
 
 - **One bilingual page** — English and Chinese use the same validated content sources, with persistent language and light/dark theme controls.
 - **Content-first maintenance** — profile, biography, experience, services, honors, recruitment, and publications use Astro's Content Layer rather than page templates.
-- **Academic publication workflow** — all publications are maintained in one Markdown file; a local command can import DOI or arXiv metadata, authors, venue information, links, and BibTeX.
+- **Academic publication workflow** — maintain a compact DOI/arXiv + optional code-link YAML list; a sync command generates the publication snapshot with authors, venue, official abbreviations, and BibTeX.
 - **Static Scholar metrics** — a weekly Action persists validated citation metrics in Git, and the site renders them without visitor-side requests to Google Scholar.
 - **Search and AI discoverability** — the build produces a sitemap, `robots.txt`, generated `llms.txt`, Schema.org JSON-LD, canonical metadata, and a branded Open Graph card.
 - **Release-ready static output** — responsive layouts, a bilingual 404 page, protected contact access, source/output privacy audits, and GitHub Pages automation are included.
@@ -52,17 +52,18 @@ npm run preview
 
 ## Common commands
 
-| Command                             | Purpose                                                 |
-| ----------------------------------- | ------------------------------------------------------- |
-| `npm run dev`                       | Start the local development server                      |
-| `npm run dev:network`               | Expose development preview to the local network         |
-| `npm run build`                     | Run release audits, checks, and the production build    |
-| `npm run preview`                   | Preview the generated production site                   |
-| `npm run check`                     | Check Prettier, Astro/TypeScript, and Scholar parser    |
-| `npm run check:web`                 | Check Prettier formatting and Astro/TypeScript          |
-| `npm run format`                    | Format code, content data, and documentation            |
-| `npm run add-paper -- <DOI\|arXiv>` | Import one publication into the shared publication file |
-| `npm run fetch:scholar`             | Refresh local Scholar metrics                           |
+| Command                             | Purpose                                              |
+| ----------------------------------- | ---------------------------------------------------- |
+| `npm run dev`                       | Start the local development server                   |
+| `npm run dev:network`               | Expose development preview to the local network      |
+| `npm run build`                     | Run release audits, checks, and the production build |
+| `npm run preview`                   | Preview the generated production site                |
+| `npm run check`                     | Check Prettier, Astro/TypeScript, and Scholar parser |
+| `npm run check:web`                 | Check Prettier formatting and Astro/TypeScript       |
+| `npm run format`                    | Format code, content data, and documentation         |
+| `npm run add-paper -- <DOI\|arXiv>` | Add one identifier to the publication source list    |
+| `npm run sync:papers`               | Update the generated snapshot from the YAML list     |
+| `npm run fetch:scholar`             | Refresh local Scholar metrics                        |
 
 ## Day-to-day content maintenance
 
@@ -76,17 +77,18 @@ Most editorial changes require no component work:
 | Editorial and reviewing service                         | [`src/content/academic-services.yaml`](./src/content/academic-services.yaml)         |
 | Representative honors                                   | [`src/content/representative-honors.yaml`](./src/content/representative-honors.yaml) |
 | Recruitment and collaboration message                   | [`src/content/open-positions.md`](./src/content/open-positions.md)                   |
-| Complete publication dataset                            | [`src/content/publications.md`](./src/content/publications.md)                       |
+| Publication inputs (edit here)                          | [`src/data/publication-sources.yaml`](./src/data/publication-sources.yaml)           |
+| Generated publication snapshot                          | [`src/content/publications.md`](./src/content/publications.md)                       |
 | Fallback Scholar statistics                             | [`src/content/scholar.json`](./src/content/scholar.json)                             |
 
 Bilingual fields use `{ en: ..., zh: ... }`. Update both languages together. Publication titles intentionally remain in their official English form in both interface languages.
 
 ### Add a publication
 
-Import metadata from a DOI or arXiv identifier:
+Add a DOI or arXiv ID, optionally with a verified code repository:
 
 ```sh
-npm run add-paper -- 10.1021/acs.jcim.5c03204
+npm run add-paper -- 10.1021/acs.jcim.5c03204 --code https://github.com/example/project
 npm run add-paper -- 2603.12808
 ```
 
@@ -94,10 +96,13 @@ Inspect an entry without changing the content file:
 
 ```sh
 npm run add-paper -- 2603.12808 --dry-run
-npm run add-paper -- 10.1021/acs.jcim.5c03204 --check
+npm run sync:papers
+npm run check:papers
 ```
 
-The importer appends to the single `publications.md` collection and rejects duplicate identifiers. After import, review the publication status, author order, principal-author flag, venue abbreviation, BibTeX, and links. Add a code repository only after its README or publication confirms the association. Set `featured: false` when a paper should not appear in the ten-item homepage selection.
+The YAML source is the human-maintained list. The build runs `sync:papers`, reusing the existing generated snapshot and fetching metadata only for new IDs; `npm run sync:papers -- --refresh` explicitly refetches all metadata. Existing papers build offline, while a newly added identifier needs API access once. After import, review publication status, author order, principal-author flag, venue abbreviation, and BibTeX. Add a code repository only after its README or publication confirms the association. Set `featured: false` in the YAML only when a paper should not appear in the ten-item homepage selection. Both UI languages show the official English paper title.
+
+The post-build release audit also checks external links in generated HTML and all publication links. It retries HEAD failures with a minimal GET; confirmed 404/410 links are warnings, while rate limits and network blocks are reported as unverified rather than breaking deployment. Run `npm run check:links` separately against an existing `dist/` when needed.
 
 Crossref metadata distinguishes published work from repositories such as bioRxiv. Published journals prefer an official short title and fall back to an ISO 4 abbreviation service; failed optional lookups keep the full venue rather than guessing.
 
