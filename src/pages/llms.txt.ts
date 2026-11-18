@@ -71,12 +71,15 @@ const honorLines = honors
 const recentPapers = publicationsEntry.data.papers
   .filter((paper) => paper.featured)
   .sort((a, b) => b.date.getTime() - a.date.getTime())
+  .slice(0, 10)
   .map((paper) => {
     const authors = paper.authors.map((author) => author.name).join(", ")
     const links = Object.values(paper.links).filter(Boolean).join("; ")
-    return `- ${paper.date.getFullYear()} — ${paper.title.en}. ${authors}. ${paper.venue}${paper.status ? ` (${paper.status.en})` : ""}${links ? `. ${links}` : ""}`
+    const entry = `- ${paper.date.getUTCFullYear()} — ${paper.title.en}. ${authors}. ${paper.venue}${paper.status ? ` (${paper.status.en})` : ""}${links ? `. ${links}` : ""}`
+    const abstract = paper.abstract?.trim()
+    return abstract ? `${entry}\n\n  Abstract: ${abstract}` : entry
   })
-  .join("\n")
+  .join("\n\n")
 
 const academicRoles = profile.academicRoles
   .map((role) => `${role.title.en}, ${role.organization.en}`)
@@ -140,7 +143,7 @@ ${recentPapers}
 
 ## Source and Freshness Policy
 
-- This profile contains only information already published on the official homepage.
+- Profile details match the public homepage. Publication abstracts, when available, come from Crossref or arXiv.
 - Time-sensitive claims should be checked against the homepage and linked identity profiles.
 - Citation metrics originate from Google Scholar and may differ from OpenAlex or other databases because their coverage and counting methods differ.
 - A listed award or infrastructure contribution should not be expanded into broader claims of institutional leadership without an additional primary source.
