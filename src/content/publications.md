@@ -65,6 +65,9 @@ papers:
     venueShort: "Drug Discov. Today"
     status: { en: "Published", zh: "已发表" }
     source: crossref
+    abstractFallback:
+      summary: "This review surveys how AI can help design drugs that bring biomolecules together to change their function. It covers target and partner selection, prediction of complex structures, and candidate design across degradative and nondegradative approaches. The authors emphasize benchmarks grounded in mechanism, analysis of failed predictions, and early evaluation of whether candidates are practical to develop."
+      url: "https://pubmed.ncbi.nlm.nih.gov/42705572/"
     bibtex: |-
       @article{Wu_2026,
         title={Artificial intelligence-enabled induced-proximity drug discovery: Designing productive molecular associations},
@@ -146,6 +149,9 @@ papers:
     venueShort: "J. Chem. Inf. Model."
     status: { en: "Published", zh: "已发表" }
     source: crossref
+    abstractFallback:
+      summary: "The authors present a module that helps enzyme kinetics predictors generalize to enzymes with sequences unlike those in their training data. It trains models to learn consistent representations from original and perturbed enzyme–substrate pairs. Across benchmarks defined by sequence similarity, adding the module improved estimates of turnover rates and Michaelis constants."
+      url: "https://pubmed.ncbi.nlm.nih.gov/42037561/"
     bibtex: |-
       @article{Wu_2026, title={Pseudodata-Guided Invariant Representation Learning Boosts the Out-of-Distribution Generalization in Enzymatic Kinetic Parameter Prediction}, volume={66}, ISSN={1549-960X}, url={http://dx.doi.org/10.1021/acs.jcim.5c03204}, DOI={10.1021/acs.jcim.5c03204}, number={9}, journal={Journal of Chemical Information and Modeling}, publisher={American Chemical Society (ACS)}, author={Wu, Haomin and Nie, Zhiwei and Zhang, Hongyu and Ren, Zhixiang}, year={2026}, month=Apr, pages={5068–5077} }
     links:

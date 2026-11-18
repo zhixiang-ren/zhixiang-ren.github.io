@@ -230,6 +230,10 @@ function yamlBlock(value, indentation = 6) {
 }
 
 export function toYaml(metadata, options) {
+  const fallback = options.abstractFallback
+  const fallbackBlock = fallback
+    ? `\n    abstractFallback:\n      summary: ${quote(fallback.summary)}\n      url: ${quote(fallback.url)}`
+    : ""
   const authors = metadata.authors
     .map((author) => {
       const principal = isPrincipalAuthor(author) ? ", principal: true" : ""
@@ -247,7 +251,7 @@ export function toYaml(metadata, options) {
 ${authors}
     venue: ${quote(metadata.venue)}
 ${metadata.venueShort ? `    venueShort: ${quote(metadata.venueShort)}\n` : ""}    status: { en: ${quote(metadata.statusEn)}, zh: ${quote(metadata.statusZh)} }
-    source: ${metadata.source}${metadata.abstract ? `\n    abstract: ${quote(metadata.abstract)}` : ""}${yamlBlock(metadata.bibtex)}
+    source: ${metadata.source}${metadata.abstract ? `\n    abstract: ${quote(metadata.abstract)}` : ""}${fallbackBlock}${yamlBlock(metadata.bibtex)}
     links:
 ${links}
     featured: ${options.featured}`

@@ -77,7 +77,11 @@ const recentPapers = publicationsEntry.data.papers
     const links = Object.values(paper.links).filter(Boolean).join("; ")
     const entry = `- ${paper.date.getUTCFullYear()} — ${paper.title.en}. ${authors}. ${paper.venue}${paper.status ? ` (${paper.status.en})` : ""}${links ? `. ${links}` : ""}`
     const abstract = paper.abstract?.trim()
-    return abstract ? `${entry}\n\n  Abstract: ${abstract}` : entry
+    if (abstract) return `${entry}\n\n  Abstract: ${abstract}`
+    const fallback = paper.abstractFallback
+    return fallback
+      ? `${entry}\n\n  Abstract summary: ${fallback.summary} (Source: ${fallback.url})`
+      : entry
   })
   .join("\n\n")
 
@@ -143,7 +147,7 @@ ${recentPapers}
 
 ## Source and Freshness Policy
 
-- Profile details match the public homepage. Publication abstracts, when available, come from Crossref or arXiv.
+- Profile details match the public homepage. Publication abstracts come from Crossref or arXiv when available. Editorial summaries link to their sources.
 - Time-sensitive claims should be checked against the homepage and linked identity profiles.
 - Citation metrics originate from Google Scholar and may differ from OpenAlex or other databases because their coverage and counting methods differ.
 - A listed award or infrastructure contribution should not be expanded into broader claims of institutional leadership without an additional primary source.

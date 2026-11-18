@@ -21,7 +21,7 @@ function key(identifier) {
 function validateEntry(entry, index) {
   if (!entry || typeof entry !== "object" || Array.isArray(entry))
     throw new Error(`papers[${index}] must be an object`)
-  const allowed = new Set(["doi", "arxiv", "code", "featured"])
+  const allowed = new Set(["doi", "arxiv", "code", "featured", "abstractFallback"])
   for (const field of Object.keys(entry))
     if (!allowed.has(field)) throw new Error(`papers[${index}] has unsupported field ${field}`)
   if (Boolean(entry.doi) === Boolean(entry.arxiv))
@@ -36,6 +36,17 @@ function validateEntry(entry, index) {
   }
   if (entry.featured !== undefined && typeof entry.featured !== "boolean")
     throw new Error(`papers[${index}] featured must be true or false`)
+  const fallback = entry.abstractFallback
+  if (
+    fallback !== undefined &&
+    (!fallback ||
+      Object.keys(fallback).length !== 2 ||
+      typeof fallback.summary !== "string" ||
+      !fallback.summary.trim() ||
+      typeof fallback.url !== "string" ||
+      new URL(fallback.url).protocol !== "https:")
+  )
+    throw new Error(`papers[${index}] abstractFallback needs a summary and an HTTPS source URL`)
   return identifier
 }
 
@@ -67,6 +78,8 @@ function snapshotMatches(record, entry) {
   return (
     (record.paper.links?.code ?? null) === (entry.code ?? null) &&
     record.paper.featured === (entry.featured ?? true) &&
+    record.paper.abstractFallback?.summary === entry.abstractFallback?.summary &&
+    record.paper.abstractFallback?.url === entry.abstractFallback?.url &&
     record.paper.title?.zh === record.paper.title?.en
   )
 }
@@ -169,7 +182,7 @@ async function main() {
             bibtex: paper.bibtex,
             links: paper.links,
           },
-          { featured: paper.featured },
+          { featured: paper.featured, abstractFallback: entry.abstractFallback },
         ),
       )
       continue
@@ -177,7 +190,12 @@ async function main() {
     console.log(`Fetching ${identifier.type} metadata for ${identifier.value}...`)
     const metadata = await fetchPaper(identifier)
     if (entry.code) metadata.links.code = entry.code
-    chunks.push(toYaml(metadata, { featured: entry.featured ?? true }))
+    chunks.push(
+      toYaml(metadata, {
+        featured: entry.featured ?? true,
+        abstractFallback: entry.abstractFallback,
+      }),
+    )
   }
   const updated = `${snapshot.prefix}\n${chunks.join("\n\n")}\n---${snapshot.suffix}`
   if (dryRun) {

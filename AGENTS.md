@@ -367,7 +367,7 @@ The importer:
 
 `--dry-run` prints candidate YAML without writing. `sync:papers` reuses the checked-in snapshot and only fetches new identifiers; `--refresh` explicitly refetches all. `check:papers` checks source/snapshot consistency offline. The existing Crossref official-short-title → ISO 4 abbreviation → full-title fallback must remain intact; do not guess conference abbreviations by keyword. English titles are canonical in both interface languages; do not require Chinese paper titles. Always inspect imported author names, publication status, venue casing, links, and BibTeX before publishing. Automatically retrieved metadata is not automatically authoritative.
 
-For bioRxiv or other repositories not directly handled by the importer, add/review the item manually and set the platform, status, and label semantics accurately.
+Treat `publications.md` as generated. Make publication and bibliography changes through `npm run add-paper` or the canonical `publication-sources.yaml` followed by `npm run sync:papers`. For missing abstracts, an `abstractFallback` source entry can contain an editorial `summary` and the verified PubMed or publisher `url`. The script carries it into the snapshot for RSS and `llms.txt`. Homepage components display neither abstracts nor these summaries.
 
 ## 10. Scholar metrics routine
 

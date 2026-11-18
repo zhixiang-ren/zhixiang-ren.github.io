@@ -4,11 +4,28 @@ papers:
   - arxiv: "2611.13534"
   - arxiv: "2610.27789"
   - doi: 10.1016/j.drudis.2026.104796
+    abstractFallback:
+      summary: >-
+        This review surveys how AI can help design drugs that bring biomolecules
+        together to change their function. It covers target and partner selection,
+        prediction of complex structures, and candidate design across degradative
+        and nondegradative approaches. The authors emphasize benchmarks grounded in
+        mechanism, analysis of failed predictions, and early evaluation of whether
+        candidates are practical to develop.
+      url: https://pubmed.ncbi.nlm.nih.gov/42705572/
   - doi: 10.64898/2026.07.21.739736
     code: https://github.com/Yaxin-Xu/Tx2Mol
   - doi: 10.1093/bioinformatics/btag550
     code: https://github.com/AI-HPC-Research-Team/BioMol-LLM-Bench
   - doi: 10.1021/acs.jcim.5c03204
+    abstractFallback:
+      summary: >-
+        The authors present a module that helps enzyme kinetics predictors generalize
+        to enzymes with sequences unlike those in their training data. It trains
+        models to learn consistent representations from original and perturbed
+        enzyme–substrate pairs. Across benchmarks defined by sequence similarity,
+        adding the module improved estimates of turnover rates and Michaelis constants.
+      url: https://pubmed.ncbi.nlm.nih.gov/42037561/
   - doi: 10.64898/2026.05.12.724472
   - doi: 10.64898/2026.03.05.709973
     code: https://github.com/AI-HPC-Research-Team/scEvolver

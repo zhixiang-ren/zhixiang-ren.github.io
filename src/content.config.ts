@@ -113,6 +113,9 @@ const publications = defineCollection({
           venueShort: z.string().optional(),
           status: localizedText.optional(),
           abstract: z.string().optional(),
+          abstractFallback: z
+            .object({ summary: z.string().trim().min(1), url: z.url() })
+            .optional(),
           bibtex: z.string().optional(),
           source: z.enum(["crossref", "arxiv", "manual"]).default("manual"),
           links: z

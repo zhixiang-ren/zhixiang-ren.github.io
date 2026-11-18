@@ -36,7 +36,11 @@ const items = papers
     const publication = [paper.venue, paper.status?.en, String(paper.date.getUTCFullYear())]
       .filter(Boolean)
       .join(" · ")
-    const description = [authors, publication, paper.abstract?.trim()].filter(Boolean).join("\n\n")
+    const fallback = paper.abstractFallback
+    const abstract =
+      paper.abstract?.trim() ||
+      (fallback ? `Abstract summary: ${fallback.summary} (Source: ${fallback.url})` : "")
+    const description = [authors, publication, abstract].filter(Boolean).join("\n\n")
     const guid = paper.links.doi ?? paper.links.arxiv ?? `${paper.date.toISOString()}:${title}`
 
     return `    <item>
