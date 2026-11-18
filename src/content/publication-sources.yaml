@@ -1,6 +1,9 @@
 # Canonical publication inputs. DOI/arXiv and an optional verified code URL are
-# the only fields needed for new entries. Three archive-only flags are retained.
+# the only fields needed for new entries. Use featured: false to keep a paper off the homepage.
 papers:
+  - arxiv: "2611.13534"
+  - arxiv: "2610.27789"
+  - doi: 10.1016/j.drudis.2026.104796
   - doi: 10.64898/2026.07.21.739736
     code: https://github.com/Yaxin-Xu/Tx2Mol
   - doi: 10.1093/bioinformatics/btag550
@@ -9,9 +12,12 @@ papers:
   - doi: 10.64898/2026.05.12.724472
   - doi: 10.64898/2026.03.05.709973
     code: https://github.com/AI-HPC-Research-Team/scEvolver
+    featured: false
   - doi: 10.1016/j.engappai.2025.111112
     code: https://github.com/AI-HPC-Research-Team/SLM4CRP
+    featured: false
   - doi: 10.1016/j.engappai.2025.110977
+    featured: false
   - doi: 10.1021/acs.jcim.5c00623
     featured: false
   - doi: 10.1007/s10489-025-06768-9
@@ -22,5 +28,5 @@ papers:
     code: https://github.com/AI-HPC-Research-Team/Drug_drug_interaction_with_LLM
   - arxiv: "2605.23960"
     code: https://github.com/AI-HPC-Research-Team/ProtDiS
-  - arxiv: "2603.12808"
+  - doi: 10.1021/acs.jpclett.6c02427
     code: https://github.com/AI-HPC-Research-Team/Mol-Reasoning

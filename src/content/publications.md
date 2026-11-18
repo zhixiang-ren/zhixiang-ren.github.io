@@ -2,6 +2,88 @@
 # Generated publication snapshot. Edit src/content/publication-sources.yaml and
 # run `npm run sync:papers`; do not hand-edit this file.
 papers:
+  - date: 2026-11-10
+    title:
+      en: "Beyond the Log-Linear Frontier: Pre-Asymptotic Analysis of Finite-Budget Neural Scaling Laws"
+      zh: "Beyond the Log-Linear Frontier: Pre-Asymptotic Analysis of Finite-Budget Neural Scaling Laws"
+    authors:
+      - { name: "Tianyu Zhao" }
+      - { name: "Zhixiang Ren", principal: true }
+    venue: "arXiv"
+    status: { en: "Preprint", zh: "预印本" }
+    source: arxiv
+    abstract: "Classical neural scaling laws model excess risk as a separable power law in model capacity $N$ and dataset size $D$. At finite budgets, however, empirical learning curves and compute-optimal allocations depart from this log-linear frontier. This paper analyzes how spectral and domain heterogeneity govern these finite-scale departures. Along the capacity axis, Mellin--Barnes analysis of covariance resolvents yields a three-term expansion where competing spectral and regularization modes produce finite-scale curvature and logarithmic transitions. Because fitting multiple power laws on narrow pilot grids is ill-conditioned, we eliminate the loss floor via first-order Aitken differencing to obtain a well-conditioned closed-form initializer. Along the data axis, KKT duality reduces $K$-domain mixing to scalar water-filling, yielding finite-budget bottleneck bounds, an online sampling curriculum, and a simplex Hessian metric for cross-domain transfer. Along the iso-compute frontier $C=6ND$, we prove that the optimal allocation exponent drifts in proportion to capacity and data exponent variances, while Schur-complement reduction separates intrinsic drift from frozen-hyperparameter bias. Across 45 operator spectra, Pythia (70M--12B), Chinchilla (245 runs), and RegMix (17 domains), our estimators achieve $5.89\\%$ holdout MAPE, cut high-compute allocation regret by up to $76.4\\%$, and reduce cross-scale mixture RMSE by $59.4\\%$ with zero selection regret."
+    bibtex: |-
+      @misc{Zhao2026Beyond,
+        title = {Beyond the Log-Linear Frontier: Pre-Asymptotic Analysis of Finite-Budget Neural Scaling Laws},
+        author = {Tianyu Zhao and Zhixiang Ren},
+        year = {2026},
+        eprint = {2611.13534},
+        archivePrefix = {arXiv},
+        primaryClass = {cs.LG}
+      }
+    links:
+      arxiv: "https://arxiv.org/abs/2611.13534"
+    featured: true
+
+  - date: 2026-10-20
+    title:
+      en: "Foundations of the Scaling Law"
+      zh: "Foundations of the Scaling Law"
+    authors:
+      - { name: "Tianyu Zhao" }
+      - { name: "Zhixiang Ren", principal: true }
+    venue: "arXiv"
+    status: { en: "Preprint", zh: "预印本" }
+    source: arxiv
+    abstract: "Empirical scaling laws relate loss to parameters $N$, training tokens $D$ and compute $C$. This technical note explains three mechanisms behind their exponents. Local approximation bounds function error at rate $N_e^{-γs/d}$, with effective parameters $N_e$, smoothness $s$, reuse exponent $γ$ and dimension $d$; the loss function determines the risk bound. Independent feature coverage gives $α_D=(β-1)/ζ$ from predictive-weight decay $β$ and occurrence rarity $ζ$. Separable-loss optimization determines training allocations and deployment crossovers. Nonlinear scoring can produce apparent emergent abilities, while grokking concerns delayed generalization and verification constrains test-time scaling. For regular molecular configurations, the $\\mathrm{SE}(3)$ quotient gives $d_{\\mathrm{int}}=d-6$ and relative approximation-exponent gain $6/d_{\\mathrm{int}}$. Optimized dense-to-equivariant excess-loss ratios scale as $C^{p_{\\mathrm{eq}}-p_{\\mathrm{dense}}}$, where $p_j$ are compute-loss exponents and the prefactor depends on loss amplitudes and FLOP costs. Domain examples also cover visual resolution, conformational coverage and correlated-sample precision."
+    bibtex: |-
+      @misc{Zhao2026Foundations,
+        title = {Foundations of the Scaling Law},
+        author = {Tianyu Zhao and Zhixiang Ren},
+        year = {2026},
+        eprint = {2610.27789},
+        archivePrefix = {arXiv},
+        primaryClass = {cs.LG}
+      }
+    links:
+      arxiv: "https://arxiv.org/abs/2610.27789"
+    featured: true
+
+  - date: 2026-09-07
+    title:
+      en: "Artificial intelligence-enabled induced-proximity drug discovery: Designing productive molecular associations"
+      zh: "Artificial intelligence-enabled induced-proximity drug discovery: Designing productive molecular associations"
+    authors:
+      - { name: "Haomin Wu" }
+      - { name: "Yaxin Xu" }
+      - { name: "Zhiwei Nie" }
+      - { name: "Zhongyang Zhou" }
+      - { name: "Zhengyu Ma" }
+      - { name: "Zhixiang Ren", principal: true }
+    venue: "Drug Discovery Today"
+    venueShort: "Drug Discov. Today"
+    status: { en: "Published", zh: "已发表" }
+    source: crossref
+    bibtex: |-
+      @article{Wu_2026,
+        title={Artificial intelligence-enabled induced-proximity drug discovery: Designing productive molecular associations},
+        volume={31},
+        ISSN={1359-6446},
+        url={http://dx.doi.org/10.1016/j.drudis.2026.104796},
+        DOI={10.1016/j.drudis.2026.104796},
+        number={6},
+        journal={Drug Discovery Today},
+        publisher={Elsevier BV},
+        author={Wu, Haomin and Xu, Yaxin and Nie, Zhiwei and Zhou, Zhongyang and Ma, Zhengyu and Ren, Zhixiang},
+        year={2026},
+        month=Dec,
+        pages={104796}
+      }
+    links:
+      doi: "https://doi.org/10.1016/j.drudis.2026.104796"
+    featured: true
+
   - date: 2026-07-24
     title:
       en: "Phenotype-driven de novo molecular design from gene expression signatures"
@@ -114,7 +196,7 @@ papers:
     links:
       doi: "https://doi.org/10.64898/2026.03.05.709973"
       code: "https://github.com/AI-HPC-Research-Team/scEvolver"
-    featured: true
+    featured: false
 
   - date: 2025-09-01
     title:
@@ -133,7 +215,7 @@ papers:
     links:
       doi: "https://doi.org/10.1016/j.engappai.2025.111112"
       code: "https://github.com/AI-HPC-Research-Team/SLM4CRP"
-    featured: true
+    featured: false
 
   - date: 2025-09-01
     title:
@@ -154,7 +236,7 @@ papers:
       @article{Wang_2025, title={Deep learning methods for protein representation and function prediction: A comprehensive overview}, volume={155}, ISSN={0952-1976}, url={http://dx.doi.org/10.1016/j.engappai.2025.110977}, DOI={10.1016/j.engappai.2025.110977}, journal={Engineering Applications of Artificial Intelligence}, publisher={Elsevier BV}, author={Wang, Mingqing and Nie, Zhiwei and He, Yonghong and Vasilakos, Athanasios V. and Cheng, Qiang (Shawn) and Ren, Zhixiang}, year={2025}, month=Sept, pages={110977} }
     links:
       doi: "https://doi.org/10.1016/j.engappai.2025.110977"
-    featured: true
+    featured: false
 
   - date: 2025-08-11
     title:
@@ -290,30 +372,42 @@ papers:
       code: "https://github.com/AI-HPC-Research-Team/ProtDiS"
     featured: true
 
-  - date: 2026-03-13
+  - date: 2026-08-17
     title:
-      en: "A Multi-task Large Reasoning Model for Molecular Science"
-      zh: "A Multi-task Large Reasoning Model for Molecular Science"
+      en: "A Multitask Large Reasoning Model for Molecular Science"
+      zh: "A Multitask Large Reasoning Model for Molecular Science"
     authors:
       - { name: "Pengfei Liu" }
       - { name: "Shuang Ge" }
+      - { name: "Xiaobo Wang" }
+      - { name: "Xin Liu" }
       - { name: "Jun Tao" }
+      - { name: "Yan Li" }
+      - { name: "Chao Liu" }
+      - { name: "Ling Chen" }
       - { name: "Zhixiang Ren", principal: true }
-    venue: "arXiv"
-    status: { en: "Preprint", zh: "预印本" }
-    source: arxiv
-    abstract: "Advancements in artificial intelligence for molecular science are necessitating a paradigm shift from purely data-driven predictions to knowledge-guided computational reasoning. Existing molecular models are predominantly proprietary, lacking general molecular intelligence and generalizability. This underscores the necessity for computational methods that can effectively integrate scientific logic with deep learning architectures. Here we introduce a multi-task large reasoning model designed to emulate the cognitive processes of molecular scientists through structured reasoning and reflection. Our approach incorporates multi-specialist modules to provide versatile molecular expertise and a chain-of-thought (CoT) framework enhanced by reinforcement learning infused with molecular knowledge, enabling structured and reflective reasoning. Systematic evaluations across 10 molecular tasks and 47 metrics demonstrate that our model achieves an average 50.3% improvement over the base architecture, outperforming over 20 state-of-the-art baselines, including ultra-large-parameter foundation models, despite using significantly fewer training data and computational resources. This validates that embedding explicit reasoning mechanisms enables high-efficiency learning, allowing smaller-scale models to surpass massive counterparts in both efficacy and interpretability. The practical utility of this computational framework was validated through a case study on the design of central nervous system (CNS) drug candidates, illustrating its capacity to bridge data-driven and knowledge-integrated approaches for intelligent molecular design."
+    venue: "The Journal of Physical Chemistry Letters"
+    venueShort: "J. Phys. Chem. Lett."
+    status: { en: "Published", zh: "已发表" }
+    source: crossref
+    abstract: "Abstract Artificial intelligence in molecular science must move beyond pattern recognition toward chemically valid and interpretable reasoning. We present a task-adaptive large reasoning model that integrates chemical knowledge through a synergistic multispecialist architecture, chain-of-thought supervision, and molecule-informed reinforcement learning. Task-conditioned routing coordinates prediction and inference specialists across 10 molecular tasks spanning molecular description and generation, nomenclature translation, property prediction, and reaction prediction. The model outperforms more than 20 general-purpose and molecular large language models, improves aggregate performance over the base model by 50.3%, and surpasses the leading molecular multitask baseline on most tasks. Analyses of specialist representations and reasoning pathways reveal task-specific adaptation while retaining interpretable chemical inference. A case study further demonstrates an integrated workflow for central nervous system candidate generation, property screening, molecular interpretation, and retrosynthetic planning. These results demonstrate a versatile multitask framework for knowledge-guided molecular reasoning and design, with the potential to serve as a core task engine for future molecular science agents."
     bibtex: |-
-      @misc{Liu2026Multitask,
-        title = {A Multi-task Large Reasoning Model for Molecular Science},
-        author = {Pengfei Liu and Shuang Ge and Jun Tao and Zhixiang Ren},
-        year = {2026},
-        eprint = {2603.12808},
-        archivePrefix = {arXiv},
-        primaryClass = {cs.LG}
+      @article{Liu_2026,
+        title={A Multitask Large Reasoning Model for Molecular Science},
+        volume={17},
+        ISSN={1948-7185},
+        url={http://dx.doi.org/10.1021/acs.jpclett.6c02427},
+        DOI={10.1021/acs.jpclett.6c02427},
+        number={34},
+        journal={The Journal of Physical Chemistry Letters},
+        publisher={American Chemical Society (ACS)},
+        author={Liu, Pengfei and Ge, Shuang and Wang, Xiaobo and Liu, Xin and Tao, Jun and Li, Yan and Liu, Chao and Chen, Ling and Ren, Zhixiang},
+        year={2026},
+        month=Aug,
+        pages={9831–9843}
       }
     links:
-      arxiv: "https://arxiv.org/abs/2603.12808"
+      doi: "https://doi.org/10.1021/acs.jpclett.6c02427"
       code: "https://github.com/AI-HPC-Research-Team/Mol-Reasoning"
     featured: true
 ---
