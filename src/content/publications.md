@@ -133,7 +133,7 @@ papers:
       @article{Xu_2026, title={The limits of bio-molecular modeling with large language models: a cross-scale evaluation}, volume={42}, ISSN={1367-4811}, url={http://dx.doi.org/10.1093/bioinformatics/btag550}, DOI={10.1093/bioinformatics/btag550}, number={8}, journal={Bioinformatics}, publisher={Oxford University Press (OUP)}, author={Xu, Yaxin and Zhou, Yue and Zhao, Tianyu and Ma, Zhengyu and An, Fengwei and Ren, Zhixiang}, editor={Uhlmann, Virginie}, year={2026}, month=July }
     links:
       doi: "https://doi.org/10.1093/bioinformatics/btag550"
-      code: "https://github.com/AI-HPC-Research-Team/BioMol-LLM-Bench"
+      code: "https://github.com/LingQiong-AI-Lab/BioMol-LLM-Bench"
     featured: true
 
   - date: 2026-05-11
@@ -201,7 +201,7 @@ papers:
       @article{Ge_2026, title={Prototype-based continual cell-type annotation reveals cellular state transitions in expanding single-cell atlases}, url={http://dx.doi.org/10.64898/2026.03.05.709973}, DOI={10.64898/2026.03.05.709973}, publisher={openRxiv}, author={Ge, Shuang and He, Qiming and Ren, Yiming and Xu, Yaxin and Wang, Mingqing and Nie, Zhiwei and Xu, Huan and Cheng, Qiang and Sun, Shuqing and Ren, Zhixiang}, year={2026}, month=Mar }
     links:
       doi: "https://doi.org/10.64898/2026.03.05.709973"
-      code: "https://github.com/AI-HPC-Research-Team/scEvolver"
+      code: "https://github.com/LingQiong-AI-Lab/scEvolver"
     featured: false
 
   - date: 2025-09-01
@@ -220,7 +220,7 @@ papers:
       @article{Liu_2025, title={A self-feedback knowledge elicitation approach for chemical reaction predictions}, volume={156}, ISSN={0952-1976}, url={http://dx.doi.org/10.1016/j.engappai.2025.111112}, DOI={10.1016/j.engappai.2025.111112}, journal={Engineering Applications of Artificial Intelligence}, publisher={Elsevier BV}, author={Liu, Pengfei and Tao, Jun and Ren, Zhixiang}, year={2025}, month=Sept, pages={111112} }
     links:
       doi: "https://doi.org/10.1016/j.engappai.2025.111112"
-      code: "https://github.com/AI-HPC-Research-Team/SLM4CRP"
+      code: "https://github.com/LingQiong-AI-Lab/SLM4CRP"
     featured: false
 
   - date: 2025-09-01
@@ -347,7 +347,7 @@ papers:
       }
     links:
       arxiv: "https://arxiv.org/abs/2603.12885"
-      code: "https://github.com/AI-HPC-Research-Team/Drug_drug_interaction_with_LLM"
+      code: "https://github.com/LingQiong-AI-Lab/Drug_drug_interaction_with_LLM"
     featured: true
 
   - date: 2026-05-12
@@ -375,7 +375,7 @@ papers:
       }
     links:
       arxiv: "https://arxiv.org/abs/2605.23960"
-      code: "https://github.com/AI-HPC-Research-Team/ProtDiS"
+      code: "https://github.com/LingQiong-AI-Lab/ProtDiS"
     featured: true
 
   - date: 2026-08-17
@@ -414,6 +414,6 @@ papers:
       }
     links:
       doi: "https://doi.org/10.1021/acs.jpclett.6c02427"
-      code: "https://github.com/AI-HPC-Research-Team/Mol-Reasoning"
+      code: "https://github.com/LingQiong-AI-Lab/Mol-Reasoning"
     featured: true
 ---

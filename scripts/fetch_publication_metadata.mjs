@@ -1,6 +1,6 @@
 const PROFILE_ORCID = "0000-0002-4104-3790"
 const PROFILE_NAMES = new Set(["zhixiang ren", "ren zhixiang"])
-const USER_AGENT = "ZhixiangRenAcademicSite/1.0 (+https://github.com/AI-HPC-Research-Team)"
+const USER_AGENT = "ZhixiangRenAcademicSite/1.0 (+https://zhixiang-ren.github.io/)"
 
 export function normalizeIdentifier(input) {
   const decoded = decodeURIComponent(input.trim())

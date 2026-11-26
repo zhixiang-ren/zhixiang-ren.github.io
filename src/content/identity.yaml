@@ -22,7 +22,7 @@ links:
   scholar: https://scholar.google.com/citations?hl=en&user=ec_pCdEAAAAJ&view_op=list_works&sortby=pubdate
   orcid: https://orcid.org/0000-0002-4104-3790
   openalex: https://openalex.org/A5070028902
-  github: https://github.com/AI-HPC-Research-Team
+  github: https://github.com/LingQiong-AI-Lab
   # Reversed fragments prevent basic email-regex harvesting in source and HTML.
   email:
     localParts: [nosaj, gnaixihz, ner]

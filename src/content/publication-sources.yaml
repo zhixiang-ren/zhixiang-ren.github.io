@@ -16,7 +16,7 @@ papers:
   - doi: 10.64898/2026.07.21.739736
     code: https://github.com/Yaxin-Xu/Tx2Mol
   - doi: 10.1093/bioinformatics/btag550
-    code: https://github.com/AI-HPC-Research-Team/BioMol-LLM-Bench
+    code: https://github.com/LingQiong-AI-Lab/BioMol-LLM-Bench
   - doi: 10.1021/acs.jcim.5c03204
     abstractFallback:
       summary: >-
@@ -28,10 +28,10 @@ papers:
       url: https://pubmed.ncbi.nlm.nih.gov/42037561/
   - doi: 10.64898/2026.05.12.724472
   - doi: 10.64898/2026.03.05.709973
-    code: https://github.com/AI-HPC-Research-Team/scEvolver
+    code: https://github.com/LingQiong-AI-Lab/scEvolver
     featured: false
   - doi: 10.1016/j.engappai.2025.111112
-    code: https://github.com/AI-HPC-Research-Team/SLM4CRP
+    code: https://github.com/LingQiong-AI-Lab/SLM4CRP
     featured: false
   - doi: 10.1016/j.engappai.2025.110977
     featured: false
@@ -42,8 +42,8 @@ papers:
   - doi: 10.1093/bib/bbaf319
     featured: false
   - arxiv: "2603.12885"
-    code: https://github.com/AI-HPC-Research-Team/Drug_drug_interaction_with_LLM
+    code: https://github.com/LingQiong-AI-Lab/Drug_drug_interaction_with_LLM
   - arxiv: "2605.23960"
-    code: https://github.com/AI-HPC-Research-Team/ProtDiS
+    code: https://github.com/LingQiong-AI-Lab/ProtDiS
   - doi: 10.1021/acs.jpclett.6c02427
-    code: https://github.com/AI-HPC-Research-Team/Mol-Reasoning
+    code: https://github.com/LingQiong-AI-Lab/Mol-Reasoning
